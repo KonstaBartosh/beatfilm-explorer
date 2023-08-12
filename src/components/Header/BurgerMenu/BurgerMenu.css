@@ -1,14 +1,26 @@
 .burger-menu{
-	display: flex;
+	display: none;
 	justify-content: flex-end;
 }
 
+.burger-menu.open{
+	display: flex;	
+}
+
+.burger-menu.open .burger-menu__container {
+  right: 0; /* При открытом меню сдвигаем внутрь экрана */
+}
+
 .burger-menu__container{
+	position: fixed;
+	top: 0;
+	right: -600px;
 	height: 100vh;
 	width: 520px;
 	display: flex;
 	flex-direction: column;
-	background-color: bisque;
+	background-color: white;
+	transition: right 0.3s ease-in-out;
 }
 
 .burger-menu__nav{
@@ -59,4 +71,10 @@
 
 .burger-menu__link:hover{
 	text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .burger-menu {
+    display: flex;
+  }
 }

@@ -9,8 +9,10 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Header loggedIn={loggedIn} /> */}
-      <BurgerMenu />
+      <Header loggedIn={loggedIn}>
+        
+      </Header>
+      {/* <BurgerMenu /> */}
     </div>
   );
 }
