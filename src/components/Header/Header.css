@@ -13,9 +13,6 @@
 .header__logo{
 }
 
-.header__profile-account{
-}
-
 .header__profile-nav{
 	display: flex;
 	gap: 30px;
@@ -38,6 +35,7 @@
 .header__button_account{
 	border-radius: 20px;
 	font-size: 14px;
+	background-color: #F9F9F9;
 }
 
 .header__button_logout{

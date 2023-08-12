@@ -5,9 +5,7 @@ import logo from '../../images/logo.svg'
 
 function Header({ loggedIn }) {
   const profileMarkup = loggedIn ? (
-    <nav className="header__profile-account">
-      <button className="header__button header__button_account">Аккаунт</button>
-    </nav>
+    <button className="header__button header__button_account">Аккаунт</button>
   ) : (
     <nav className="header__profile-nav">
       <button className="header__button header__button_register">Регистрация</button>
