@@ -9,7 +9,7 @@ function App() {
   const [loggedIn, setLogin] = useState(false);
 
   return (
-    <div className="App">
+    <div className="app">
       <Header loggedIn={loggedIn} />
       <Main />
     </div>
