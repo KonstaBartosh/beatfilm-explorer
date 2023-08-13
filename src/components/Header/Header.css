@@ -1,6 +1,11 @@
 .header {
 	max-width: 1280px;
 	min-height: 74px;
+	background-color: #465DFF;
+}
+
+.header.logged-in {
+	background-color: white;
 }
 
 .header__container {
@@ -47,7 +52,7 @@
 }
 
 .header__button_register {
-	color: gold;
+	color: white;
 	background-color: inherit;
 	font-size: 12px;
 }

@@ -16,7 +16,7 @@ function Header({ loggedIn }) {
   );
 
   return (
-    <div className="header">
+    <div className={`header ${loggedIn ? "logged-in" : ""}`}>
       <div className="header__container">
         <img src={logo} className="header__logo" alt="логотип" />
         {loggedIn ? <Navigation /> : null}
