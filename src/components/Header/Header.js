@@ -1,8 +1,7 @@
 import React from "react";
-import Navigation from "../Navigation/Navigation";
+import Navigation from "./Navigation/Navigation";
 import './Header.css';
 import logo from '../../images/logo.svg';
-import burgerIcon from '../../images/icon_burger.svg'
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 
 function Header({ loggedIn }) {
@@ -21,7 +20,7 @@ function Header({ loggedIn }) {
         <img src={logo} className="header__logo" alt="логотип" />
         {loggedIn ? <Navigation /> : null}
         {profileMarkup}
-				<BurgerMenu />
+				{loggedIn ? <BurgerMenu /> : null}
       </div>
     </div>
   );

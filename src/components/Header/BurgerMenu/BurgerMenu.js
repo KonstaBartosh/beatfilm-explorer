@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./BurgerMenu.css";
 import closeIcon from "../../../images/close_icon.svg";
-import burgerIcon from '../../../images/icon_burger.svg';
+import burgerIcon from "../../../images/icon_burger.svg";
 
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,10 +13,14 @@ function BurgerMenu() {
 
   return (
     <>
-      <div className={`burger-menu ${isOpen ? 'open' : ''}`}>
-        
-        <img onClick={toggleMenu} src={burgerIcon} className="burger__icon" alt="меню" />
-      
+      <div className={`burger-menu ${isOpen ? "open" : ""}`}>
+        <img
+          onClick={toggleMenu}
+          src={burgerIcon}
+          className="burger__icon"
+          alt="меню"
+        />
+
         <nav className="burger-menu__container">
           <img
             onClick={toggleMenu}
@@ -31,7 +35,6 @@ function BurgerMenu() {
           </ul>
           <button className="burger-menu__btn-acc">Аккаунт</button>
         </nav>
-        
       </div>
     </>
   );

@@ -9,10 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header loggedIn={loggedIn}>
-        
-      </Header>
-      {/* <BurgerMenu /> */}
+      <Header loggedIn={loggedIn} />
     </div>
   );
 }
