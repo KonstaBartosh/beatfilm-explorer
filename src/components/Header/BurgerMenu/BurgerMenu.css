@@ -7,11 +7,12 @@
 	display: flex;	
 }
 
+/* При открытом меню сдвигаем внутрь экрана */
 .burger-menu.open .burger-menu__container {
-  right: 0; /* При открытом меню сдвигаем внутрь экрана */
+  right: 0; 
 }
 
-.burger-menu__container{
+.burger-menu__container {
 	position: fixed;
 	top: 0;
 	right: -600px;
@@ -73,13 +74,13 @@
 	text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .burger-menu {
     display: flex;
   }
 }
 
-@media (max-width: 425px) {
+@media screen and (max-width: 425px) {
 	.burger-menu__container{
 		width: 320px;
 	}

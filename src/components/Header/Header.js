@@ -1,8 +1,9 @@
 import React from "react";
-import Navigation from "./Navigation/Navigation";
+
 import './Header.css';
-import logo from '../../images/logo.svg';
+import Navigation from "./Navigation/Navigation";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import logo from '../../images/logo.svg';
 
 function Header({ loggedIn }) {
   const profileMarkup = loggedIn ? (
@@ -23,7 +24,7 @@ function Header({ loggedIn }) {
 				{loggedIn ? <BurgerMenu /> : null}
       </div>
     </div>
-  );
+  )
 }
 
 export default Header;

@@ -1,20 +1,20 @@
-.navigation{
+.navigation {
 	display: flex;
 	justify-content: center;
 }
 
-.navigation__movies{
+.navigation__movies {
 	list-style: none;
 	display: flex;
 	gap: 16px;
 }
 
-.navigation__movies-link{
+.navigation__movies-link {
 	text-decoration: none;
 	color: inherit;
 }
 
-.navigation__movies-link:hover{
+.navigation__movies-link:hover {
 	opacity: 0.8;
 }
 

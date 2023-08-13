@@ -3,22 +3,24 @@
 	min-height: 74px;
 }
 
-.header__container{
+.header__container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 18px 70px;
 }
 
-.header__logo{
+.header__logo {
+	width: 38px;
+	height: 38px;
 }
 
-.header__profile-nav{
+.header__profile-nav {
 	display: flex;
 	gap: 30px;
 }
 
-.header__button{
+.header__button {
 	cursor: pointer;
 	border: 0;
 	padding: 8px 20px;
@@ -28,33 +30,33 @@
 	line-height: 16px;
 }
 
-.header__button:hover{
+.header__button:hover {
 	opacity: 0.8;
 }
 
-.header__button_account{
+.header__button_account {
 	border-radius: 20px;
 	font-size: 14px;
 	background-color: #F9F9F9;
 }
 
-.header__button_logout{
+.header__button_logout {
 	background-color: #2BE080;
 	border-radius: 3px;
 	font-size: 12px;
 }
 
-.header__button_register{
+.header__button_register {
 	color: gold;
 	background-color: inherit;
 	font-size: 12px;
 }
 
 @media screen and (max-width: 768px) {
-	.header__button_account{
+	.header__button_account {
 		display: none;
 	}
-	.header__container{
+	.header__container {
 		padding: 18px 30px;
 	}
 }
