@@ -37,6 +37,8 @@ export default function Portfolio() {
           <a
             className="portfolio__github"
             href="https://github.com/KonstaBartosh"
+						target="_blank"
+						rel="noopener noreferrer"
           >
             Github
           </a>

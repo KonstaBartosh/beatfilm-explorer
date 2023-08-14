@@ -99,3 +99,90 @@
 	border-bottom: 1px solid #E8E8E8;
 	padding-bottom: 19px;
 }
+
+@media screen and (max-width: 768px) {
+	.portfolio {
+		padding: 90px 50px;
+	}
+	.portfolio__about-container {
+		width: 364px;
+	}
+
+	.portfolio__title {
+		font-size: 40px;
+	}
+
+	.portfolio__subtitle {
+		padding-top: 20px;
+		font-size: 12px;
+	}
+
+	.portfolio__text {
+		font-size: 12px;
+	}
+
+	.portfolio__img {
+		width: 255px;
+		height: 307px;
+	}
+
+	.portfolio__github {
+		padding-top: 40px;
+	}
+
+	.portfolio__sign {
+		padding-top: 90px;
+	}
+
+	.portfolio__exaples-container {
+		padding-top: 50px;
+	}
+
+	.portfolio__example-sample, .portfolio__example-link {
+		font-size: 28px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.portfolio {
+		padding: 70px 14px;
+	}
+	.portfolio__about {
+		padding-top: 40px;
+		flex-direction: column-reverse;
+	}
+	.portfolio__title {
+		font-size: 30px;
+	}
+
+	.portfolio__subtitle {
+		padding-top: 20px;
+		font-size: 11px;
+	}
+
+	.portfolio__text {
+		font-size: 11px;
+	}
+
+	.portfolio__img {
+		width: 292px;
+		height: 352px;
+	}
+
+	.portfolio__github {
+		padding-top: 40px;
+	}
+
+	.portfolio__sign {
+		padding-top: 70px;
+		font-size: 14px;
+	}
+
+	.portfolio__exaples-container {
+		padding-top: 40px;
+	}
+
+	.portfolio__example-sample, .portfolio__example-link {
+		font-size: 18px;
+	}
+}
