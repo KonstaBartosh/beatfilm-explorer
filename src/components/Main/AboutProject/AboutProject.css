@@ -55,6 +55,7 @@
 
 .about__timeframe-block_first-week {
 	width: 228px;
+	min-width: 100px;
 	background-color: #2BE080;
 }
 
@@ -91,5 +92,30 @@
 
 	.block__text {
 		font-size: 12px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.about {
+		padding: 70px 18px;
+	}
+
+	.about__text-container {
+		flex-direction: column;
+		gap: 56px;
+		padding: 60px 0;
+	}
+
+	.block__title {
+		font-size: 18px;
+		padding-bottom: 16px;
+	}
+
+	.block__text{
+		font-size: 11px;
+	}
+
+	.about__timeframe-text {
+		font-size: 11px;
 	}
 }
