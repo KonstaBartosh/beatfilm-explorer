@@ -25,7 +25,7 @@
 }
 
 .header__button {
-	width: 76px;
+	/* width: 76px; */
 	height: 32px;
 	cursor: pointer;
 	border: 0;
