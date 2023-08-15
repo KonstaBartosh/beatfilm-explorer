@@ -15,10 +15,15 @@
 }
 
 .nav-tab__link {
+	color: black;
 	cursor: pointer;
 	font-size: 13px;
 	line-height: 16px; /* 123.077% */
 	text-decoration-line: underline;
+	
+}
+
+.nav-tab__li {
 	list-style: none;
 }
 
