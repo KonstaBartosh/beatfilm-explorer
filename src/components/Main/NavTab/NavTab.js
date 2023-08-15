@@ -6,9 +6,15 @@ export default function NavTab() {
   return (
     <nav className="nav-tab">
       <ul className="nav-tab__container">
-        <li className="nav-tab__link">О проекте</li>
-        <li className="nav-tab__link">Технологии</li>
-        <li className="nav-tab__link">Студент</li>
+        <li className="nav-tab__link">
+          <a href="#about">О проекте</a>
+        </li>
+        <li className="nav-tab__link">
+          <a href="#tech">Технологии</a>
+        </li>
+        <li className="nav-tab__link">
+          <a href="#portfolio">Студент</a>
+        </li>
       </ul>
     </nav>
   );

@@ -21,7 +21,7 @@ export default function Portfolio() {
   };
 
   return (
-    <section className="portfolio">
+    <section id="portfolio" className="portfolio">
       <Title title="Студент" />
       <div className="portfolio__about">
         <div className="portfolio__about-container">
