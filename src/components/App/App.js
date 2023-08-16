@@ -3,17 +3,17 @@ import Header from "../Header/Header";
 import "./App.css";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import NotFound from "../NotFound/NotFound";
+import Movies from "../Movies/Movies";
 
 function App() {
   const [loggedIn, setLogin] = useState(true);
 
   return (
     <div className="app">
-      {/* <Header loggedIn={loggedIn} />
-      {!loggedIn ? <Main /> : null } 
-      <Footer /> */}
-      <NotFound />
+      <Header loggedIn={loggedIn} />
+      {!loggedIn ? <Main /> : null }
+      <Movies />
+      <Footer />
     </div>
   );
 }
