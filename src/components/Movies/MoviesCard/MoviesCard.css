@@ -8,10 +8,12 @@
 }
 
 .card__image {
+	border-radius: 10px 10px 0 0;
 	background-color: bisque;
 	width: 270px;
 	height: 151px;
 	object-fit: cover;
+	background-repeat: no-repeat;
 }
 
 .card__header {

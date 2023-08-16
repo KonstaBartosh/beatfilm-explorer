@@ -16,6 +16,7 @@
 	border-radius: 6px;
 	background-color: #F9F9F9;
 	font-size: 12px;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

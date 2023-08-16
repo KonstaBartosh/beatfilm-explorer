@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import "./MoviesCard.css";
+import testImg from '../../../images/test-image.jpg'
 
 export default function MoviesCard() {
 	const [isLiked, setLike] = useState(false);
@@ -10,7 +11,7 @@ export default function MoviesCard() {
 
   return (
     <div className="card">
-      <img src='#' alt="#" class="card__image" />
+      <img src={testImg} alt="" class="card__image" />
       <div class="card__header">
 				<div className="card__header-wrapper">
 					<h2 class="card__title">Заглушка</h2>
