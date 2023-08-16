@@ -1,7 +1,9 @@
 .searchform {
+	padding: 0 70px;
 	height: 247px;
 	display: flex;
 	flex-direction: column;
+	z-index: -1;
 }
 
 .searchform__bar {
@@ -73,6 +75,9 @@
 }
 
 @media screen and (max-width: 768px) {
+	.searchform {
+		padding: 0 30px;
+	}
 	.searchform__bar {
 		padding-top: 80px;
 	}
@@ -87,6 +92,10 @@
 }
 
 @media screen and (max-width: 425px) {
+	.searchform {
+		padding: 0 14px;
+	}
+
 	.searchform__toggle-title {
 		font-size: 11px;
 	}

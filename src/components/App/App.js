@@ -11,11 +11,10 @@ function App() {
 
   return (
     <div className="app">
-      {/* <Header loggedIn={loggedIn} />
+      <Header loggedIn={loggedIn} />
       {!loggedIn ? <Main /> : null }
       <Movies />
-      <Footer /> */}
-      <MoviesCard />
+      <Footer />
     </div>
   );
 }
