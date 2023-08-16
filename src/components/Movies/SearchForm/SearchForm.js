@@ -26,7 +26,11 @@ export default function SearchForm() {
 					<img className="searchform__icon" src={logo} alt="поиск"/>
 				</button>
       </form>
-			<ToggleSwitch />
+			<div className="searchform__toggle-container">
+				<ToggleSwitch />
+				<span className="searchform__toggle-title">Короткометражки</span>
+			</div>
+			<span className="searchform__border-bottom"/>
     </div>
   );
 }
