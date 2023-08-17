@@ -8,12 +8,13 @@ import { NavLink, useLocation } from "react-router-dom";
 
 function Header({ loggedIn }) {
   const url = useLocation();
+
   const headerStyle =
-    url.pathname === "/movies" || "/saved-movies"
+    url.pathname === "/movies" || url.pathname === "/saved-movies"
       ? "header_movies-logged-in"
       : "header_main-logged-in";
 
-  const markupForHeader = loggedIn ? (
+  const profileMarkup = loggedIn ? (
     <button className="header__button header__button_account">Аккаунт</button>
   ) : (
     <nav className="header__profile-nav">
@@ -31,7 +32,7 @@ function Header({ loggedIn }) {
           <img src={logo} className="header__logo" alt="логотип" />
         </NavLink>
         {loggedIn ? <Navigation /> : null}
-        {markupForHeader}
+        {profileMarkup}
         {loggedIn ? <BurgerMenu /> : null}
       </div>
     </div>

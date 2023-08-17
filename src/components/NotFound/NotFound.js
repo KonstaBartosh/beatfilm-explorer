@@ -1,6 +1,7 @@
 import React from "react";
 
 import './NotFound.css'
+import { NavLink } from "react-router-dom";
 
 export default function NotFound() {
 	return(
@@ -8,7 +9,7 @@ export default function NotFound() {
 			<div className="notfound__container">
 				<h2 className="notfound__title">404</h2>
 				<p className="notfound__subtitle">Страница не найдена</p>
-				<a className="notfound__link">Назад</a>
+				<NavLink to="/" className="notfound__link">Назад</NavLink>
 			</div>
 		</div>
 	);
