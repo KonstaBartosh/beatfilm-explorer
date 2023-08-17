@@ -55,12 +55,15 @@
 	padding-top: 22px;
 }
 
-.burger-menu__link {
-	color: black;
-	cursor: pointer;
+.burger-menu__li {
 	font-size: 18px;
 	text-align: center;
 	list-style: none;
+}
+
+.burger-menu__link {
+	color: black;
+	text-decoration: none;
 }
 
 .burger-menu__btn-acc {
@@ -84,16 +87,8 @@
 	opacity: 0.8;
 }
 
-.burger-menu__link:hover {
-	text-decoration: underline;
-}
-
-.menu {
-	display: none;
-}
-
-.menu.open {
-	display: block;
+.burger-menu__link.active {
+	border-bottom: black solid 2px;
 }
 
 @media screen and (max-width: 768px) {

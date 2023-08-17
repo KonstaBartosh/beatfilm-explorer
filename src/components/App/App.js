@@ -5,6 +5,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import Movies from "../Movies/Movies";
 import { Route, Routes } from "react-router-dom";
+import SavedMovies from "../SavedMovies/SavedMovies";
 
 function App() {
   const [loggedIn, setLogin] = useState(true);
@@ -14,7 +15,8 @@ function App() {
       <Header loggedIn={loggedIn} />
       <Routes>
         <Route path="/"  element={<Main />}/>
-        <Route path="/movies" element={loggedIn ? <Movies /> : <Main/>}/>
+        <Route path="/movies" element={loggedIn ? <Movies /> : <Main />}/>
+        <Route path="/saved-movies" element={loggedIn ? <SavedMovies /> : <Main />}/>
       </Routes>
       <Footer />
     </body>

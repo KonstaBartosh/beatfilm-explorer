@@ -8,7 +8,7 @@ export default function Movies() {
 	return(
 		<section className="movies">
 			<SearchForm />
-			<MoviesCardList />
+			<MoviesCardList sampleItems={16} />
 		</section>
 	);
 }

@@ -20,6 +20,10 @@
 	cursor: pointer;
 }
 
+.movies-card-list__button:hover {
+	opacity: 0.8;
+}
+
 @media screen and (max-width: 768px) {
 	.movies-card-list {
 		padding: 70px 30px 30px;

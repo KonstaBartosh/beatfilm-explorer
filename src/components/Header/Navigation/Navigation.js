@@ -13,7 +13,11 @@ function Navigation() {
 					>
 						Фильмы
 					</NavLink>
-					<a className="navigation__movies-link" href="#">Сохраненные фильмы</a>
+					<NavLink
+						to='/saved-movies'className="navigation__movies-link"
+					>
+						Сохраненные фильмы
+					</NavLink>
 			</div>
     </nav>
   );
