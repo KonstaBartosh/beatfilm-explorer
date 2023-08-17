@@ -7,7 +7,12 @@ function Navigation() {
   return (
     <nav className="navigation">
 			<div className="navigation__movies">
-					<a className="navigation__movies-link" href="#">Фильмы</a>
+					<NavLink 
+						className="navigation__movies-link" 
+						to='/movies'
+					>
+						Фильмы
+					</NavLink>
 					<a className="navigation__movies-link" href="#">Сохраненные фильмы</a>
 			</div>
     </nav>

@@ -10,8 +10,15 @@
 }
 
 .navigation__movies-link {
+	font-size: 14px;
+	font-weight: 400;
 	text-decoration: none;
+	font-style: normal;
 	color: inherit;
+}
+
+.navigation__movies-link.active {
+	font-weight: 500;
 }
 
 .navigation__movies-link:hover {

@@ -4,8 +4,12 @@ import './Header.css';
 import Navigation from "./Navigation/Navigation";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
 import logo from '../../images/logo.svg';
+import { NavLink, useLocation } from "react-router-dom";
 
 function Header({ loggedIn }) {
+  const url = useLocation();
+  const headerStyle = url.pathname === '/movies' ? 'header_movies-logged-in' : 'header_main-logged-in';
+
   const profileMarkup = loggedIn ? (
     <button className="header__button header__button_account">Аккаунт</button>
   ) : (
@@ -16,12 +20,14 @@ function Header({ loggedIn }) {
   );
 
   return (
-    <div className={`header ${loggedIn ? "logged-in" : ""}`}>
+    <div className={`header ${loggedIn ? headerStyle : ""}`}>
       <div className="header__container">
-        <img src={logo} className="header__logo" alt="логотип" />
+        <NavLink to="/">
+          <img src={logo} className="header__logo" alt="логотип" />
+        </NavLink>
         {loggedIn ? <Navigation /> : null}
         {profileMarkup}
-				{loggedIn ? <BurgerMenu /> : null}
+        {loggedIn ? <BurgerMenu /> : null}
       </div>
     </div>
   )

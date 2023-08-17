@@ -3,9 +3,14 @@
 	background-color: #465DFF;
 }
 
-.header.logged-in {
+.header.header_main-logged-in {
+	color: white;
+}	
+
+.header.header_movies-logged-in {
+	color: black;
 	background-color: white;
-}
+}	
 
 .header__container {
 	display: flex;
@@ -25,7 +30,6 @@
 }
 
 .header__button {
-	/* width: 76px; */
 	height: 32px;
 	cursor: pointer;
 	border: 0;

@@ -14,6 +14,7 @@ export default function Footer() {
           <a
             className="footer__link"
             href="https://practicum.yandex.ru/"
+            target="_blank"
             rel="noreferrer noopener"
           >
             Яндекс.Практикум
