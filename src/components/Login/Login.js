@@ -1,7 +1,6 @@
 import React from "react";
 
-import './Login.css'
-import AuthForm from "../Forms/AuthForm";
+import AuthForm from "../Forms/AuthForm/AuthForm";
 
 export default function Login() {
 	return(
@@ -9,6 +8,7 @@ export default function Login() {
 			<AuthForm 
 				title={'Рады видеть!'}
 				buttonText={'Войти'}
+				navLink={'/sign-up'}
 				question={'Ещё не зарегистрированы?'}
 				navLinkTitle={'Регистрация'}
 			/>

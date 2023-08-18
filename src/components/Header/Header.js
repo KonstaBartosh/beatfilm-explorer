@@ -10,16 +10,24 @@ function Header({ loggedIn }) {
   const url = useLocation();
 
   const headerStyle =
-    url.pathname === "/movies" || url.pathname === "/saved-movies" || url.pathname === "/profile"
+    url.pathname === "/movies" ||
+    url.pathname === "/saved-movies" ||
+    url.pathname === "/profile"
       ? "header_movies-logged-in"
       : "header_main-logged-in";
 
   const profileMarkup = loggedIn ? (
-    <NavLink to="/profile" className="header__button header__button_account">Аккаунт</NavLink>
+    <NavLink to="/profile" className="header__button header__button_account">
+      Аккаунт
+    </NavLink>
   ) : (
     <nav className="header__profile-nav">
-      <button className="header__button header__button_register">Регистрация</button>
-      <button className="header__button header__button_logout">Войти</button>
+      <NavLink to="/sign-up" className="header__button header__button_register">
+        Регистрация
+      </NavLink>
+      <NavLink to="/sign-in" className="header__button header__button_logout">
+        Войти
+      </NavLink>
     </nav>
   );
 

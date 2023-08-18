@@ -32,6 +32,8 @@
 	line-height: 16px;
 	text-decoration: none;
 	color: black;
+	display: flex;
+	align-items: center;
 }
 
 .header__button:hover {
