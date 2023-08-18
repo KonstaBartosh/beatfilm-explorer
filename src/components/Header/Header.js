@@ -3,8 +3,8 @@ import React from "react";
 import "./Header.css";
 import Navigation from "./Navigation/Navigation";
 import BurgerMenu from "./BurgerMenu/BurgerMenu";
-import logo from "../../images/logo.svg";
 import { NavLink, useLocation } from "react-router-dom";
+import Logo from "../Logo/Logo";
 
 function Header({ loggedIn }) {
   const url = useLocation();
@@ -26,9 +26,7 @@ function Header({ loggedIn }) {
   return (
     <div className={`header ${loggedIn ? headerStyle : ""}`}>
       <div className="header__container">
-        <NavLink to="/">
-          <img src={logo} className="header__logo" alt="логотип" />
-        </NavLink>
+        <Logo />
         {loggedIn ? <Navigation /> : null}
         {profileMarkup}
         {loggedIn ? <BurgerMenu /> : null}
