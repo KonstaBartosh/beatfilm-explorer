@@ -46,7 +46,7 @@ function BurgerMenu() {
             <NavLink to="/saved-movies"className="burger-menu__link">Сохраненные фильмы</NavLink>
           </li>
         </ul>
-        <button className="burger-menu__btn-acc">Аккаунт</button>
+        <NavLink to="/profile" className="burger-menu__btn-acc">Аккаунт</NavLink>
       </nav>
     </div>
   );

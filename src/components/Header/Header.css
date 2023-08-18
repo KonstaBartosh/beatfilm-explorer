@@ -30,12 +30,14 @@
 }
 
 .header__button {
-	height: 32px;
+	/* height: 32px; */
 	cursor: pointer;
 	border: 0;
 	padding: 8px 20px;
 	text-align: center;
 	line-height: 16px;
+	text-decoration: none;
+	color: black;
 }
 
 .header__button:hover {
