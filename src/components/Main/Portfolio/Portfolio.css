@@ -141,6 +141,11 @@
 	.portfolio__example-sample, .portfolio__example-link {
 		font-size: 28px;
 	}
+
+	.portfolio__example-link:hover {
+		opacity: 0.8;
+		color: aqua;
+	}
 }
 
 @media screen and (max-width: 767px) {

@@ -10,10 +10,11 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   const url = useLocation();
-  const [loggedIn, setLogin] = useState(false);
+  const [loggedIn, setLogin] = useState(true);
 
   const showFooter =
     url.pathname !== "/profile" &&

@@ -10,7 +10,9 @@ export default function Portfolio() {
     return (
       <div className="portfolio__exaple-container _underline">
         <p className="portfolio__example-sample">{title}</p>
-        <a className="portfolio__example-link" href={link}
+        <a 
+          className="portfolio__example-link" 
+          href={link}
           target="_blank"
           rel="noopener noreferrer"
         >
