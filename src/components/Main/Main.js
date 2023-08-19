@@ -8,12 +8,12 @@ import Portfolio from "./Portfolio/Portfolio";
 
 export default function Main() {
 	return(
-		<>
+		<main>
 			<Promo />
 			<NavTab />
 			<AboutProject />
 			<Tech />
 			<Portfolio />
-		</>
+		</main>
 	)
 }
