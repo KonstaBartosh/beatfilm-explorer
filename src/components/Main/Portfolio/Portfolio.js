@@ -8,17 +8,15 @@ import { sampleWorkOne, sampleWorkThree, sampleWorkTwo } from "../../../utils/co
 export default function Portfolio() {
   const getSampleMarkup = (title, link) => {
     return (
-      <div className="portfolio__exaple-container _underline">
+      <a 
+        className="portfolio__exaple-container portfolio__example-link _underline"
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <p className="portfolio__example-sample">{title}</p>
-        <a 
-          className="portfolio__example-link" 
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-					&#x2197;
-				</a>
-      </div>
+        <span>&#x2197;</span>
+      </a>
     );
   };
 
