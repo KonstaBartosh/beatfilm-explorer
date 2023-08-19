@@ -26,7 +26,7 @@ function App() {
     url.pathname !== "/sign-up";
 
   return (
-    <body className="app">
+    <div className="app">
       {showHeader && <Header loggedIn={loggedIn} />}
       <Routes>
         <Route path="/sign-up" element={<Register />} />
@@ -41,7 +41,7 @@ function App() {
       </Routes>
       {showFooter && <Footer />}
       {/* <NotFound/> */}
-    </body>
+    </div>
   );
 }
 
