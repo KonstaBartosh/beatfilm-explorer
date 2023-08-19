@@ -14,7 +14,7 @@ import NotFound from "../NotFound/NotFound";
 
 function App() {
   const url = useLocation();
-  const [loggedIn, setLogin] = useState(false);
+  const [loggedIn, setLogin] = useState(true);
 
   const showFooter =
     url.pathname !== "/profile" &&

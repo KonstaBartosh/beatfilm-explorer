@@ -1,7 +1,6 @@
 import React from "react";
 
 import './Profile.css'
-import { NavLink } from "react-router-dom";
 
 export default function Profile() {
 	const sampleWord = 'Заглушка';
