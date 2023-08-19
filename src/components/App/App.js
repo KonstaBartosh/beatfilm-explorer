@@ -14,7 +14,7 @@ import NotFound from "../NotFound/NotFound";
 
 function App() {
   const url = useLocation();
-  const [loggedIn, setLogin] = useState(false);
+  const [loggedIn, setLogin] = useState(true);
 
   const showFooter =
     url.pathname !== "/profile" &&
@@ -40,6 +40,7 @@ function App() {
         <Route path="/profile" element={loggedIn ? <Profile /> : null} />
       </Routes>
       {showFooter && <Footer />}
+      {/* <NotFound/> */}
     </body>
   );
 }

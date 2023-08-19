@@ -18,77 +18,77 @@ function AuthForm({ title, buttonText, question, navLink, navLinkTitle, children
   } = useForm({ mode: "onChange" });
 
   return (
-    <div className="auth-form">
-      <div className="auth-form__container">
-        <div>
-          <div className="auth-form__header">
-            <Logo />
-            <h2 className="auth-form__title">{title}</h2>
+      <div className="auth-form">
+        <div className="auth-form__container">
+          <div>
+            <div className="auth-form__header">
+              <Logo />
+              <h2 className="auth-form__title">{title}</h2>
+            </div>
+            <form className="auth-form__form" name="form__auth">
+              {children}
+              <label className="auth-form__label">E-mail</label>
+              <input
+                {...register("email", {
+                  required: requiredMessage,
+                  minLength: {
+                    value: 6,
+                    message: emailMinLengthMessage,
+                  },
+                  maxLength: {
+                    value: 40,
+                    message: emailMaxLenghtMessage,
+                  },
+                  pattern: {
+                    value: emailRegex,
+                    message: emailPatternMessage,
+                  },
+                })}
+                id="email"
+                type="email"
+                className={"auth-form__input"}
+              />
+              <div className="auth-form__error-message auth-form__error-message_active">
+                {errors?.email && <div>{errors?.email?.message}</div>}
+              </div>
+
+              <label className="auth-form__label">Пароль</label>
+              <input
+                {...register("password", {
+                  required: requiredMessage,
+                  minLength: {
+                    value: 3,
+                    message: minLengthMessage,
+                  },
+                  maxLength: 40,
+                })}
+                id="password"
+                type="password"
+                className="auth-form__input"
+              />
+
+              <div className="auth-form__error-message auth-form__error-message_active">
+                {errors?.password && <div>{errors?.password?.message}</div>}
+              </div>
+            </form>
           </div>
-          <form className="auth-form__form" name="form__auth">
-            {children}
-            <label className="auth-form__label">E-mail</label>
-            <input
-              {...register("email", {
-                required: requiredMessage,
-                minLength: {
-                  value: 6,
-                  message: emailMinLengthMessage,
-                },
-                maxLength: {
-                  value: 40,
-                  message: emailMaxLenghtMessage,
-                },
-                pattern: {
-                  value: emailRegex,
-                  message: emailPatternMessage,
-                },
-              })}
-              id="email"
-              type="email"
-              className={"auth-form__input"}
-            />
-            <div className="auth-form__error-message auth-form__error-message_active">
-              {errors?.email && <div>{errors?.email?.message}</div>}
-            </div>
-
-            <label className="auth-form__label">Пароль</label>
-            <input
-              {...register("password", {
-                required: requiredMessage,
-                minLength: {
-                  value: 3,
-                  message: minLengthMessage,
-                },
-                maxLength: 40,
-              })}
-              id="password"
-              type="password"
-              className="auth-form__input"
-            />
-
-            <div className="auth-form__error-message auth-form__error-message_active">
-              {errors?.password && <div>{errors?.password?.message}</div>}
-            </div>
-          </form>
-        </div>
-        <div>
-          <button
-            className="auth-form__button"
-            type="submit"
-            disabled={!isValid}
-          >
-            {buttonText}
-          </button>
-          <p className="auth-form__question">
-            {question}
-            <NavLink to={navLink} className="auth-form__link">
-              &nbsp;{navLinkTitle}
-            </NavLink>
-          </p>
+          <div>
+            <button
+              className="auth-form__button"
+              type="submit"
+              disabled={!isValid}
+            >
+              {buttonText}
+            </button>
+            <p className="auth-form__question">
+              {question}
+              <NavLink to={navLink} className="auth-form__link">
+                &nbsp;{navLinkTitle}
+              </NavLink>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 

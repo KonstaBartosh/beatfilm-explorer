@@ -45,6 +45,7 @@ export default function Portfolio() {
         </div>
         <img src={photo} className="portfolio__img" alt="фото" />
       </div>
+      
       <span className="portfolio__sign">Портфолио</span>
       <div className="portfolio__exaples-container">
         {getSampleMarkup("Статичный сайт", sampleWorkOne)}
