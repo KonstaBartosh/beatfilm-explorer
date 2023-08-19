@@ -32,14 +32,14 @@ function Header({ loggedIn }) {
   );
 
   return (
-    <div className={`header ${loggedIn ? headerStyle : ""}`}>
+    <header className={`header ${loggedIn ? headerStyle : ""}`}>
       <div className="header__container">
         <Logo />
         {loggedIn ? <Navigation /> : null}
         {profileMarkup}
         {loggedIn ? <BurgerMenu /> : null}
       </div>
-    </div>
+    </header>
   );
 }
 
