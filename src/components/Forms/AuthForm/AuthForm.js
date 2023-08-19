@@ -4,7 +4,14 @@ import { NavLink } from "react-router-dom";
 import "./AuthForm.css";
 import Logo from "../../Logo/Logo";
 
-function AuthForm({ title, buttonText, question, navLink, navLinkTitle, children }) {
+function AuthForm({ 
+  title, 
+  buttonText, 
+  question, 
+  navLink, 
+  navLinkTitle, 
+  children 
+}) {
   const requiredMessage = "Заполните это поле.";
   const minLengthMessage = "Минимум 3 символа";
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
@@ -46,6 +53,7 @@ function AuthForm({ title, buttonText, question, navLink, navLinkTitle, children
                 })}
                 id="email"
                 type="email"
+                placeholder={'E-mail'}
                 className={"auth-form__input"}
               />
               <div className="auth-form__error-message auth-form__error-message_active">
@@ -64,6 +72,7 @@ function AuthForm({ title, buttonText, question, navLink, navLinkTitle, children
                 })}
                 id="password"
                 type="password"
+                placeholder={'Пароль'}
                 className="auth-form__input"
               />
 

@@ -35,6 +35,10 @@
 	border-radius: 8px;
 }
 
+.auth-form__input::placeholder {
+  font-size: 13px;
+}
+
 .auth-form__button {
 	font-size: 14px;
 	font-weight: 500;

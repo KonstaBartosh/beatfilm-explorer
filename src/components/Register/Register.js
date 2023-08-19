@@ -21,6 +21,7 @@ export default function Register() {
 			<TextInput
 				title={'name'}
 				label={'Имя'}
+				placeholder={'Имя'}
 				register={register}
 				errors={errors}
 			/>
