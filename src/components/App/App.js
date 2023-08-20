@@ -13,34 +13,29 @@ import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 
 function App() {
-  const url = useLocation();
+  const location = useLocation();
   const [loggedIn, setLogin] = useState(false);
 
-  const showFooter =
-    url.pathname !== "/profile" &&
-    url.pathname !== "/sign-in" &&
-    url.pathname !== "/sign-up";
+  const validPaths = ["/", "/movies", "/saved-movies"];
+  const showHeaderAndFooter = validPaths.includes(location.pathname);
 
-  const showHeader =
-    url.pathname !== "/sign-in" &&
-    url.pathname !== "/sign-up";
+  const movies = loggedIn ? <Movies /> : <Main /> ;
+  const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
+  const profile = loggedIn ? <Profile /> : <NotFound />
 
   return (
     <div className="app">
-      {showHeader && <Header loggedIn={loggedIn} />}
+      {showHeaderAndFooter && <Header loggedIn={loggedIn} />}
       <Routes>
         <Route path="/sign-up" element={<Register />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/" element={<Main />} />
-        <Route path="/movies" element={loggedIn ? <Movies /> : <Main />} />
-        <Route
-          path="/saved-movies"
-          element={loggedIn ? <SavedMovies /> : <Main />}
-        />
-        <Route path="/profile" element={loggedIn ? <Profile /> : null} />
+        <Route path="/movies" element={movies} />
+        <Route path="/saved-movies" element={savedMovies} />
+        <Route path="/profile" element={profile} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
-      {showFooter && <Footer />}
-      {/* <NotFound/> */}
+      {showHeaderAndFooter && <Footer />}
     </div>
   );
 }
