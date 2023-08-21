@@ -51,7 +51,7 @@
 	background-color: #2BE080;
 }
 
-.card__like:hover, .card__like_rm:hover {
+.card__btn:hover {
 	opacity: 0.8;
 }
 

@@ -56,6 +56,10 @@
 	font-weight: 500;
 }
 
+.portfolio__github:hover, .portfolio__exaple-container:hover {
+	opacity: 0.8;
+}
+
 .portfolio__sign {
 	padding-top: 100px;
 	color: #A0A0A0;

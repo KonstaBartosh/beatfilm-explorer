@@ -27,6 +27,10 @@
 	border-radius: 34px;
 }
 
+.toggle:hover {
+  opacity: 0.8;
+}
+
 .toggle__slider:before {
   position: absolute;
   content: "";
