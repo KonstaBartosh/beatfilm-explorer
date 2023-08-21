@@ -1,0 +1,87 @@
+.header {
+	max-width: 1280px;
+	height: 74px;
+	background-color: #465DFF;
+}
+
+.header.header_main-logged-in {
+	color: white;
+}	
+
+.header.header_movies-logged-in {
+	color: black;
+	background-color: white;
+}	
+
+.header__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 18px 70px;
+}
+
+.header__profile-nav {
+	display: flex;
+	gap: 30px;
+}
+
+.header__button {
+	font-size: 12px;
+	cursor: pointer;
+	border: 0;
+	line-height: 16px;
+	text-decoration: none;
+	color: black;
+	width: 76px;
+	height: 32px;
+	display: flex;
+  justify-content: center;
+	align-items: center;
+}
+
+.header__button:hover {
+	opacity: 0.8;
+}
+
+.header__button_account {
+	border-radius: 20px;
+	font-size: 14px;
+	background-color: #F9F9F9;
+	width: 100px;
+}
+
+.header__button_logout {
+	background-color: #2BE080;
+	border-radius: 3px;
+}
+
+.header__button_register {
+	color: white;
+	background-color: inherit;
+}
+
+@media screen and (max-width: 768px) {
+	.header__button_account {
+		display: none;
+	}
+	.header__container {
+		padding: 18px 30px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.header{
+		height: 74px;
+	}
+	.header__container {
+		padding: 18px 14px;
+	}
+	.header__button {
+		width: 54px;
+		height: 26px;
+		font-size: 10px;
+	}
+	.header__profile-nav {
+		gap: 14px;
+	}
+}

@@ -1,0 +1,31 @@
+.navigation {
+	display: flex;
+	justify-content: center;
+}
+
+.navigation__movies {
+	list-style: none;
+	display: flex;
+	gap: 16px;
+}
+
+.navigation__movies-link {
+	font-size: 13px;
+	font-weight: 400;
+	text-decoration: none;
+	color: inherit;
+}
+
+.navigation__movies-link.active {
+	font-weight: 500;
+}
+
+.navigation__movies-link:hover {
+	opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+	.navigation__movies {
+			display: none;
+	}
+}
