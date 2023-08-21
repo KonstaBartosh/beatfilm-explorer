@@ -1,6 +1,5 @@
 .notfound {
-	max-width: 1280px;
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 }
 
@@ -29,7 +28,7 @@
 
 .notfound__subtitle {
 	margin: 0;
-	padding-block: 5px 10px;
+	padding-block: 5px 30px;
 	font-size: 16px;
 	text-align: center;
 }
@@ -39,6 +38,8 @@
 	font-size: 14px;
 	cursor: pointer;
 	text-decoration: none;
+	border: 0;
+	background-color: inherit;
 }
 
 .notfound__link:hover {

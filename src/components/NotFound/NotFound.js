@@ -1,9 +1,13 @@
 import React from "react";
 
 import './NotFound.css'
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function NotFound() {
+	const navigate = useNavigate()
+
+	const onGetBack = () => navigate(-1);
+
 	return(
 		<div className="notfound">
 			<div className="notfound__container">
@@ -12,7 +16,7 @@ export default function NotFound() {
 					<p className="notfound__subtitle">Страница не найдена</p>
 				</div>
 
-				<NavLink to="/" className="notfound__link">Назад</NavLink>
+				<button onClick={onGetBack} className="notfound__link">Назад</button>
 			</div>
 		</div>
 	);
