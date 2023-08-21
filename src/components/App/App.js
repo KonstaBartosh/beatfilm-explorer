@@ -14,18 +14,21 @@ import NotFound from "../NotFound/NotFound";
 
 function App() {
   const location = useLocation();
-  const [loggedIn, setLogin] = useState(false);
+  const [loggedIn, setLogin] = useState(true);
 
-  const validPaths = ["/", "/movies", "/saved-movies"];
-  const showHeaderAndFooter = validPaths.includes(location.pathname);
+  const validFooterPaths = ["/", "/movies", "/saved-movies"];
+  const validHeaderPaths = validFooterPaths + "/profile";
 
+  const shouldShowHeader = validHeaderPaths.includes(location.pathname);
+  const shouldShowFooter = validFooterPaths.includes(location.pathname);
+  
   const movies = loggedIn ? <Movies /> : <Main /> ;
   const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
   const profile = loggedIn ? <Profile /> : <NotFound />
 
   return (
     <div className="app">
-      {showHeaderAndFooter && <Header loggedIn={loggedIn} />}
+      {shouldShowHeader && <Header loggedIn={loggedIn} />}
       <Routes>
         <Route path="/sign-up" element={<Register />} />
         <Route path="/sign-in" element={<Login />} />
@@ -35,7 +38,7 @@ function App() {
         <Route path="/profile" element={profile} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      {showHeaderAndFooter && <Footer />}
+      {shouldShowFooter && <Footer />}
     </div>
   );
 }
