@@ -1,9 +1,9 @@
 import React from "react";
 
-import '../pages/Movies/Movies.css'
+import '../Movies/Movies.css'
 
-import SearchForm from "../pages/Movies/SearchForm/SearchForm";
-import MoviesCardList from "../pages/Movies/MoviesCardList/MoviesCardList";
+import SearchForm from "../Movies/SearchForm/SearchForm";
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 
 export default function SavedMovies() {
 	return(
