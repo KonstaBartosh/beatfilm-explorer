@@ -10,14 +10,7 @@ export const register = ({ name, email, password }) => {
 		headers: json__headers,
 		body: JSON.stringify({ name, email, password })
 	})
-	.then((res) => {
-		if (res === res.ok) {
-			res.json();
-		}
-		else {
-			Promise.reject(`Упс.. ошибка ${res.status}`)
-		}
-	});
+	.then(res => res.ok? res.json() : Promise.reject(`Ошибка: ${res.status}`))
 };
 
 export const login = ({ email, password }) => {
@@ -26,13 +19,6 @@ export const login = ({ email, password }) => {
 		headers: json__headers,
 		body: JSON.stringify({ email, password })
 	})
-	.then((res) => {
-		if (res === res.ok) {
-			res.json();
-		}
-		else {
-			Promise.reject(`Упс.. ошибка ${res.status}`)
-		}
-	});
+	.then(res => res.ok? res.json() : Promise.reject(`Ошибка: ${res.status}`))
 };
 

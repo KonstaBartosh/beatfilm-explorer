@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -11,9 +11,11 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
+import * as auth from "../../utils/MainApi";
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [loggedIn, setLogin] = useState(true);
 
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
@@ -26,12 +28,30 @@ function App() {
   const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
   const profile = loggedIn ? <Profile /> : <NotFound />
 
+  function handleRegister({ name, email, password}) {
+    auth
+      .register({ name, email, password})
+      .then(() => {
+        navigate('/sign-in');
+      })
+      .catch((err) => alert(`Возникла ошибка ${err}`))
+  }
+
+  function handleLogin({ email, password}) {
+    auth
+      .login({ email, password})
+      .then(() => {
+        navigate('/');
+      })
+      .catch((err) => alert(`Возникла ошибка ${err}`))
+  }
+
   return (
     <div className="app">
       {shouldShowHeader && <Header loggedIn={loggedIn} />}
       <Routes>
-        <Route path="/sign-up" element={<Register />} />
-        <Route path="/sign-in" element={<Login />} />
+        <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
+        <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
         <Route path="/" element={<Main />} />
         <Route path="/movies" element={movies} />
         <Route path="/saved-movies" element={savedMovies} />
