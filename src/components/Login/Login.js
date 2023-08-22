@@ -14,7 +14,6 @@ export default function Login({ handleLogin }) {
 
 	const submitData = (data) => {
 		handleLogin(data);
-		console.log(data);
 	}
 
   return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
@@ -16,7 +16,9 @@ import * as auth from "../../utils/MainApi";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [loggedIn, setLogin] = useState(true);
+  const [loggedIn, setLogin] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
 
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
@@ -27,6 +29,10 @@ function App() {
   const movies = loggedIn ? <Movies /> : <Main /> ;
   const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
   const profile = loggedIn ? <Profile /> : <NotFound />
+
+  useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   function handleRegister({ name, email, password}) {
     auth
@@ -40,11 +46,30 @@ function App() {
   function handleLogin({ email, password}) {
     auth
       .login({ email, password})
-      .then(() => {
+      .then((data) => {
+        localStorage.setItem('token', data.token);
+        setLogin(true);
         navigate('/');
       })
       .catch((err) => alert(`Возникла ошибка ${err}`))
   }
+
+  /** Валидность токена */
+  function handleTokenCheck() {
+    auth
+      .checkToken()
+      .then((user) => {
+        const currentUserName = user.name;
+        const currentUserEmail = user.email;
+        setLogin(true);
+        navigate('/');
+        setUserName(currentUserName)
+        setUserEmail(currentUserEmail)
+      })
+      .catch((err) => alert(`Возникла ошибка ${err}`))
+  }
+
+  console.log(userName);
 
   return (
     <div className="app">
