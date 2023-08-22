@@ -5,12 +5,12 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import Movies from "../Movies/Movies";
+import Movies from "../pages/Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import Profile from "../Profile/Profile";
+import Profile from "../pages/Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import NotFound from "../NotFound/NotFound";
+import NotFound from "../pages/NotFound/NotFound";
 
 function App() {
   const location = useLocation();
