@@ -23,7 +23,12 @@ export default function Profile({ onLogOut }) {
 				</div>
 				<div className="profile__buttons">
 					<button  className="profile__btn">Редактировать</button>
-					<button onClick={onLogOut} className="profile__btn profile__btn_red">Выйти из аккаунта</button>
+					<button 
+						onClick={onLogOut} 
+						className="profile__btn profile__btn_red"
+					>
+						Выйти из аккаунта
+					</button>
 				</div>
 			</div>
 		</section>

@@ -6,6 +6,7 @@ import EmailInput from "../Forms/Inputs/EmailInput";
 import PasswordInput from "../Forms/Inputs/PasswordInput";
 
 export default function Login({ handleLogin }) {
+	
   const {
     register,
 		handleSubmit,

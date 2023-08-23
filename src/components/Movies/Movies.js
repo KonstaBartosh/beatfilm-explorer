@@ -4,11 +4,11 @@ import './Movies.css'
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-export default function Movies() {
+export default function Movies({ onSearchClick, moviesList }) {
 	return(
 		<section className="movies">
-			<SearchForm />
-			<MoviesCardList sampleItems={16} />
+			<SearchForm onSearchClick={onSearchClick} />
+			<MoviesCardList moviesList={moviesList} />
 		</section>
 	);
 }

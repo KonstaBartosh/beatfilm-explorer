@@ -12,6 +12,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import * as api from "../../utils/MainApi";
+import * as moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../context/context";
 
 function App() {
@@ -19,15 +20,12 @@ function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [moviesList, setMoviesList] = useState([]);
 
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
-
-  const movies = loggedIn ? <Movies /> : <Main /> ;
-  const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
-  const profile = loggedIn ? <Profile onLogOut={handleLogOut}/> : null
 
   useEffect(() => {
     if (loggedIn) {
@@ -85,7 +83,20 @@ function App() {
     navigate('/');
   }
 
-  console.log(currentUser)
+  function handleCards(evt) {
+    evt.preventDefault();
+    console.log('test');
+    moviesApi
+      .getMovies()
+      .then((data) => {
+        setMoviesList(data);
+        console.log(data);
+      })
+  }
+
+  const movies = loggedIn ? <Movies onSearchClick={handleCards} moviesList={moviesList}/> : <Main /> ;
+  const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
+  const profile = loggedIn ? <Profile onLogOut={handleLogOut} /> : null;
 
   return (
     <div className="app">

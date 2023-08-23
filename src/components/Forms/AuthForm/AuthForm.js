@@ -13,7 +13,6 @@ function AuthForm({
   onSubmit,
   isValid
 }) {
-
   return (
     <div className="auth-form">
       <div className="auth-form__container">
@@ -31,7 +30,7 @@ function AuthForm({
         <div>
 
           <button
-            className="auth-form__button"
+            className={`auth-form__button ${isValid ? "" : "auth-form__button_inactive"}`}
             type="submit"
             form="form__auth"
             disabled={!isValid}

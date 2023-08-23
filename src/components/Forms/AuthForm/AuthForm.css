@@ -52,7 +52,12 @@
 	width: 100%;
 }
 
-.auth-form__button:hover {
+.auth-form__button_inactive {
+	background-color: #A0A0A0;
+	
+}
+
+.auth-form__button:not(:disabled):hover {
 	opacity: 0.8;
 }
 

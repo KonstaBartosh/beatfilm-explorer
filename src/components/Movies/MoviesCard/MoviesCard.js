@@ -1,30 +1,39 @@
 import React, { useState } from "react";
 
 import "./MoviesCard.css";
-import testImg from '../../../images/test-image.jpg'
 import { useLocation } from "react-router-dom";
 
-export default function MoviesCard() {
+
+export default function MoviesCard({ movie }) {
 	const [isLiked, setLike] = useState(false);
-	const urlPath = useLocation();
+	const location = useLocation();
+	const baseUrl = ' https://api.nomoreparties.co/';
+	const { nameRU, duration, image, trailerLink } = movie;
 
-	const handleLikeClick = () => setLike(true);
-	
+  const formatTime = (duration) => {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+    return `${hours ? `${hours}ч` : ''} ${minutes}м`;
+  }
+	const handleLike = () => setLike(!isLiked);
+
 	const cardLikeButtonClassName = (`card__btn card__like ${isLiked && 'card__like_active'}`); 
-
-	const button = urlPath.pathname === '/movies' ? 
-		(<button class={cardLikeButtonClassName} type="submit" onClick={handleLikeClick}/>) :
+	const button = location.pathname === '/movies' ? 
+		(<button className={cardLikeButtonClassName} type="submit" onClick={handleLike}/>) :
 		(<button className="card__btn card__like_rm" type="submit">&#x2717;</button>)
 
   return (
     <div className="card">
-      <img src={testImg} alt="" class="card__image" />
-      <div class="card__header">
+			<a href={trailerLink}>
+				<img src={`${baseUrl}${image.url}`} alt={nameRU} className="card__image" />
+			</a>
+      
+      <div className="card__header">
 				<div className="card__header-wrapper">
-					<h2 class="card__title">Заглушка</h2>
+					<h2 className="card__title">{nameRU}</h2>
 					{button}
 				</div>
-				<span className="card__subtitle">Заглушка</span>
+				<span className="card__subtitle">{formatTime(duration)}</span>
       </div>
     </div>
   );

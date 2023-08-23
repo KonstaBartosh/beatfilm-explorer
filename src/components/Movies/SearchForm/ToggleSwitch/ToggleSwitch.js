@@ -4,9 +4,9 @@ import "./ToggleSwitch.css";
 
 export default function ToggleSwitch() {
   return (
-		<label class="toggle">
+		<label className="toggle">
 			<input type="checkbox" id="toggle"/>
-			<span class="toggle__slider"></span>
+			<span className="toggle__slider"></span>
 		</label>
   );
 }

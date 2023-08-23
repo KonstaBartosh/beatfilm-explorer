@@ -4,22 +4,22 @@ import "./SearchForm.css";
 import logo from '../../../images/search_icon.svg'
 import ToggleSwitch from "./ToggleSwitch/ToggleSwitch";
 
-export default function SearchForm() {
+export default function SearchForm({ onSearchClick }) {
+
   return (
     <div className="searchform">
-      <form className="searchform__bar" noValidate>
+      <form onSubmit={onSearchClick} className="searchform__bar" noValidate>
 				<label className="searchform__label">
 					<input 
 						className="searchform__input"
 						id="search-input" 
 						type="search"
 						placeholder="Фильм"
-						value=""
 						required 
 					/>
 				</label>
 
-				<button 
+				<button
 					className="searchform__button" 
 					type="submit"
 				>
