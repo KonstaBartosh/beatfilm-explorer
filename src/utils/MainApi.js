@@ -4,6 +4,12 @@ const jsonHeaders = {
 	'Accept': 'application/json'
 }
 
+const checkResponse = (res) => {
+	if (res.ok) {
+		return res.json();
+	}
+	return Promise.reject(`Упс...Ошибка: ${res.status}`);
+}
 
 export const register = ({ name, email, password }) => {
 	return fetch(`${BASE_URL}/signup`, {
@@ -11,7 +17,7 @@ export const register = ({ name, email, password }) => {
 		headers: jsonHeaders,
 		body: JSON.stringify({ name, email, password })
 	})
-	.then(res => res.ok? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+	.then(checkResponse)
 };
 
 export const login = ({ email, password }) => {
@@ -20,7 +26,7 @@ export const login = ({ email, password }) => {
 		headers: jsonHeaders,
 		body: JSON.stringify({ email, password })
 	})
-	.then(res => res.ok? res.json() : Promise.reject(`Ошибка: ${res.status}`))
+	.then(checkResponse)
 };
 
 export function checkToken() {
@@ -33,5 +39,16 @@ export function checkToken() {
 	})
 	.then((res) => res.json())
 	.then(data => data)
+}
+
+export function getUserData() {
+	return fetch(`${BASE_URL}/users/me`, {
+		method: 'GET',
+		headers: {
+			...jsonHeaders,
+			"Authorization": `Bearer ${localStorage.getItem('token')}`
+		}
+	})
+	.then(checkResponse)
 }
 

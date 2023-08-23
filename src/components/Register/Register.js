@@ -15,9 +15,8 @@ export default function Register({ onRegister }) {
 
 	const submitData = (data) => {
 		onRegister(data);
-		console.log(data);
 	}
-	
+
   return (
     <AuthForm
       title={"Добро пожаловать!"}

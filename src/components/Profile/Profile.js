@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import './Profile.css'
 import { CurrentUserContext } from "../../context/context";
 
-export default function Profile() {
+export default function Profile({ onLogOut }) {
 	const currentUser = useContext(CurrentUserContext);
 
 	return(
@@ -22,8 +22,8 @@ export default function Profile() {
 					</div>
 				</div>
 				<div className="profile__buttons">
-					<button className="profile__btn">Редактировать</button>
-					<button className="profile__btn profile__btn_red">Выйти из аккаунта</button>
+					<button  className="profile__btn">Редактировать</button>
+					<button onClick={onLogOut} className="profile__btn profile__btn_red">Выйти из аккаунта</button>
 				</div>
 			</div>
 		</section>

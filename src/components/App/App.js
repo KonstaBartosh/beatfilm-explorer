@@ -11,31 +11,40 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
-import * as auth from "../../utils/MainApi";
+import * as api from "../../utils/MainApi";
 import { CurrentUserContext } from "../../context/context";
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [loggedIn, setLogin] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
-
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
-  
+
   const movies = loggedIn ? <Movies /> : <Main /> ;
   const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
-  const profile = loggedIn ? <Profile /> : <NotFound />
+  const profile = loggedIn ? <Profile onLogOut={handleLogOut}/> : null
+
+  useEffect(() => {
+    if (loggedIn) {
+      api
+        .getUserData()
+        .then((userData) => setCurrentUser(userData))
+        .catch((err) => alert(`Возникла ошибка ${err}`))
+    }
+  }, [loggedIn])
 
   useEffect(() => {
     handleTokenCheck();
   }, []);
 
+
   function handleRegister({ name, email, password}) {
-    auth
+    api
       .register({ name, email, password})
       .then(() => {
         navigate('/sign-in');
@@ -44,11 +53,11 @@ function App() {
   }
 
   function handleLogin({ email, password}) {
-    auth
+    api
       .login({ email, password})
       .then((data) => {
         localStorage.setItem('token', data.token);
-        setLogin(true);
+        setLoggedIn(true);
         navigate('/');
       })
       .catch((err) => alert(`Возникла ошибка ${err}`))
@@ -56,17 +65,27 @@ function App() {
 
   /** Валидность токена */
   function handleTokenCheck() {
-    auth
-      .checkToken()
-      .then((data) => {
-        setCurrentUser(data)
-        setLogin(true);
-        navigate('/');
-      })
+    const token = localStorage.getItem('token');
+
+    if(token) {
+      api
+        .checkToken()
+        .then(() => {
+          setLoggedIn(true);
+          navigate('/');
+        })
       .catch((err) => alert(`Возникла ошибка ${err}`))
+    }
   }
 
-  console.log(currentUser);
+  function handleLogOut() {
+    console.log('12345')
+    setLoggedIn(false);
+    localStorage.clear();
+    navigate('/');
+  }
+
+  console.log(currentUser)
 
   return (
     <div className="app">
