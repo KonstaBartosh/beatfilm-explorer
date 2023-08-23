@@ -20,7 +20,7 @@ function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [moviesList, setMoviesList] = useState([]);
+  // const [moviesList, setMoviesList] = useState([]);
 
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
@@ -83,18 +83,18 @@ function App() {
     navigate('/');
   }
 
-  function handleCards(evt) {
-    evt.preventDefault();
-    console.log('test');
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        setMoviesList(data);
-        console.log(data);
-      })
-  }
+  // function getAllCards(evt) {
+  //   evt.preventDefault();
+  //   console.log('test');
+  //   moviesApi
+  //     .getMovies()
+  //     .then((data) => {
+  //       setMoviesList(data);
+  //       console.log(data);
+  //     })
+  // }
 
-  const movies = loggedIn ? <Movies onSearchClick={handleCards} moviesList={moviesList}/> : <Main /> ;
+  const movies = loggedIn ? <Movies /> : <Main /> ;
   const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
   const profile = loggedIn ? <Profile onLogOut={handleLogOut} /> : null;
 
