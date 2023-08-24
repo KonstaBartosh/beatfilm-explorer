@@ -1,10 +1,10 @@
-	import React, { useState } from "react";
+	import React from "react";
 
 	import "./SearchForm.css";
 	import logo from '../../../images/search_icon.svg'
 	import ToggleSwitch from "./ToggleSwitch/ToggleSwitch";
 
-	export default function SearchForm({ searchQuery, handleSearchChange, onSearchClick }) {
+	export default function SearchForm({ searchQuery, handleSearchChange, onSearchClick, onToggle }) {
 
 		return (
 			<div className="searchform">
@@ -19,13 +19,12 @@
 							onChange={handleSearchChange}
 						/>
 					</label>
-
 					<button className="searchform__button" type="submit">
 						<img className="searchform__icon" src={logo} alt="поиск" />
 					</button>
 				</form>
 				<div className="searchform__toggle-container">
-					<ToggleSwitch />
+					<ToggleSwitch onToggle={onToggle}/>
 					<span className="searchform__toggle-title">Короткометражки</span>
 				</div>
 				<span className="searchform__border-bottom" />
