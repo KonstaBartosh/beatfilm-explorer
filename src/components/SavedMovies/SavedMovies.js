@@ -8,8 +8,7 @@ import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 export default function SavedMovies() {
 	return(
 		<section className="movies">
-			<SearchForm />
-			<MoviesCardList sampleItems={4}/>
+			<p>gfhgghf</p>
 		</section>
 	);
 }

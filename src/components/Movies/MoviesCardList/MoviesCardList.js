@@ -6,14 +6,6 @@ export default function MoviesCardList({ moviesList }) {
   return (
     <>
       <section className="movies-card-list">
-        {/* {
-          moviesList.map((movie) => (
-            <MoviesCard 
-              key={movie.id}
-              movie={movie}
-            />
-          ))
-        } */}
         {
         moviesList.length > 0 ? 
         (moviesList.map((movie) => <MoviesCard key={movie.id} movie={movie} />)) 

@@ -11,6 +11,7 @@ export default function Movies() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
+  //** подгрузка фильмов при монтировании компонента */
 	useEffect(() => {
 		moviesApi
 			.getMovies()
@@ -18,18 +19,20 @@ export default function Movies() {
 			.catch((err) => alert(`Возникла ошибка ${err}`))
 	}, [])
 
+  /** отправка формы */
 	function handleSearchSubmit (evt) {
     evt.preventDefault();
-
-    const filtered = moviesList.filter((movie) =>
-      movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    //** фильтрация фильмов на основе поискового запроса */
+    const filtered = moviesList.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
+    });
 
     setFilteredMovies(filtered);
   };
 
-	const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+  //** запись значения в поиске в стейт-переменную */
+	const handleSearchChange = (evt) => {
+    setSearchQuery(evt.target.value);
   };
 
   return (
