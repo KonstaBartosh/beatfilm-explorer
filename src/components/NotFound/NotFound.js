@@ -18,6 +18,6 @@ export default function NotFound() {
 
 				<button onClick={onGetBack} className="notfound__link">Назад</button>
 			</div>
-		</ы>
+		</section>
 	);
 }
