@@ -36,13 +36,13 @@ export default function Movies() {
     setSearchQuery(evt.target.value);
   };
 
-  function handleToggleSwitchOn () {
-    if (isToggled === false) {
+  //** переключатель короткометражек */
+  function handleToggleSwitch () {
+    if (!isToggled) {
       setIsToggled(true);
       const shortMovies = moviesList.filter(movie => movie.duration < 60);
       setFilteredMovies(shortMovies);
-      console.log(isToggled);
-    } else if (isToggled === true) {
+    } else {
       setIsToggled(false);
       setFilteredMovies(moviesList);
     }
@@ -55,7 +55,7 @@ export default function Movies() {
         onSearchClick={handleSearchSubmit}
         handleSearchChange={handleSearchChange}
 				setFilteredMovies={setFilteredMovies}
-        onToggle={handleToggleSwitchOn}
+        onToggle={handleToggleSwitch}
       />
       <MoviesCardList moviesList={filteredMovies} />
     </section>
