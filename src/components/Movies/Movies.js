@@ -11,6 +11,7 @@ export default function Movies() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isToggled, setIsToggled] = useState(false);
+  const [validationMessage, setValidationMessage] = useState('');
 
   //** подгрузка фильмов при монтировании компонента */
 	useEffect(() => {
@@ -23,11 +24,16 @@ export default function Movies() {
   /** отправка формы */
 	function handleSearchSubmit (evt) {
     evt.preventDefault();
+
+    if (searchQuery === '') {
+      setValidationMessage('Нужно ввести ключевое слово');
+      return;
+    }
     //** фильтрация фильмов на основе поискового запроса */
+    setValidationMessage('')
     const filtered = moviesList.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
     });
-
     setFilteredMovies(filtered);
   };
 
@@ -56,6 +62,7 @@ export default function Movies() {
         handleSearchChange={handleSearchChange}
 				setFilteredMovies={setFilteredMovies}
         onToggle={handleToggleSwitch}
+        validationMessage={validationMessage}
       />
       <MoviesCardList moviesList={filteredMovies} />
     </section>

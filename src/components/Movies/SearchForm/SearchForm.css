@@ -72,6 +72,15 @@
 	padding-top: 70px;
 }
 
+.searchform__validation {
+	padding-top: 10px;
+	text-align: center;
+	font-size: 12px;
+	line-height: 12px;
+	color: #EE3465;
+}
+
+
 @media screen and (max-width: 768px) {
 	.searchform {
 		padding: 0 30px;
