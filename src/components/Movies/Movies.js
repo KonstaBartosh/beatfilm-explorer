@@ -13,12 +13,13 @@ export default function Movies() {
   const [isToggled, setIsToggled] = useState(false);
   const [validationMessage, setValidationMessage] = useState('');
   const [isLoading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   
   const message = (<p className="movies-card-list__message">
     Во время запроса произошла ошибка. 
     Возможно, проблема с соединением или сервер недоступен. 
     Подождите немного и попробуйте ещё раз</p>)
-const [errorMessage, setErrorMessage] = useState(message);
+
 
   //** подгрузка фильмов при монтировании компонента */
 	useEffect(() => {
