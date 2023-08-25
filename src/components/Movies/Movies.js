@@ -14,7 +14,7 @@ export default function Movies() {
   const [validationMessage, setValidationMessage] = useState('');
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  
+
   const message = (<p className="movies-card-list__message">
     Во время запроса произошла ошибка. 
     Возможно, проблема с соединением или сервер недоступен. 
