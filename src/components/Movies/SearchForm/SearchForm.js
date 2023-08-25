@@ -22,6 +22,7 @@ function SearchForm({
             placeholder="Фильм"
             value={searchQuery}
             onChange={handleSearchChange}
+						autoComplete="off"
           />
         </label>
         <button className="searchform__button" type="submit">

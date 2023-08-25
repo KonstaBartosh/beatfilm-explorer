@@ -12,14 +12,27 @@ export default function Movies() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isToggled, setIsToggled] = useState(false);
   const [validationMessage, setValidationMessage] = useState('');
+  const [isLoading, setLoading] = useState(true);
+  
+  const message = (<p className="movies-card-list__message">
+    Во время запроса произошла ошибка. 
+    Возможно, проблема с соединением или сервер недоступен. 
+    Подождите немного и попробуйте ещё раз</p>)
+const [errorMessage, setErrorMessage] = useState(message);
 
   //** подгрузка фильмов при монтировании компонента */
 	useEffect(() => {
 		moviesApi
 			.getMovies()
-			.then((data) => setMoviesList(data))
-			.catch((err) => alert(`Возникла ошибка ${err}`))
-	}, [])
+			.then((data) => {
+        setLoading(false);
+        setMoviesList(data);
+      })
+			.catch(() => {
+        setLoading(false);
+        setErrorMessage(message);
+      })
+	}, []);
 
   /** отправка формы */
 	function handleSearchSubmit (evt) {
@@ -29,8 +42,9 @@ export default function Movies() {
       setValidationMessage('Нужно ввести ключевое слово');
       return;
     }
+
     //** фильтрация фильмов на основе поискового запроса */
-    setValidationMessage('')
+    setValidationMessage('');
     const filtered = moviesList.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
     });
@@ -64,7 +78,11 @@ export default function Movies() {
         onToggle={handleToggleSwitch}
         validationMessage={validationMessage}
       />
-      <MoviesCardList moviesList={filteredMovies} />
+      <MoviesCardList 
+        moviesList={filteredMovies}
+        isLoading={isLoading}
+        errorMessage={errorMessage}
+      />
     </section>
   );
 }

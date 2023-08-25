@@ -12,7 +12,6 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import * as api from "../../utils/MainApi";
-import * as moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext } from "../../context/context";
 
 function App() {
@@ -82,17 +81,6 @@ function App() {
     localStorage.clear();
     navigate('/');
   }
-
-  // function getAllCards(evt) {
-  //   evt.preventDefault();
-  //   console.log('test');
-  //   moviesApi
-  //     .getMovies()
-  //     .then((data) => {
-  //       setMoviesList(data);
-  //       console.log(data);
-  //     })
-  // }
 
   const movies = loggedIn ? <Movies /> : <Main /> ;
   const savedMovies = loggedIn ? <SavedMovies /> : <Main />;

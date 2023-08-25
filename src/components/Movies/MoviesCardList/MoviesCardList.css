@@ -24,6 +24,12 @@
 	opacity: 0.8;
 }
 
+.movies-card-list__message {
+	max-width: 600px;
+	text-align: center;
+	line-height: 22px;
+}
+
 @media screen and (max-width: 768px) {
 	.movies-card-list {
 		padding: 70px 30px 30px;
@@ -43,5 +49,11 @@
 	.movies-card-list__button {
 		margin: 50px 10px 80px;
 		width: 300px;
+	}
+
+	.movies-card-list__message {
+		width: 300px;
+		font-size: 11px;
+		line-height: 18px;
 	}
 }
