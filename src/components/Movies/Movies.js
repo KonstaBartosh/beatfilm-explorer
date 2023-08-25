@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import * as moviesApi from "../../utils/MoviesApi"
+import * as moviesApi from "../../utils/MoviesApi";
 
-import './Movies.css'
+import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
@@ -11,78 +11,116 @@ export default function Movies() {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isToggled, setIsToggled] = useState(false);
-  const [validationMessage, setValidationMessage] = useState('');
+  const [validationMessage, setValidationMessage] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const message = (<p className="movies-card-list__message">
-    Во время запроса произошла ошибка. 
-    Возможно, проблема с соединением или сервер недоступен. 
-    Подождите немного и попробуйте ещё раз</p>)
+  const [displayCards, setDisplayCards] = useState(16);
+  const cardsToShow = filteredMovies.slice(0, displayCards);
 
+  const message = (
+    <p className="movies-card-list__message">
+      Во время запроса произошла ошибка. Возможно, проблема с соединением или
+      сервер недоступен. Подождите немного и попробуйте ещё раз
+    </p>
+  );
 
   //** подгрузка фильмов при монтировании компонента */
-	useEffect(() => {
-		moviesApi
-			.getMovies()
-			.then((data) => {
+  useEffect(() => {
+    moviesApi
+      .getMovies()
+      .then((data) => {
         setLoading(false);
         setMoviesList(data);
       })
-			.catch(() => {
+      .catch(() => {
         setLoading(false);
         setErrorMessage(message);
-      })
-	}, []);
+      });
+  }, []);
+
+  //** изменение кол-ва карточек в зависимости от ширины экрана */
+  useEffect(() => {
+    const updateDisplayCards = () => {
+      const screenWidth = window.innerWidth;
+      
+      if (screenWidth >= 1280) {
+        setDisplayCards(16);
+      } else if (screenWidth >= 768) {
+        setDisplayCards(8);
+      } else {
+        setDisplayCards(5);
+      }
+    };
+    //** изминение кол-ва при монтировании компонента */
+    updateDisplayCards();
+
+    //** изменение кол-ва карточек в зав-ти от размера окна */
+    window.addEventListener("resize", () => {
+      console.log(window.innerWidth);
+      updateDisplayCards();
+    });
+
+    return () => {
+      window.removeEventListener("resize", updateDisplayCards);
+    };
+  }, []);
 
   /** отправка формы */
-	function handleSearchSubmit (evt) {
-    evt.preventDefault();
-
-    if (searchQuery === '') {
-      setValidationMessage('Нужно ввести ключевое слово');
+  function handleSearchSubmit() {
+    if (searchQuery === "") {
+      setValidationMessage("Нужно ввести ключевое слово");
       return;
     }
 
     //** фильтрация фильмов на основе поискового запроса */
-    setValidationMessage('');
+    setValidationMessage("");
     const filtered = moviesList.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
+      return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase());
     });
     setFilteredMovies(filtered);
-  };
+  }
 
   //** запись значения в поиске в стейт-переменную */
-	const handleSearchChange = (evt) => {
+  const handleSearchChange = (evt) => {
     setSearchQuery(evt.target.value);
   };
 
   //** переключатель короткометражек */
-  function handleToggleSwitch () {
+  function handleToggleSwitch() {
     if (!isToggled) {
-      setIsToggled(true);
-      const shortMovies = moviesList.filter(movie => movie.duration < 60);
+      const shortMovies = filteredMovies.filter((movie) => movie.duration < 60);
       setFilteredMovies(shortMovies);
+      setIsToggled(true);
     } else {
+      console.log(filteredMovies)
+      handleSearchSubmit();
       setIsToggled(false);
-      setFilteredMovies(moviesList);
     }
-  };
+  }
 
+  //** добавление карточек из списка */
+  const handleAddMoreCards = () => {
+    setDisplayCards(
+      window.innerWidth > 768 ? displayCards + 4 : displayCards + 2
+    );
+  };
 
   return (
     <section className="movies">
       <SearchForm
         onSearchClick={handleSearchSubmit}
         handleSearchChange={handleSearchChange}
-				setFilteredMovies={setFilteredMovies}
+        setFilteredMovies={setFilteredMovies}
         onToggle={handleToggleSwitch}
         validationMessage={validationMessage}
       />
-      <MoviesCardList 
-        moviesList={filteredMovies}
+      <MoviesCardList
+        list={filteredMovies}
         isLoading={isLoading}
         errorMessage={errorMessage}
+        onAddMore={handleAddMoreCards}
+        cardsToShow={cardsToShow}
       />
     </section>
   );
