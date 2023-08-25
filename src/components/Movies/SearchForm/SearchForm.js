@@ -11,9 +11,15 @@ function SearchForm({
   onToggle,
 	validationMessage
 }) {
+	
+	const handleSubmit = (evt) => {
+		evt.preventDefault();
+		onSearchClick();
+	}
+
   return (
     <div className="searchform">
-      <form onSubmit={onSearchClick} className="searchform__bar">
+      <form onSubmit={handleSubmit} className="searchform__bar">
         <label className="searchform__label">
           <input
             className="searchform__input"
