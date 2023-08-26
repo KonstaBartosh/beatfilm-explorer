@@ -5,6 +5,7 @@ import * as moviesApi from "../../utils/MoviesApi";
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import { messageErr } from "../../utils/constants";
 
 export default function Movies() {
   const [moviesList, setMoviesList] = useState([]);
@@ -14,16 +15,8 @@ export default function Movies() {
   const [validationMessage, setValidationMessage] = useState("");
   const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-
   const [displayCards, setDisplayCards] = useState(16);
   const cardsToShow = filteredMovies.slice(0, displayCards);
-
-  const message = (
-    <p className="movies-card-list__message">
-      Во время запроса произошла ошибка. Возможно, проблема с соединением или
-      сервер недоступен. Подождите немного и попробуйте ещё раз
-    </p>
-  );
 
   //** подгрузка фильмов при монтировании компонента */
   useEffect(() => {
@@ -35,29 +28,27 @@ export default function Movies() {
       })
       .catch(() => {
         setLoading(false);
-        setErrorMessage(message);
+        setErrorMessage(messageErr);
       });
   }, []);
 
+  const updateDisplayCards = () => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 1280) {
+      setDisplayCards(16);
+    } else if (screenWidth >= 768) {
+      setDisplayCards(8);
+    } else {
+      setDisplayCards(5);
+    }
+  };
+
   //** изменение кол-ва карточек в зависимости от ширины экрана */
   useEffect(() => {
-    const updateDisplayCards = () => {
-      const screenWidth = window.innerWidth;
-      
-      if (screenWidth >= 1280) {
-        setDisplayCards(16);
-      } else if (screenWidth >= 768) {
-        setDisplayCards(8);
-      } else {
-        setDisplayCards(5);
-      }
-    };
-    //** изминение кол-ва при монтировании компонента */
     updateDisplayCards();
-
-    //** изменение кол-ва карточек в зав-ти от размера окна */
+    //** динамическое изменение кол-ва карточек */
     window.addEventListener("resize", () => {
-      console.log(window.innerWidth);
       updateDisplayCards();
     });
 
@@ -81,11 +72,6 @@ export default function Movies() {
     setFilteredMovies(filtered);
   }
 
-  //** запись значения в поиске в стейт-переменную */
-  const handleSearchChange = (evt) => {
-    setSearchQuery(evt.target.value);
-  };
-
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (!isToggled) {
@@ -97,6 +83,11 @@ export default function Movies() {
       setIsToggled(false);
     }
   }
+
+  //** запись значения в поиске в стейт-переменную */
+  const handleSearchChange = (evt) => {
+    setSearchQuery(evt.target.value);
+  };
 
   //** добавление карточек из списка */
   const handleAddMoreCards = () => {
