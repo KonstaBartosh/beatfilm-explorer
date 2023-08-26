@@ -18,10 +18,10 @@
 }
 
 .card__header {
-	background-color: white;
-  align-items: center;
-	flex-direction: column;
   padding: 14px 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .card__header-wrapper {
@@ -66,6 +66,10 @@
 	margin: 0;
 	font-size: 13px;
 	font-weight: 500;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 206px;
 }
 
 .card__subtitle {
