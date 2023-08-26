@@ -4,11 +4,8 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../../Preloader/Preloader";
 
 function MoviesCardList ({ list, isLoading, errorMessage, onAddMore, cardsToShow }) {
-
-  if (isLoading) {
-    return <Preloader />;
-  }
   return (
+    isLoading ? <Preloader /> :
     <>
       <section className="movies-card-list">
         {cardsToShow.length > 0  
@@ -17,11 +14,10 @@ function MoviesCardList ({ list, isLoading, errorMessage, onAddMore, cardsToShow
         {errorMessage}
       </section>
 
-      {list.length > cardsToShow.length  
-      ? (<button onClick={onAddMore} className="movies-card-list__button">Еще</button>)
-      : null}
+      {list.length > cardsToShow.length && 
+      (<button onClick={onAddMore} className="movies-card-list__button">Еще</button>)}
     </>
-  );
+  )
 }
 
 export default MoviesCardList;
