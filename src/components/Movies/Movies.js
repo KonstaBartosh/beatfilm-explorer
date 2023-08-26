@@ -73,7 +73,7 @@ export default function Movies() {
       return;
     }
 
-    //** фильтрация фильмов на основе поискового запроса */
+    //** поиск фильмов на основе запроса */
     setValidationMessage("");
     const filtered = moviesList.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase());
@@ -93,7 +93,6 @@ export default function Movies() {
       setFilteredMovies(shortMovies);
       setIsToggled(true);
     } else {
-      console.log(filteredMovies)
       handleSearchSubmit();
       setIsToggled(false);
     }
