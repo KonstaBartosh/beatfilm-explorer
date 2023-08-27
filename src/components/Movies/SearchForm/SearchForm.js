@@ -9,7 +9,8 @@ function SearchForm({
   handleSearchChange,
   onSearchClick,
   onToggle,
-	validationMessage
+	validationMessage,
+  defaultValue
 }) {
 	
 	const handleSubmit = (evt) => {
@@ -26,6 +27,7 @@ function SearchForm({
             id="search-input"
             type="search"
             placeholder="Фильм"
+            defaultValue={defaultValue}
             value={searchQuery}
             onChange={handleSearchChange}
 						autoComplete="off"
