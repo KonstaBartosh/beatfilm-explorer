@@ -18,23 +18,40 @@
     const [displayCards, setDisplayCards] = useState(16);
     const cardsToShow = filteredMovies.slice(0, displayCards);
 
-    const localStorageMovies = JSON.parse(localStorage.getItem('lastSearchRequest'));
+    const localStorageMovies = JSON.parse(localStorage.getItem('moviesList'));
+    const localStorageShortMovies = JSON.parse(localStorage.getItem('shortMovies'))
     const localStorageQuery = localStorage.getItem('query');
     const slicedLocalStorageQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : '';
+    const storedIsToggled = localStorage.getItem('isToggled');
 
-    
+    // В useEffect, чтобы восстановить состояние при загрузке страницы
+    useEffect(() => {
+      if (storedIsToggled) {
+        setIsToggled(true);
+      }
+    }, []);
+
     function handleLocalStorageData () {
       if (localStorageMovies === null) {
         return;
       }
-      setFilteredMovies(localStorageMovies);
+
+      if (localStorageShortMovies) {
+        setFilteredMovies(localStorageShortMovies);
+      } else {
+        setFilteredMovies(localStorageMovies);
+      }
+      
       setSearchQuery(localStorageQuery);
     }
-    
+
+    console.log(isToggled)
+    console.log(filteredMovies)
+
     //** возвращаем предыдущий запрос если он был */
     useEffect(() => {
       handleLocalStorageData();
-    })
+    }, [])
     
     //** подгрузка фильмов при монтировании компонента */
     useEffect(() => {
@@ -50,7 +67,8 @@
         });
     }, []);
 
-    const updateDisplayCards = () => {
+
+    function updateDisplayCards() {
       const screenWidth = window.innerWidth;
 
       if (screenWidth >= 1280) {
@@ -89,18 +107,23 @@
       });
       setFilteredMovies(filtered);
       // обновление localStorage при изменении filteredMovies
-      localStorage.setItem('lastSearchRequest', JSON.stringify(filtered));
+      localStorage.setItem('moviesList', JSON.stringify(filtered));
     }
 
     //** переключатель короткометражек */
     function handleToggleSwitch() {
-      if (!isToggled) {
+      console.log("Toggled");
+      if (isToggled === false) {
         const shortMovies = filteredMovies.filter((movie) => movie.duration < 60);
-        setFilteredMovies(shortMovies);
         setIsToggled(true);
+        setFilteredMovies(shortMovies);
+        localStorage.setItem('shortMovies', JSON.stringify(shortMovies));
+        localStorage.setItem('isToggled', JSON.stringify(true));
       } else {
         handleSearchSubmit();
         setIsToggled(false);
+        localStorage.removeItem('shortMovies');
+        localStorage.removeItem('isToggled');
       }
     }
 
@@ -127,6 +150,7 @@
           onToggle={handleToggleSwitch}
           validationMessage={validationMessage}
           defaultValue={slicedLocalStorageQuery}
+          isToggled={isToggled}
         />
         <MoviesCardList
           list={filteredMovies}

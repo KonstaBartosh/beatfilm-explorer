@@ -10,7 +10,8 @@ function SearchForm({
   onSearchClick,
   onToggle,
 	validationMessage,
-  defaultValue
+  defaultValue,
+  isToggled
 }) {
 	
 	const handleSubmit = (evt) => {
@@ -39,7 +40,7 @@ function SearchForm({
       </form>
       {validationMessage && <span className="searchform__validation">{validationMessage}</span>}
       <div className="searchform__toggle-container">
-        <ToggleSwitch onToggle={onToggle} />
+        <ToggleSwitch onToggle={onToggle} isToggled={isToggled} />
         <span className="searchform__toggle-title">Короткометражки</span>
       </div>
       <span className="searchform__border-bottom" />

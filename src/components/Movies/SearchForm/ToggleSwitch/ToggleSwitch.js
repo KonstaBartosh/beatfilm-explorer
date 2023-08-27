@@ -2,10 +2,10 @@ import React from "react";
 
 import "./ToggleSwitch.css";
 
-export default function ToggleSwitch({ onToggle }) {
+export default function ToggleSwitch({ onToggle, isToggled }) {
   return (
 		<label className="toggle">
-			<input type="checkbox" id="toggle"/>
+			<input type="checkbox" id="toggle" checked={isToggled}/>
 			<span onClick={onToggle} className="toggle__slider"></span>
 		</label>
   );
