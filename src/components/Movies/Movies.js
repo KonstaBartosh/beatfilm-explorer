@@ -1,7 +1,8 @@
   import React, { useEffect } from "react";
   import { useState } from "react";
-  import * as moviesApi from "../../utils/MoviesApi";
 
+  import * as moviesApi from "../../utils/MoviesApi";
+  import * as api from "../../utils/MainApi";
   import "./Movies.css";
   import SearchForm from "./SearchForm/SearchForm";
   import MoviesCardList from "./MoviesCardList/MoviesCardList";
@@ -17,27 +18,25 @@
     const [errorMessage, setErrorMessage] = useState(null);
     const [displayCards, setDisplayCards] = useState(16);
     const cardsToShow = filteredMovies.slice(0, displayCards);
-
+    //** взаимодействие с localStorage */
     const localStorageMovies = JSON.parse(localStorage.getItem('moviesList'));
     const localStorageShortMovies = JSON.parse(localStorage.getItem('shortMovies'))
     const localStorageQuery = localStorage.getItem('query');
     const slicedLocalStorageQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : '';
     const storedIsToggled = localStorage.getItem('isToggled');
 
-    // В useEffect, чтобы восстановить состояние при загрузке страницы
-    useEffect(() => {
-      if (storedIsToggled) {
-        setIsToggled(true);
-      }
-    }, []);
+    console.log(filteredMovies)
 
     function handleLocalStorageData () {
       if (localStorageMovies === null) {
         return;
       }
 
-      if (localStorageShortMovies) {
+      const shouldRestoreShortMovies = localStorageShortMovies && storedIsToggled;
+
+      if (shouldRestoreShortMovies) {
         setFilteredMovies(localStorageShortMovies);
+        setIsToggled(true);
       } else {
         setFilteredMovies(localStorageMovies);
       }
@@ -45,8 +44,6 @@
       setSearchQuery(localStorageQuery);
     }
 
-    console.log(isToggled)
-    console.log(filteredMovies)
 
     //** возвращаем предыдущий запрос если он был */
     useEffect(() => {
@@ -140,6 +137,14 @@
         window.innerWidth > 768 ? displayCards + 4 : displayCards + 2
       );
     };
+
+    // function handleSaveMovie() {
+    //   console.log('save click!');
+    //   api
+    //     .createUserMovie()
+    //     .then()
+    //     .catch((err) => alert(`Возникла ошибка ${err}`))
+    // }
 
     return (
       <section className="movies">

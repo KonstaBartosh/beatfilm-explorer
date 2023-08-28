@@ -30,7 +30,9 @@ function App() {
     if (loggedIn) {
       api
         .getUserData()
-        .then((userData) => setCurrentUser(userData))
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
         .catch((err) => alert(`Возникла ошибка ${err}`))
     }
   }, [loggedIn])
@@ -82,6 +84,7 @@ function App() {
     navigate('/');
   }
 
+
   const movies = loggedIn ? <Movies /> : <Main /> ;
   const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
   const profile = loggedIn ? <Profile onLogOut={handleLogOut} /> : null;
@@ -89,17 +92,17 @@ function App() {
   return (
     <div className="app">
       <CurrentUserContext.Provider value={currentUser}>
-        {shouldShowHeader && <Header loggedIn={loggedIn} />}
-        <Routes>
-          <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
-          <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
-          <Route path="/" element={<Main />} />
-          <Route path="/movies" element={movies} />
-          <Route path="/saved-movies" element={savedMovies} />
-          <Route path="/profile" element={profile} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        {shouldShowFooter && <Footer />}
+          {shouldShowHeader && <Header loggedIn={loggedIn} />}
+          <Routes>
+            <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
+            <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+            <Route path="/" element={<Main />} />
+            <Route path="/movies" element={movies} />
+            <Route path="/saved-movies" element={savedMovies} />
+            <Route path="/profile" element={profile} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          {shouldShowFooter && <Footer />}
       </CurrentUserContext.Provider>
     </div>
   );

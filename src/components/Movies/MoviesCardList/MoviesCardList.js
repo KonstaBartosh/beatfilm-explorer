@@ -10,7 +10,9 @@ function MoviesCardList ({ list, isLoading, errorMessage, onAddMore, cardsToShow
     <>
       <section className="movies-card-list">
         {cardsToShow.length > 0  
-        ? (cardsToShow.map((movie) => <MoviesCard key={movie.id} movie={movie} />))
+        ? (cardsToShow.map((movie) => {
+          return <MoviesCard key={movie.id} movie={movie} />
+        }))
         : (<p className="movies-card-list__message">Ничего не найдено</p>)}
         {errorMessage}
       </section>

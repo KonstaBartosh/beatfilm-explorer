@@ -1,3 +1,5 @@
+import { movieServerUrl } from "./constants";
+
 const BASE_URL = 'https://api.moviexplorer.nomoreparties.co';
 const jsonHeaders = {
 	'Content-Type': 'application/json',
@@ -6,6 +8,7 @@ const jsonHeaders = {
 
 const checkResponse = (res) => {
 	if (res.ok) {
+		console.log('hi from api!')
 		return res.json();
 	}
 	return Promise.reject(`Упс...Ошибка: ${res.status}`);
@@ -52,3 +55,37 @@ export function getUserData() {
 	.then(checkResponse)
 }
 
+export function getUserMovies() {
+	return fetch(`${BASE_URL}/movies`, {
+		method: 'GET',
+		headers: {
+			...jsonHeaders,
+			"Authorization": `Bearer ${localStorage.getItem('token')}`
+		}
+	})
+	.then(checkResponse)
+}
+
+export const createUserMovie = (movie) => {
+	return fetch(`${BASE_URL}/movies`, {
+		method: 'POST',
+		headers: {
+			...jsonHeaders,
+			"Authorization": `Bearer ${localStorage.getItem('token')}`
+		},
+		body: JSON.stringify({
+			country: movie.country,
+			director: movie.director,
+			duration: movie.duration,
+			year: movie.year,
+			description: movie.description,
+			image: `${movieServerUrl}${movie.image.url}`,
+			trailerLink: movie.trailerLink,
+			nameRU: movie.nameRU,
+			nameEN: movie.nameEN,
+			thumbnail: `${movieServerUrl}${movie.image.url}`,
+			movieId: movie.id,
+		})
+	})
+	.then(checkResponse)
+};
