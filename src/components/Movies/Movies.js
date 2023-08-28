@@ -138,14 +138,6 @@
       );
     };
 
-    // function handleSaveMovie() {
-    //   console.log('save click!');
-    //   api
-    //     .createUserMovie()
-    //     .then()
-    //     .catch((err) => alert(`Возникла ошибка ${err}`))
-    // }
-
     return (
       <section className="movies">
         <SearchForm

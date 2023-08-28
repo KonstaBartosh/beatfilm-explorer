@@ -20,15 +20,30 @@ function MoviesCard({ movie }) {
 	function handleSaveMovie() {
 		console.log('save click!');
 		api
-			.createUserMovie(movie)
-			.then(() => setLike(true))
+			.saveUserMovie(movie)
+			.then((savedMovie) => {
+				setLike(true);
+				movie._id = savedMovie._id;
+			})
 			.catch((err) => console.log(`Возникла ошибка ${err}`))
+	}
+
+	function handelRemoveMovie() {
+		api
+			.removeUserMovie(movie._id)
+			.then(() => {
+				setLike(false)})
+			.catch((err) => console.log(`Возникла ошибка ${err}`))
+	}
+
+	const toggleLike = () => {
+		!isLiked ? handleSaveMovie() : handelRemoveMovie();
 	}
 
 
 	const cardLikeButtonClassName = (`card__btn card__like ${isLiked && 'card__like_active'}`); 
 	const button = location.pathname === '/movies' ? 
-		(<button className={cardLikeButtonClassName} type="submit" onClick={handleSaveMovie}/>) :
+		(<button className={cardLikeButtonClassName} type="submit" onClick={toggleLike}/>) :
 		(<button className="card__btn card__like_rm" type="submit">&#x2717;</button>)
 
   return (

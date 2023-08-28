@@ -8,7 +8,6 @@ const jsonHeaders = {
 
 const checkResponse = (res) => {
 	if (res.ok) {
-		console.log('hi from api!')
 		return res.json();
 	}
 	return Promise.reject(`Упс...Ошибка: ${res.status}`);
@@ -66,7 +65,7 @@ export function getUserMovies() {
 	.then(checkResponse)
 }
 
-export const createUserMovie = (movie) => {
+export const saveUserMovie = (movie) => {
 	return fetch(`${BASE_URL}/movies`, {
 		method: 'POST',
 		headers: {
@@ -88,4 +87,19 @@ export const createUserMovie = (movie) => {
 		})
 	})
 	.then(checkResponse)
+  .then(savedMovie => {
+    movie._id = savedMovie._id;
+    return savedMovie;
+  });
 };
+
+export const removeUserMovie = (movieId) => {
+	return fetch(`${BASE_URL}/movies/${movieId}`, {
+		method: 'DELETE',
+		headers: {
+			...jsonHeaders,
+			"Authorization": `Bearer ${localStorage.getItem('token')}`
+		}	
+	})
+	.then(checkResponse)
+}
