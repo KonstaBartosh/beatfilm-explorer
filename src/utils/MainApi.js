@@ -78,7 +78,7 @@ export const saveUserMovie = (movie) => {
 			duration: movie.duration,
 			year: movie.year,
 			description: movie.description,
-			image: `${movieServerUrl}${movie.image.url}`,
+			image: {url: `${movieServerUrl}${movie.image.url}`},
 			trailerLink: movie.trailerLink,
 			nameRU: movie.nameRU,
 			nameEN: movie.nameEN,
@@ -87,10 +87,7 @@ export const saveUserMovie = (movie) => {
 		})
 	})
 	.then(checkResponse)
-  .then(savedMovie => {
-    movie._id = savedMovie._id;
-    return savedMovie;
-  });
+  .then(savedMovie => movie._id = savedMovie._id);
 };
 
 export const removeUserMovie = (movieId) => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./SearchForm.css";
 import logo from "../../../images/search_icon.svg";
@@ -9,15 +9,15 @@ function SearchForm({
   handleSearchChange,
   onSearchClick,
   onToggle,
-	validationMessage,
   defaultValue,
-  isToggled
+  isToggled,
 }) {
-	
+
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 		onSearchClick();
 	}
+  
 
   return (
     <div className="searchform">
@@ -38,7 +38,7 @@ function SearchForm({
           <img className="searchform__icon" src={logo} alt="поиск" />
         </button>
       </form>
-      {validationMessage && <span className="searchform__validation">{validationMessage}</span>}
+      <span className="searchform__validation">Нужно ввести ключевое слово</span>
       <div className="searchform__toggle-container">
         <ToggleSwitch onToggle={onToggle} isToggled={isToggled} />
         <span className="searchform__toggle-title">Короткометражки</span>

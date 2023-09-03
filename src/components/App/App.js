@@ -12,20 +12,42 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import * as api from "../../utils/MainApi";
-import { CurrentUserContext } from "../../context/context";
+import * as moviesApi from "../../utils/MoviesApi";
+import { CurrentUserContext, UserMoviesContext } from "../../context/context";
+// import { messageErr } from "../../utils/constants";
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  // const [moviesList, setMoviesList] = useState([]);
+  // const [defaultMoviesList, setMoviesList] = useState([]);
+  // const [isLoading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [userMovies, setUserMovies] = useState([]);
 
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
+  
+  // console.log(defaultMoviesList);
+  //** проверка валидности токена */
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
+    if (token) {
+      api
+        .checkToken()
+        .then(() => {
+          setLoggedIn(true);
+          navigate("/");
+        })
+        .catch((err) => alert(`Возникла ошибка ${err}`));
+    }
+  }, []);
+
+  //** данные пользователя из БД если он залогиннен */
   useEffect(() => {
     if (loggedIn) {
       api
@@ -33,69 +55,96 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
         })
-        .catch((err) => alert(`Возникла ошибка ${err}`))
+        .catch((err) => alert(`Возникла ошибка ${err}`));
     }
-  }, [loggedIn])
+  }, [loggedIn]);
 
+  // //** подгрузка фильмов при монтировании компонента */
+  // useEffect(() => {
+  //   moviesApi
+  //     .getMovies()
+  //     .then((data) => {
+  //       setLoading(false);
+  //       setMoviesList(data);
+  //     })
+  //     .catch(() => {
+  //       setLoading(false);
+  //       setErrorMessage(messageErr);
+  //     });
+  // }, []);
+
+  //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {
-    handleTokenCheck();
+    api
+      .getUserMovies()
+      .then((data) => {
+        setUserMovies(data);
+      })
+      .catch(() => {
+        // setErrorMessage(messageErr);
+      });
   }, []);
 
 
-  function handleRegister({ name, email, password}) {
+  function handleRegister({ name, email, password }) {
     api
-      .register({ name, email, password})
+      .register({ name, email, password })
       .then(() => {
-        navigate('/sign-in');
+        navigate("/sign-in");
       })
-      .catch((err) => alert(`Возникла ошибка ${err}`))
+      .catch((err) => alert(`Возникла ошибка ${err}`));
   }
 
-  function handleLogin({ email, password}) {
+  function handleLogin({ email, password }) {
     api
-      .login({ email, password})
+      .login({ email, password })
       .then((data) => {
-        localStorage.setItem('token', data.token);
+        localStorage.setItem("token", data.token);
         setLoggedIn(true);
-        navigate('/');
+        navigate("/");
       })
-      .catch((err) => alert(`Возникла ошибка ${err}`))
-  }
-
-  /** Валидность токена */
-  function handleTokenCheck() {
-    const token = localStorage.getItem('token');
-
-    if(token) {
-      api
-        .checkToken()
-        .then(() => {
-          setLoggedIn(true);
-          navigate('/');
-        })
-      .catch((err) => alert(`Возникла ошибка ${err}`))
-    }
+      .catch((err) => alert(`Возникла ошибка ${err}`));
   }
 
   function handleLogOut() {
-    console.log('12345')
     setLoggedIn(false);
     localStorage.clear();
-    navigate('/');
+    navigate("/");
   }
 
+  const movies = loggedIn ? (
+    <Movies
+      // moviesList={defaultMoviesList}
+      // isLoading={isLoading}
+      errorMessage={errorMessage}
+      setErrorMessage={setErrorMessage}
+    />
+  ) : (
+    <Main />
+  );
 
-  const movies = loggedIn ? <Movies /> : <Main /> ;
-  const savedMovies = loggedIn ? <SavedMovies /> : <Main />;
+  const savedMovies = loggedIn ? 
+    <SavedMovies
+      errorMessage={errorMessage}
+    /> : <Main />;
+
   const profile = loggedIn ? <Profile onLogOut={handleLogOut} /> : null;
+
 
   return (
     <div className="app">
-      <CurrentUserContext.Provider value={currentUser}>
+      <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
+        <CurrentUserContext.Provider value={currentUser}>
           {shouldShowHeader && <Header loggedIn={loggedIn} />}
           <Routes>
-            <Route path="/sign-up" element={<Register onRegister={handleRegister} />} />
-            <Route path="/sign-in" element={<Login handleLogin={handleLogin} />} />
+            <Route
+              path="/sign-up"
+              element={<Register onRegister={handleRegister} />}
+            />
+            <Route
+              path="/sign-in"
+              element={<Login handleLogin={handleLogin} />}
+            />
             <Route path="/" element={<Main />} />
             <Route path="/movies" element={movies} />
             <Route path="/saved-movies" element={savedMovies} />
@@ -103,7 +152,8 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
           {shouldShowFooter && <Footer />}
-      </CurrentUserContext.Provider>
+        </CurrentUserContext.Provider>
+      </UserMoviesContext.Provider>
     </div>
   );
 }
