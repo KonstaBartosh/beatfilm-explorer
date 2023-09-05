@@ -1,17 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import { UserMoviesContext } from "../../context/context";
 import * as moviesApi from "../../utils/MoviesApi";
-import { messageErr } from "../../utils/constants";
+import * as api from "../../utils/MainApi";
 
-export default function Movies({ 
-  errorMessage,
-  setErrorMessage
-}) {
+export default function Movies() {
   const [moviesList, setMoviesList] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,15 +18,21 @@ export default function Movies({
   const [isLoading, setLoading] = useState(true);
 
   //** взаимодействие с localStorage */
-  const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
+  const localStorageMovies = JSON.parse(localStorage.getItem("lS-movie-list"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
   // const  = localStorageQuery ? localStorageQuery.slice(1, -1) : "";
-  const storedIsToggled = localStorage.getItem("isToggled");
+  const localStorageIsToggled = localStorage.getItem("isToggled");
 
-  const [validationError, setValidationError] = useState(false);
 
-  console.log(moviesList);
+    // Обновляем состояние isToggled после установки значения из localStorage
+  useEffect(() => {
+    if (localStorageIsToggled) {
+      setIsToggled(true);
+    } else {
+      setIsToggled(false);
+    }
+  }, [localStorageIsToggled]);
 
   //** подгрузка фильмов при монтировании компонента */
   useEffect(() => {
@@ -43,7 +45,6 @@ export default function Movies({
       .catch(() => {
         setLoading(false);
         setRequestError(true);
-        // setErrorMessage(messageErr);
       });
   }, []);
 
@@ -57,14 +58,9 @@ export default function Movies({
       return;
     }
 
-    const shouldRestoreShortMovies = localStorageShortMovies && storedIsToggled;
-
-    if (shouldRestoreShortMovies) {
-      setFilteredMovies(localStorageShortMovies);
-      setIsToggled(true);
-    } else {
-      setFilteredMovies(localStorageMovies);
-    }
+    localStorageShortMovies 
+    ? setFilteredMovies(localStorageShortMovies)
+    : setFilteredMovies(localStorageMovies);
 
     setSearchQuery(localStorageQuery);
   }
@@ -94,31 +90,32 @@ export default function Movies({
     };
   }, []);
 
+  console.log(filteredMovies)
 
   /** отправка формы */
   function handleSearchSubmit() {
-    //** поиск фильмов на основе запроса */
     const filtered = moviesList.filter((movie) => {
       return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase().slice(1, -1));
     });
     setFilteredMovies(filtered);
     // обновление localStorage при изменении filteredMovies
-    localStorage.setItem("moviesList", JSON.stringify(filtered));
+    localStorage.setItem("lS-movie-list", JSON.stringify(filtered));
   }
 
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (isToggled === false) {
-      const shortMovies = filteredMovies.filter((movie) => movie.duration < 40);
+      const shortMoviesList = filteredMovies.filter((movie) => movie.duration < 40)
       setIsToggled(true);
-      setFilteredMovies(shortMovies);
-      localStorage.setItem("shortMovies", JSON.stringify(shortMovies));
-      localStorage.setItem("isToggled", JSON.stringify(true));
+      setFilteredMovies(shortMoviesList);
+      localStorage.setItem('isToggled', true);
+      localStorage.setItem('shortMovies', JSON.stringify(shortMoviesList));
+      console.log(isToggled)
     } else {
-      handleSearchSubmit();
       setIsToggled(false);
+      setFilteredMovies(localStorageMovies)
+      localStorage.removeItem('isToggled');
       localStorage.removeItem("shortMovies");
-      localStorage.removeItem("isToggled");
     }
   }
 
@@ -138,23 +135,23 @@ export default function Movies({
 
   return (
     <section className="movies">
-      <SearchForm
-        onSearchClick={handleSearchSubmit}
-        handleSearchChange={handleSearchChange}
-        setFilteredMovies={setFilteredMovies}
-        onToggle={handleToggleSwitch}
-        defaultValue={localStorageQuery}
-        isToggled={isToggled}
-        validationError={validationError}
-      />
-      <MoviesCardList
-        arrayList={filteredMovies}
-        isLoading={isLoading}
-        isRequestError={isRequestError}
-        errorMessage={errorMessage}
-        onAddMore={handleAddMoreCards}
-        cards={fiteredToShowMovies}
-      />
+        <SearchForm
+          onSearchClick={handleSearchSubmit}
+          handleSearchChange={handleSearchChange}
+          setFilteredMovies={setFilteredMovies}
+          onToggle={handleToggleSwitch}
+          defaultValue={localStorageQuery}
+          isToggled={isToggled}
+          searchQuery={searchQuery}
+        />
+        <MoviesCardList
+          arrayList={filteredMovies}
+          isLoading={isLoading}
+          isRequestError={isRequestError}
+          onAddMore={handleAddMoreCards}
+          cards={fiteredToShowMovies}
+          setFilteredMovies={setFilteredMovies}
+        />
     </section>
   );
 }

@@ -1,15 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "../Movies/Movies.css";
+import * as api from "../../utils/MainApi";
 
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import { UserMoviesContext } from "../../context/context";
 
-export default function SavedMovies({ errorMessage }) {
-  const [query, setQuery] = useState('');
+export default function SavedMovies() {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
-  
+  const [query, setQuery] = useState('');
+
+  //** подгружаем сохраненные фильмы из БД */
+  useEffect(() => {
+    api
+      .getUserMovies()
+      .then((data) => {
+        setUserMovies(data);
+      })
+      .catch((err) => alert(`Возникла ошибка ${err}`));
+  }, []);
 
   function handleSearchUserMovies() {
     const filtered = userMovies.filter((movie) => {
@@ -18,7 +28,7 @@ export default function SavedMovies({ errorMessage }) {
     setUserMovies(filtered);
   }
 
-  const qwerty = (evt) => {
+  const handleOnChange = (evt) => {
     const value = evt.target.value;
     setQuery(value);
   }
@@ -27,13 +37,12 @@ export default function SavedMovies({ errorMessage }) {
     <section className="movies">  
       <SearchForm
         onSearchClick={handleSearchUserMovies}
-        handleSearchChange={qwerty}
+        handleSearchChange={handleOnChange}
         searchQuery={query}
       />
       <MoviesCardList 
         arrayList={userMovies}
         cards={userMovies}
-        errorMessage={errorMessage}
         userMovies={userMovies}
       />
     </section>

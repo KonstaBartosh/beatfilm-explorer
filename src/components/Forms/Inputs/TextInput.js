@@ -1,7 +1,17 @@
-import '../AuthForm/AuthForm.css';
+import "../AuthForm/AuthForm.css";
 
-export default function TextInput( { type, title, label, register, errors, placeholder, defaultValue }) {
-  return(
+export default function TextInput({
+  type,
+  title,
+  label,
+  register,
+  errors,
+  placeholder,
+  defaultValue,
+}) {
+  const namePattern = /^[a-zA-Zа-яА-Я\s-]*$/;
+
+  return (
     <>
       <label className="auth-form__label">{label}</label>
       <input
@@ -11,7 +21,11 @@ export default function TextInput( { type, title, label, register, errors, place
             value: 2,
             message: "Текст должен быть не короче 2 символов",
           },
-          maxLength: 40
+          maxLength: 40,
+          pattern: {
+            value: namePattern,
+            message: 'Данное поле содержит недопустимые символы.'
+          }
         })}
         id={`${title}-input`}
         type={type}
@@ -20,8 +34,8 @@ export default function TextInput( { type, title, label, register, errors, place
         className="auth-form__input"
       />
       <span className="auth-form__error-message auth-form__error-message_active">
-				{errors?.[title] && <div>{errors?.[title]?.message}</div>}
-      </span>			
+        {errors?.[title] && <div>{errors?.[title]?.message}</div>}
+      </span>
     </>
   );
 }

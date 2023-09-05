@@ -12,17 +12,13 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import * as api from "../../utils/MainApi";
-import * as moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
-// import { messageErr } from "../../utils/constants";
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  // const [defaultMoviesList, setMoviesList] = useState([]);
-  // const [isLoading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
 
@@ -30,8 +26,9 @@ function App() {
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
+
+  console.log(userMovies)
   
-  // console.log(defaultMoviesList);
   //** проверка валидности токена */
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -59,32 +56,6 @@ function App() {
     }
   }, [loggedIn]);
 
-  // //** подгрузка фильмов при монтировании компонента */
-  // useEffect(() => {
-  //   moviesApi
-  //     .getMovies()
-  //     .then((data) => {
-  //       setLoading(false);
-  //       setMoviesList(data);
-  //     })
-  //     .catch(() => {
-  //       setLoading(false);
-  //       setErrorMessage(messageErr);
-  //     });
-  // }, []);
-
-  //** подгружаем сохраненные фильмы из БД */
-  useEffect(() => {
-    api
-      .getUserMovies()
-      .then((data) => {
-        setUserMovies(data);
-      })
-      .catch(() => {
-        // setErrorMessage(messageErr);
-      });
-  }, []);
-
 
   function handleRegister({ name, email, password }) {
     api
@@ -101,7 +72,7 @@ function App() {
       .then((data) => {
         localStorage.setItem("token", data.token);
         setLoggedIn(true);
-        navigate("/");
+        navigate("/movies");
       })
       .catch((err) => alert(`Возникла ошибка ${err}`));
   }
@@ -114,8 +85,6 @@ function App() {
 
   const movies = loggedIn ? (
     <Movies
-      // moviesList={defaultMoviesList}
-      // isLoading={isLoading}
       errorMessage={errorMessage}
       setErrorMessage={setErrorMessage}
     />
@@ -124,9 +93,7 @@ function App() {
   );
 
   const savedMovies = loggedIn ? 
-    <SavedMovies
-      errorMessage={errorMessage}
-    /> : <Main />;
+    <SavedMovies/> : <Main />;
 
   const profile = loggedIn ? <Profile onLogOut={handleLogOut} /> : null;
 

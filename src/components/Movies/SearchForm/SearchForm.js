@@ -12,12 +12,17 @@ function SearchForm({
   defaultValue,
   isToggled,
 }) {
+  const [validationError, setValidationError] = useState("");
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
+    if (searchQuery.slice(1, -1) === "") {
+      setValidationError("Нужно ввести ключевое слово");
+      return
+    }
+    setValidationError("");
 		onSearchClick();
 	}
-  
 
   return (
     <div className="searchform">
@@ -29,7 +34,6 @@ function SearchForm({
             type="search"
             placeholder="Фильм"
             defaultValue={defaultValue}
-            value={searchQuery}
             onChange={handleSearchChange}
 						autoComplete="off"
           />
@@ -38,7 +42,8 @@ function SearchForm({
           <img className="searchform__icon" src={logo} alt="поиск" />
         </button>
       </form>
-      <span className="searchform__validation">Нужно ввести ключевое слово</span>
+      {validationError &&
+      <span className="searchform__validation">Нужно ввести ключевое слово</span>}
       <div className="searchform__toggle-container">
         <ToggleSwitch onToggle={onToggle} isToggled={isToggled} />
         <span className="searchform__toggle-title">Короткометражки</span>
