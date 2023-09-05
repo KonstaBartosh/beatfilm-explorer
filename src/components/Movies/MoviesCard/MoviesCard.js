@@ -51,7 +51,7 @@ function MoviesCard({ movie }) {
         //** добавляем фильм в userMovies после сохранения */
         setUserMovies([...userMovies, movie]);
       })
-      .catch(handleError);
+      .catch((err) => console.error(`Возникла ошибка ${err.message}`));
   }
   
   function handleRemoveMovie(movieToRemove) {
@@ -61,11 +61,7 @@ function MoviesCard({ movie }) {
         setIsLiked(false);
         setUserMovies(userMovies.filter((userMovie) => userMovie._id !== movieToRemove._id));
       })
-      .catch(handleError);
-  }
-  
-  function handleError(err) {
-    console.error(`Возникла ошибка ${err.message}`);
+      .catch((err) => console.error(`Возникла ошибка ${err.message}`));
   }
   
 
