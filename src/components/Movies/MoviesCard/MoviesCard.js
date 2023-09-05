@@ -12,10 +12,9 @@ function MoviesCard({ movie }) {
   const { nameRU, duration, image, trailerLink } = movie;
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);
-  
-  const picture = location.pathname === "/movies"
-      ? `${movieServerUrl}${image.url}`
-      : image.url;
+  const isMoviesPath = location.pathname === "/movies";
+  const picture = isMoviesPath ? `${movieServerUrl}${image.url}` : image.url;
+  const buttonText = isMoviesPath ? null : "✗";
   
   const cardLikeButtonClassName = `card__btn card__like ${isLiked && "card__like_active"}`;
 
@@ -34,8 +33,7 @@ function MoviesCard({ movie }) {
 
   function toggleLike() {
     //** ищем фильм в userMovies */
-    const savedMovie = userMovies.find((userMovie) => userMovie._id === movie._id);
-  
+    const savedMovie = userMovies.find((userMovie) => userMovie.nameRU === movie.nameRU);
     if (!savedMovie) {
       handleSaveMovie();
     } else {
@@ -65,27 +63,23 @@ function MoviesCard({ movie }) {
   }
   
 
-  const button = (
-    <button
-      className={`card__btn ${location.pathname === "/movies" ? cardLikeButtonClassName : "card__like_rm"}`}
-      type="submit"
-      onClick={toggleLike}
-    >
-      {location.pathname === "/movies" ? "" : "✗"}
-    </button>
-  );
-  
-
   return (
     <div className="card">
       <a href={trailerLink}>
         <img src={picture} alt={nameRU} className="card__image" />
       </a>
-
       <div className="card__header">
         <div className="card__header-wrapper">
           <h2 className="card__title">{nameRU}</h2>
-          {button}
+            <button
+              className={`card__btn ${isMoviesPath ? 
+                cardLikeButtonClassName : "card__like_rm"}`
+              }
+              type="submit"
+              onClick={toggleLike}
+            >
+              {buttonText}
+            </button>
         </div>
         <span className="card__subtitle">{formattedDuration}</span>
       </div>
