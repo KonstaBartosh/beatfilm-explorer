@@ -5,7 +5,7 @@ import AuthForm from "../Forms/AuthForm/AuthForm";
 import EmailInput from "../Forms/Inputs/EmailInput";
 import PasswordInput from "../Forms/Inputs/PasswordInput";
 
-export default function Login({ handleLogin }) {
+export default function Login({ onLogin }) {
 	
   const {
     register,
@@ -14,7 +14,7 @@ export default function Login({ handleLogin }) {
   } = useForm({ mode: "onChange" });
 
 	const submitData = (data) => {
-		handleLogin(data);
+		onLogin(data);
 	}
 
   return (
