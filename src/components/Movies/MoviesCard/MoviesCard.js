@@ -15,8 +15,15 @@ function MoviesCard({ movie }) {
   const isMoviesPath = location.pathname === "/movies";
   const picture = isMoviesPath ? `${movieServerUrl}${image.url}` : image.url;
   const buttonText = isMoviesPath ? null : "✗";
+  //** стили для кнопки */
+  const baseButtonClassName = "card__btn";
+  const likeButtonClassName = `card__like ${isLiked && "card__like_active"}`;
+  const removeButtonClassName = "card__like_rm";
   
-  const cardLikeButtonClassName = `card__btn card__like ${isLiked && "card__like_active"}`;
+  const buttonClassName = ` ${baseButtonClassName} ${
+    isMoviesPath ? likeButtonClassName : removeButtonClassName
+  }`;
+  
 
   // есть ли фильм в списке лайкнутых => установить начальное состояние isLiked
   useEffect(() => {
@@ -71,13 +78,7 @@ function MoviesCard({ movie }) {
       <div className="card__header">
         <div className="card__header-wrapper">
           <h2 className="card__title">{nameRU}</h2>
-            <button
-              className={`card__btn ${isMoviesPath ? 
-                cardLikeButtonClassName : "card__like_rm"}`
-              }
-              type="submit"
-              onClick={toggleLike}
-            >
+            <button className={buttonClassName} type="submit" onClick={toggleLike}>
               {buttonText}
             </button>
         </div>
