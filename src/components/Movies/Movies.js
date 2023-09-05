@@ -89,13 +89,13 @@ export default function Movies() {
     };
   }, []);
 
-  console.log(filteredMovies)
-
   /** отправка формы */
   function handleSearchSubmit() {
     const filtered = moviesList.filter((movie) => {
-      return movie.nameRU.toLowerCase().includes(searchQuery.toLowerCase().slice(1, -1));
+      const movieName = movie.nameRU || movie.nameEN;
+      return movieName.toLowerCase().includes(searchQuery.toLowerCase().slice(1, -1));
     });
+    
     setFilteredMovies(filtered);
     // обновление localStorage при изменении filteredMovies
     localStorage.setItem("lS-movie-list", JSON.stringify(filtered));

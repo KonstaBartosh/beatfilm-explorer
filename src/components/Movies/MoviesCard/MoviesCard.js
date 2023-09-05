@@ -14,8 +14,9 @@ function MoviesCard({ movie }) {
   const [isLiked, setIsLiked] = useState(false);
   const isMoviesPath = location.pathname === "/movies";
   const picture = isMoviesPath ? `${movieServerUrl}${image.url}` : image.url;
-  const buttonText = isMoviesPath ? null : "✗";
+
   //** стили для кнопки */
+  const buttonText = isMoviesPath ? null : "✗";
   const baseButtonClassName = "card__btn";
   const likeButtonClassName = `card__like ${isLiked && "card__like_active"}`;
   const removeButtonClassName = "card__like_rm";
