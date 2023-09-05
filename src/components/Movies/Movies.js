@@ -5,7 +5,6 @@ import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 import * as moviesApi from "../../utils/MoviesApi";
-import * as api from "../../utils/MainApi";
 
 export default function Movies() {
   const [moviesList, setMoviesList] = useState([]);
@@ -132,6 +131,7 @@ export default function Movies() {
       window.innerWidth > 768 ? displayCards + 4 : displayCards + 2
     );
   };
+  
 
   return (
     <section className="movies">
@@ -150,7 +150,6 @@ export default function Movies() {
           isRequestError={isRequestError}
           onAddMore={handleAddMoreCards}
           cards={fiteredToShowMovies}
-          setFilteredMovies={setFilteredMovies}
         />
     </section>
   );
