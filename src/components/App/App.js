@@ -14,7 +14,7 @@ import NotFound from "../NotFound/NotFound";
 import * as api from "../../utils/MainApi";
 import {
   CurrentUserContext,
-  LoggedInContext,
+  IsLoggedInContext,
   UserMoviesContext,
 } from "../../context/context";
 import ProtectedRoute from "../ProtectedRoute";
@@ -22,7 +22,7 @@ import ProtectedRoute from "../ProtectedRoute";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
@@ -49,7 +49,7 @@ function App() {
 
   //** данные пользователя из БД если он залогиннен */
   useEffect(() => {
-    if (loggedIn) {
+    if (isLoggedIn) {
       api
         .getUserData()
         .then((userData) => {
@@ -57,7 +57,7 @@ function App() {
         })
         .catch((err) => alert(`Возникла ошибка ${err}`));
     }
-  }, [loggedIn]);
+  }, [isLoggedIn]);
 
   function handleRegister({ name, email, password }) {
     api
@@ -89,49 +89,43 @@ function App() {
     <div className="app">
       <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
         <CurrentUserContext.Provider value={currentUser}>
-          <LoggedInContext.Provider value={loggedIn}>
-            {shouldShowHeader && <Header loggedIn={loggedIn} />}
-            <Routes>
-              <Route
-                path="/sign-up"
-                element={<Register onRegister={handleRegister} />}
-              />
-              <Route
-                path="/sign-in"
-                element={<Login onLogin={handleLogin} />}
-              />
-              <Route path="/" element={<Main />} />
-              <Route
-                path="/movies"
-                element={
-                  <ProtectedRoute
-                    element={Movies}
-                    loggedIn={loggedIn}
-                    errorMessage={errorMessage}
-                    setErrorMessage={setErrorMessage}
-                  />
-                }
-              />
-              <Route
-                path="/saved-movies"
-                element={
-                  <ProtectedRoute element={SavedMovies} loggedIn={loggedIn} />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute
-                    element={Profile}
-                    loggedIn={loggedIn}
-                    onLogOut={handleLogOut}
-                  />
-                }
-              />
-              <Route path="/*" element={<NotFound />} />
-            </Routes>
-          </LoggedInContext.Provider>
-
+          {shouldShowHeader && <Header isLoggedIn={isLoggedIn} />}
+          <Routes>
+            <Route
+              path="/sign-up"
+              element={<Register onRegister={handleRegister} />}
+            />
+            <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
+            <Route path="/" element={<Main />} />
+            <Route
+              path="/movies"
+              element={
+                <ProtectedRoute
+                  element={Movies}
+                  isLoggedIn={isLoggedIn}
+                  errorMessage={errorMessage}
+                  setErrorMessage={setErrorMessage}
+                />
+              }
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute
+                  element={Profile}
+                  isLoggedIn={isLoggedIn}
+                  onLogOut={handleLogOut}
+                />
+              }
+            />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
           {shouldShowFooter && <Footer />}
         </CurrentUserContext.Provider>
       </UserMoviesContext.Provider>
