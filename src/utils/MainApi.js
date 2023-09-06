@@ -65,6 +65,18 @@ export function getUserMovies() {
 	.then(checkResponse)
 }
 
+export function changeUserData({ name, email }) {
+	return fetch(`${BASE_URL}/users/me`, {
+		method: 'PATCH',
+		headers: {
+			...jsonHeaders,
+			"Authorization": `Bearer ${localStorage.getItem('token')}`
+		},
+		body: JSON.stringify({ name, email })
+	})
+	.then(checkResponse)
+}
+
 export const saveUserMovie = (movie) => {
 	return fetch(`${BASE_URL}/movies`, {
 		method: 'POST',

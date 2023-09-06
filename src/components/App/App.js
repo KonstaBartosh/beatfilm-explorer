@@ -11,13 +11,10 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
-import * as api from "../../utils/MainApi";
-import {
-  CurrentUserContext,
-  IsLoggedInContext,
-  UserMoviesContext,
-} from "../../context/context";
 import ProtectedRoute from "../ProtectedRoute";
+import * as api from "../../utils/MainApi";
+import { CurrentUserContext, UserMoviesContext } from "../../context/context";
+import PopupWithForm from "../popups/PopupWithForm/PopupWithForm";
 
 function App() {
   const location = useLocation();
@@ -32,6 +29,10 @@ function App() {
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
 
+  const handleError = (err) => {
+    console.error(`Возникла ошибка ${err.message}`)
+  }
+
   //** проверка валидности токена */
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,7 +44,7 @@ function App() {
           setLoggedIn(true);
           navigate("/");
         })
-        .catch((err) => alert(`Возникла ошибка ${err}`));
+        .catch(handleError);
     }
   }, []);
 
@@ -55,7 +56,7 @@ function App() {
         .then((userData) => {
           setCurrentUser(userData);
         })
-        .catch((err) => alert(`Возникла ошибка ${err}`));
+        .catch(handleError);
     }
   }, [isLoggedIn]);
 
@@ -65,7 +66,7 @@ function App() {
       .then(() => {
         navigate("/sign-in");
       })
-      .catch((err) => alert(`Возникла ошибка ${err}`));
+      .catch(handleError);
   }
 
   function handleLogin({ email, password }) {
@@ -76,13 +77,22 @@ function App() {
         setLoggedIn(true);
         navigate("/movies");
       })
-      .catch((err) => alert(`Возникла ошибка ${err}`));
+      .catch(handleError);
   }
 
   function handleLogOut() {
     setLoggedIn(false);
     localStorage.clear();
     navigate("/");
+  }
+
+  function handleChangeUserData({ name, email }) {
+    api
+      .changeUserData({ name, email })
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch(handleError);
   }
 
   return (
@@ -121,12 +131,14 @@ function App() {
                   element={Profile}
                   isLoggedIn={isLoggedIn}
                   onLogOut={handleLogOut}
+                  onSave={handleChangeUserData}
                 />
               }
             />
             <Route path="/*" element={<NotFound />} />
           </Routes>
           {shouldShowFooter && <Footer />}
+          <PopupWithForm/>
         </CurrentUserContext.Provider>
       </UserMoviesContext.Provider>
     </div>
