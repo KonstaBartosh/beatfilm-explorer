@@ -44,7 +44,7 @@ export default function Profile({ onLogOut, onSave }) {
     <section className="profile">
       <div className="profile__container">
         <div className="profile__data-set">
-          <h2 className="profile__title">Привет, {currentUser.name}!</h2>
+          <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
           <div className="profile__data-string">
             <span className="profile__text">Имя</span>
             <span className={`profile__text ${isVisible ? "hidden" : ""}`}>
@@ -61,13 +61,12 @@ export default function Profile({ onLogOut, onSave }) {
             </div>
           </div>
           <span className="underline" />
-          <div className="profile__data-string">
+          <div className="profile__data-string"> 
             <span className="profile__text">E-mail</span>
             <span className={`profile__text ${isVisible ? "hidden" : ""}`}>
               {currentUser.email}
             </span>
-            <div
-              className={`profile__input-container ${isVisible ? "" : "hidden"}`}>
+            <div className={`profile__input-container ${isVisible ? "" : "hidden"}`}>
               <EmailInput
                 type={"email"}
                 title={"email"}

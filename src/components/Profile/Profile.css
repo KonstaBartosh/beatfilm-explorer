@@ -124,4 +124,8 @@
 	.profile__btn {
 		font-size: 12px;
 	}
+
+	.profile__input-container {
+		width: 200px;
+	}
 }
