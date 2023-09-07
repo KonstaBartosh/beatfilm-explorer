@@ -17,7 +17,7 @@ export default function Profile({ onLogOut, onSave }) {
 	const nameInputValue = watch('name');
 	const emailInputValue = watch('email');
   const { currentUser } = useContext(CurrentUserContext);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isInputsVisible, setIsnputsVisible] = useState(false);
 	const [isSaveButtonValid, setIsSaveButtonValid] = useState(false);
 	const isButtonDisabled = isValid && isSaveButtonValid;
 	const saveBtnClassName = `profile__save-button ${isButtonDisabled ? "" : "profile__save-button_disabled"}`
@@ -32,12 +32,12 @@ export default function Profile({ onLogOut, onSave }) {
 	
 
   const handleUnlockInputs = () => {
-    setIsVisible(true);
+    setIsnputsVisible(true);
   };
 	
 	const submitData = (data) => {
 		onSave(data);
-		setIsVisible(false);
+		setIsnputsVisible(false);
 	}
 
   return (
@@ -47,10 +47,10 @@ export default function Profile({ onLogOut, onSave }) {
           <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
           <div className="profile__data-string">
             <span className="profile__text">Имя</span>
-            <span className={`profile__text ${isVisible ? "hidden" : ""}`}>
+            <span className={`profile__text ${isInputsVisible ? "hidden" : ""}`}>
               {currentUser.name}
             </span>
-            <div className={`profile__input-container ${isVisible ? "" : "hidden"}`}>
+            <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
               <TextInput
                 type={"text"}
                 title={"name"}
@@ -63,10 +63,10 @@ export default function Profile({ onLogOut, onSave }) {
           <span className="underline" />
           <div className="profile__data-string"> 
             <span className="profile__text">E-mail</span>
-            <span className={`profile__text ${isVisible ? "hidden" : ""}`}>
+            <span className={`profile__text ${isInputsVisible ? "hidden" : ""}`}>
               {currentUser.email}
             </span>
-            <div className={`profile__input-container ${isVisible ? "" : "hidden"}`}>
+            <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
               <EmailInput
                 type={"email"}
                 title={"email"}
@@ -78,7 +78,7 @@ export default function Profile({ onLogOut, onSave }) {
           </div>
         </div>
         <div className="profile__buttons">
-          {!isVisible ? (
+          {!isInputsVisible ? (
             <>
               <button className="profile__btn" onClick={handleUnlockInputs}>
                 Редактировать
