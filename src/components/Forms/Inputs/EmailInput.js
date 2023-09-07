@@ -10,7 +10,8 @@ export default function EmailInput({
   defaultValue,
 }) {
 
-	const emailPatternMessage = "Адрес электронной почты должен содержать символ ' @ ' ";
+	const emailPatternMessage = `Адрес электронной почты должен содержать символ ' @ ' 
+    и минимум 2 символа для домена`;
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
 
   return (
