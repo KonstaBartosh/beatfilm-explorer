@@ -17,10 +17,9 @@ export default function Movies() {
   const [isLoading, setLoading] = useState(true);
 
   //** взаимодействие с localStorage */
-  const localStorageMovies = JSON.parse(localStorage.getItem("lS-movie-list"));
+  const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
-  // const  = localStorageQuery ? localStorageQuery.slice(1, -1) : "";
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
 
@@ -98,7 +97,7 @@ export default function Movies() {
     
     setFilteredMovies(filtered);
     // обновление localStorage при изменении filteredMovies
-    localStorage.setItem("lS-movie-list", JSON.stringify(filtered));
+    localStorage.setItem("moviesList", JSON.stringify(filtered));
   }
 
   //** переключатель короткометражек */

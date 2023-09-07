@@ -11,10 +11,10 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
-import ProtectedRoute from "../ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as api from "../../utils/MainApi";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
-import PopupWithForm from "../popups/PopupWithForm/PopupWithForm";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
   const location = useLocation();
@@ -23,6 +23,10 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(true);
+  const [isProfileChangePopupOpen, setIProfileChangePopupOpen] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isUserDataChanged, setUserDataChanged] = useState(false);
 
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
@@ -30,7 +34,7 @@ function App() {
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
 
   const handleError = (err) => {
-    console.error(`Возникла ошибка ${err.message}`)
+    console.error(`Возникла ошибка ${err}`)
   }
 
   //** проверка валидности токена */
@@ -64,9 +68,14 @@ function App() {
     api
       .register({ name, email, password })
       .then(() => {
+        setIsRegistered(true);
+        setIsInfoPopupOpen(true);
         navigate("/sign-in");
       })
-      .catch(handleError);
+      .catch(() => {
+        setIsInfoPopupOpen(true);
+        handleError();
+      });
   }
 
   function handleLogin({ email, password }) {
@@ -91,14 +100,38 @@ function App() {
       .changeUserData({ name, email })
       .then((data) => {
         setCurrentUser(data);
+        setUserDataChanged(true);
+        setIProfileChangePopupOpen(true);
       })
-      .catch(handleError);
+      .catch(() => {
+        setIProfileChangePopupOpen(true);
+        handleError();
+      });
+  }
+
+  function handleClosePopup() {
+    setIsInfoPopupOpen(false);
+    setIProfileChangePopupOpen(false);
   }
 
   return (
     <div className="app">
+      <InfoTooltip
+        isOpen={isProfileChangePopupOpen}
+        onClose={handleClosePopup}
+        condition={isUserDataChanged}
+        successTitle={'Профиль успешно изменен!'}
+        deniedTitle={'При обновлении профиля произошла ошибка.'}
+      />
+      <InfoTooltip
+        isOpen={isInfoPopupOpen}
+        onClose={handleClosePopup}
+        condition={isRegistered}
+        successTitle={'Вы успешно зарегистрировались!'}
+        deniedTitle={'Что-то пошло не так! Попробуйте ещё раз.'}
+      />
       <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
-        <CurrentUserContext.Provider value={currentUser}>
+        <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           {shouldShowHeader && <Header isLoggedIn={isLoggedIn} />}
           <Routes>
             <Route
@@ -138,7 +171,6 @@ function App() {
             <Route path="/*" element={<NotFound />} />
           </Routes>
           {shouldShowFooter && <Footer />}
-          <PopupWithForm/>
         </CurrentUserContext.Provider>
       </UserMoviesContext.Provider>
     </div>

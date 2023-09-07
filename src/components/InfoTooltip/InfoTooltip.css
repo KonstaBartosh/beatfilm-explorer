@@ -11,6 +11,7 @@
 	transition: visibility .2s linear, opacity .2s linear;
 	visibility: hidden;
 	opacity: 0;
+	z-index: 99;
 }
 
 .popup_opened {
@@ -30,18 +31,25 @@
 	position: relative;
 }
 
-.popup__title {
+.popup__title_infotooltip {
 	margin: 0;
 	font-style: normal;
 	font-weight: 900;
 	font-size: 24px;
 	line-height: 29px;
-	padding-bottom: 38px;
+	padding-bottom: 23px;
+	text-align: center;
 }
 
+.popup__image_infotooltip {
+	width: 120px;
+	height: 120px;
+	align-self: center;
+	padding: 24px 0 32px;
+}
 
 .popup__close-button {
-	background-image: url(../../../images/close_icon.svg);
+	background-image: url(../../images/close-icon-white.svg);
 	width: 32px;
 	height: 32px;
 	position: absolute;
@@ -56,6 +64,14 @@
 	opacity: 0.6;
 }
 
+
+@media screen and (max-width: 540px) {
+	.popup__title_infotooltip {
+			font-size: 18px;
+			line-height: 22px;
+	}
+}
+
 @media screen and (max-width: 540px) {
 	.popup__close-button {
 			width: 20px;
@@ -65,17 +81,9 @@
 	}
 }
 
-
 @media screen and (max-width: 540px) {
 	.popup__container {
 			max-width: 282px;
 			padding: 25px 22px;
-	}
-}
-
-@media screen and (max-width: 540px) {
-	.popup__title {
-			font-size: 18px;
-			line-height: 22px;
 	}
 }
