@@ -20,6 +20,8 @@ export default function Movies() {
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
+  // const formattedQuery = localStorageQuery.slice(1, -1);
+  const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : '';
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
 
@@ -55,12 +57,13 @@ export default function Movies() {
     if (localStorageMovies === null) {
       return;
     }
+    console.log(formattedQuery)
 
     localStorageShortMovies 
     ? setFilteredMovies(localStorageShortMovies)
     : setFilteredMovies(localStorageMovies);
 
-    setSearchQuery(localStorageQuery);
+    setSearchQuery(formattedQuery);
   }
 
   function updateDisplayCards() {
@@ -100,15 +103,19 @@ export default function Movies() {
     localStorage.setItem("moviesList", JSON.stringify(filtered));
   }
 
+  //** фильтрации короткометражных фильмов */
+  function filterShortMovies() {
+    return filteredMovies.filter((movie) => movie.duration < 40);
+  }
+  
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (isToggled === false) {
-      const shortMoviesList = filteredMovies.filter((movie) => movie.duration < 40)
+      const shortMoviesList = filterShortMovies();
       setIsToggled(true);
       setFilteredMovies(shortMoviesList);
       localStorage.setItem('isToggled', true);
       localStorage.setItem('shortMovies', JSON.stringify(shortMoviesList));
-      console.log(isToggled)
     } else {
       setIsToggled(false);
       setFilteredMovies(localStorageMovies)
@@ -139,7 +146,7 @@ export default function Movies() {
           handleSearchChange={handleSearchChange}
           setFilteredMovies={setFilteredMovies}
           onToggle={handleToggleSwitch}
-          defaultValue={localStorageQuery}
+          defaultValue={formattedQuery}
           isToggled={isToggled}
           searchQuery={searchQuery}
         />
