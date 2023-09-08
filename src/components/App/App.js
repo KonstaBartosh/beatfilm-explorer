@@ -23,7 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
-  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(true);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isProfileChangePopupOpen, setIProfileChangePopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isUserDataChanged, setUserDataChanged] = useState(false);
