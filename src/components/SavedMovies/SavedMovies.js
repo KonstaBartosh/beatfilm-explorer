@@ -7,8 +7,9 @@ import { UserMoviesContext } from "../../context/context";
 
 function SavedMovies({ getUserMovies }) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
+  const [filteredUserMovies, setFilteredUserMovies] = useState(userMovies);
   const [query, setQuery] = useState('');
-  const [isToggled, setIsToggled] = useState(false);
+  const [isToggled, setIsToggled] = useState(false);  
 
   //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {
@@ -16,12 +17,11 @@ function SavedMovies({ getUserMovies }) {
   }, [])
 
   function handleSearchUserMovies() {
-    console.log('sss')
     const filtered = userMovies.filter((movie) => {
       const movieName = movie.nameRU || movie.nameEN;
       return movieName.toLowerCase().includes(query.toLowerCase());
     })
-    setUserMovies(filtered);
+    setFilteredUserMovies(filtered);
   }
 
   const handleOnChange = (evt) => {
@@ -55,7 +55,7 @@ function SavedMovies({ getUserMovies }) {
       />
       <MoviesCardList 
         arrayList={userMovies}
-        cards={userMovies}
+        cards={filteredUserMovies}
         userMovies={userMovies}
       />
     </section>
