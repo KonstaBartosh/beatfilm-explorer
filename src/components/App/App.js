@@ -41,11 +41,13 @@ function App() {
   const handleError = (err) => console.error(`Возникла ошибка ${err}`);
 
   useEffect(() => {
+    handleTokenCheck();
+  }, []);
+
+  useEffect(() => {
     if (isLoggedIn) {
-      handleTokenCheck();
       getUserData();
       getMovies();
-      getUserMovies();
     }
   }, [isLoggedIn]); 
   
@@ -183,7 +185,13 @@ function App() {
             <Route
               path="/saved-movies"
               element={
-                <ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />
+                <ProtectedRoute
+                  element={SavedMovies}
+                  isLoggedIn={isLoggedIn}
+                  getUserMovies={getUserMovies} 
+                  userMovies={userMovies}
+                  setUserMovies={setUserMovies}
+                />
               }
             />
             <Route

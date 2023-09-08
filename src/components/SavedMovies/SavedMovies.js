@@ -5,16 +5,22 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import { UserMoviesContext } from "../../context/context";
 
-function SavedMovies({ getUserMovies }) {
-  const {userMovies, setUserMovies} = useContext(UserMoviesContext);
-  const [filteredUserMovies, setFilteredUserMovies] = useState(userMovies);
+function SavedMovies({ getUserMovies, userMovies, setUserMovies }) {
+  // const {userMovies, setUserMovies} = useContext(UserMoviesContext);
+  const [filteredUserMovies, setFilteredUserMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);  
+
+  console.log(filteredUserMovies)
 
   //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {
     getUserMovies();
   }, [])
+
+  useEffect(() => {
+    setFilteredUserMovies(userMovies);
+  }, [userMovies])
 
   function handleSearchUserMovies() {
     const filtered = userMovies.filter((movie) => {
