@@ -106,7 +106,7 @@ export default function Movies({ isRequestError, isLoading, moviesList }) {
   const handleSearchChange = (evt) => {
     const value = evt.target.value;
     localStorage.setItem("query", JSON.stringify(value));
-    setSearchQuery(localStorage.getItem("query", JSON.stringify(value)));
+    setSearchQuery(localStorage.getItem("query", JSON.stringify(value).slice(1, -1)));
   };
 
   //** добавление карточек из списка */
