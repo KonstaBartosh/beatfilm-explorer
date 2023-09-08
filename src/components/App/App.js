@@ -189,8 +189,6 @@ function App() {
                   element={SavedMovies}
                   isLoggedIn={isLoggedIn}
                   getUserMovies={getUserMovies} 
-                  userMovies={userMovies}
-                  setUserMovies={setUserMovies}
                 />
               }
             />

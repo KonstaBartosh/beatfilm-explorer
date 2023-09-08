@@ -5,8 +5,8 @@ import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import { UserMoviesContext } from "../../context/context";
 
-function SavedMovies({ getUserMovies, userMovies, setUserMovies }) {
-  // const {userMovies, setUserMovies} = useContext(UserMoviesContext);
+function SavedMovies({ getUserMovies }) {
+  const {userMovies, setUserMovies} = useContext(UserMoviesContext);
   const [filteredUserMovies, setFilteredUserMovies] = useState([]);
   const [query, setQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);  
