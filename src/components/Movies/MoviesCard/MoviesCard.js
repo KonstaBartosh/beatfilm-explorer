@@ -25,7 +25,6 @@ function MoviesCard({ movie }) {
     isMoviesPath ? likeButtonClassName : removeButtonClassName
   }`;
   
-
   // есть ли фильм в списке лайкнутых => установить начальное состояние isLiked
   useEffect(() => {
     setIsLiked(

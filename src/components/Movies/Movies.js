@@ -4,60 +4,39 @@ import { useState } from "react";
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import * as moviesApi from "../../utils/MoviesApi";
 
-export default function Movies() {
-  const [moviesList, setMoviesList] = useState([]);
+export default function Movies({ isRequestError, isLoading, moviesList }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);
-  const [isRequestError, setRequestError] = useState(false);
   const [displayCards, setDisplayCards] = useState(16);
   const fiteredToShowMovies = filteredMovies.slice(0, displayCards);
-  const [isLoading, setLoading] = useState(true);
-
-  //** взаимодействие с localStorage */
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
-  // const formattedQuery = localStorageQuery.slice(1, -1);
   const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : '';
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
-
-    // Обновляем состояние isToggled после установки значения из localStorage
+  //** обновляем состояние isToggled из localStorage  */
+  //** и возвращаем предыдущий поисковый запрос если он был */
   useEffect(() => {
+    setToggleState();
+    handleLocalStorageData();
+  }, [localStorageIsToggled]);
+
+
+  function setToggleState() {
     if (localStorageIsToggled) {
       setIsToggled(true);
     } else {
       setIsToggled(false);
     }
-  }, [localStorageIsToggled]);
-
-  //** подгрузка фильмов при монтировании компонента */
-  useEffect(() => {
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        setLoading(false);
-        setMoviesList(data);
-      })
-      .catch(() => {
-        setLoading(false);
-        setRequestError(true);
-      });
-  }, []);
-
-  //** возвращаем предыдущий запрос если он был */
-  useEffect(() => {
-    handleLocalStorageData();
-  }, []);
+  }
 
   function handleLocalStorageData() {
     if (localStorageMovies === null) {
       return;
     }
-    console.log(formattedQuery)
 
     localStorageShortMovies 
     ? setFilteredMovies(localStorageShortMovies)
@@ -91,7 +70,7 @@ export default function Movies() {
     };
   }, []);
 
-  /** отправка формы */
+  /** отправка формы поиска */
   function handleSearchSubmit() {
     const filtered = moviesList.filter((movie) => {
       const movieName = movie.nameRU || movie.nameEN;
@@ -113,12 +92,11 @@ export default function Movies() {
     if (isToggled === false) {
       const shortMoviesList = filterShortMovies();
       setIsToggled(true);
-      setFilteredMovies(shortMoviesList);
       localStorage.setItem('isToggled', true);
       localStorage.setItem('shortMovies', JSON.stringify(shortMoviesList));
     } else {
       setIsToggled(false);
-      setFilteredMovies(localStorageMovies)
+      setFilteredMovies(localStorageMovies);
       localStorage.removeItem('isToggled');
       localStorage.removeItem("shortMovies");
     }

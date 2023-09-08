@@ -13,6 +13,7 @@ import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as api from "../../utils/MainApi";
+import * as moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
@@ -28,17 +29,28 @@ function App() {
   const [isRegistered, setIsRegistered] = useState(false);
   const [isUserDataChanged, setUserDataChanged] = useState(false);
 
+  const [moviesList, setMoviesList] = useState([]);
+  const [isRequestError, setRequestError] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
 
-  const handleError = (err) => {
-    console.error(`Возникла ошибка ${err}`)
-  }
+  const handleError = (err) => console.error(`Возникла ошибка ${err}`);
 
-  //** проверка валидности токена */
   useEffect(() => {
+    if (isLoggedIn) {
+      handleTokenCheck();
+      getUserData();
+      getMovies();
+      getUserMovies();
+    }
+  }, [isLoggedIn]); 
+  
+  //** проверка валидности токена */
+  function handleTokenCheck() {
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -50,19 +62,41 @@ function App() {
         })
         .catch(handleError);
     }
-  }, []);
+  }
 
-  //** данные пользователя из БД если он залогиннен */
-  useEffect(() => {
-    if (isLoggedIn) {
-      api
-        .getUserData()
-        .then((userData) => {
-          setCurrentUser(userData);
-        })
-        .catch(handleError);
-    }
-  }, [isLoggedIn]);
+  //** данные пользователя из БД */
+  function getUserData() {
+    api
+      .getUserData()
+      .then((userData) => {
+        setCurrentUser(userData);
+      })
+      .catch(handleError);
+  }
+
+  //** получить фильмы из отдельной БД  */
+  function getMovies() {
+    moviesApi
+      .getMovies()
+      .then((data) => {
+        setLoading(false);
+        setMoviesList(data);
+      })
+      .catch(() => {
+        setLoading(false);
+        setRequestError(true);
+    });
+  }
+
+  //** получить фильмы из избранного  */
+  function getUserMovies() {
+    api
+      .getUserMovies()
+      .then((data) => {
+        setUserMovies(data);
+      })
+      .catch(handleError);
+  }
 
   function handleRegister({ name, email, password }) {
     api
@@ -71,6 +105,9 @@ function App() {
         setIsRegistered(true);
         setIsInfoPopupOpen(true);
         navigate("/sign-in");
+        setTimeout(() => {
+          setIsInfoPopupOpen(false);
+        }, 2000);
       })
       .catch(() => {
         setIsInfoPopupOpen(true);
@@ -102,6 +139,9 @@ function App() {
         setCurrentUser(data);
         setUserDataChanged(true);
         setIProfileChangePopupOpen(true);
+        setTimeout(() => {
+          setIProfileChangePopupOpen(false);
+        }, 2000);
       })
       .catch(() => {
         setIProfileChangePopupOpen(true);
@@ -116,20 +156,6 @@ function App() {
 
   return (
     <div className="app">
-      <InfoTooltip
-        isOpen={isProfileChangePopupOpen}
-        onClose={handleClosePopup}
-        condition={isUserDataChanged}
-        successTitle={'Профиль успешно изменен!'}
-        deniedTitle={'При обновлении профиля произошла ошибка.'}
-      />
-      <InfoTooltip
-        isOpen={isInfoPopupOpen}
-        onClose={handleClosePopup}
-        condition={isRegistered}
-        successTitle={'Вы успешно зарегистрировались!'}
-        deniedTitle={'Что-то пошло не так! Попробуйте ещё раз.'}
-      />
       <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           {shouldShowHeader && <Header isLoggedIn={isLoggedIn} />}
@@ -148,6 +174,9 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   errorMessage={errorMessage}
                   setErrorMessage={setErrorMessage}
+                  isRequestError={isRequestError}
+                  isLoading={isLoading}
+                  moviesList={moviesList}
                 />
               }
             />
@@ -173,6 +202,20 @@ function App() {
           {shouldShowFooter && <Footer />}
         </CurrentUserContext.Provider>
       </UserMoviesContext.Provider>
+      <InfoTooltip
+        isOpen={isProfileChangePopupOpen}
+        onClose={handleClosePopup}
+        condition={isUserDataChanged}
+        successTitle={'Профиль успешно изменен!'}
+        deniedTitle={'При обновлении профиля произошла ошибка.'}
+      />
+      <InfoTooltip
+        isOpen={isInfoPopupOpen}
+        onClose={handleClosePopup}
+        condition={isRegistered}
+        successTitle={'Вы успешно зарегистрировались!'}
+        deniedTitle={'Что-то пошло не так! Попробуйте ещё раз.'}
+      />
     </div>
   );
 }
