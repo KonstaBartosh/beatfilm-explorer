@@ -14,7 +14,7 @@ export default function Movies({ isRequestError, isLoading, moviesList }) {
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
-  const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : '';
+  const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : ''  ;
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
   //** обновляем состояние isToggled из localStorage  */
@@ -74,7 +74,7 @@ export default function Movies({ isRequestError, isLoading, moviesList }) {
   function handleSearchSubmit() {
     const filtered = moviesList.filter((movie) => {
       const movieName = movie.nameRU || movie.nameEN;
-      return movieName.toLowerCase().includes(searchQuery.toLowerCase().slice(1, -1));
+      return movieName.toLowerCase().includes(searchQuery.toLowerCase());
     });
     
     setFilteredMovies(filtered);
@@ -105,8 +105,8 @@ export default function Movies({ isRequestError, isLoading, moviesList }) {
   //** запись значения в поиске в стейт-переменную */
   const handleSearchChange = (evt) => {
     const value = evt.target.value;
+    setSearchQuery(value);
     localStorage.setItem("query", JSON.stringify(value));
-    setSearchQuery(localStorage.getItem("query", JSON.stringify(value).slice(1, -1)));
   };
 
   //** добавление карточек из списка */
