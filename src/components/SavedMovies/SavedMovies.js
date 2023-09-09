@@ -9,7 +9,8 @@ function SavedMovies({ getUserMovies }) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
   const [filteredUserMovies, setFilteredUserMovies] = useState([]);
   const [query, setQuery] = useState('');
-  const [isToggled, setIsToggled] = useState(false);  
+  const [isToggled, setIsToggled] = useState(false);
+  const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
 
   console.log(filteredUserMovies)
 
@@ -26,7 +27,12 @@ function SavedMovies({ getUserMovies }) {
     const filtered = userMovies.filter((movie) => {
       const movieName = movie.nameRU || movie.nameEN;
       return movieName.toLowerCase().includes(query.toLowerCase());
-    })
+    });
+
+    if (filtered.length === 0) {
+      setIsMoviesNotFound(true)
+    }
+
     setFilteredUserMovies(filtered);
   }
 
@@ -63,6 +69,7 @@ function SavedMovies({ getUserMovies }) {
         arrayList={userMovies}
         cards={filteredUserMovies}
         userMovies={userMovies}
+        isMoviesNotFound={isMoviesNotFound}
       />
     </section>
   );

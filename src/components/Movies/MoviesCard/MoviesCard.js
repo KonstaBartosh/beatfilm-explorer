@@ -2,7 +2,7 @@ import { React, useContext, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import "./MoviesCard.css";
-import * as api from "../../../utils/MainApi";
+import * as api from "../../../utils/mainApi";
 import { movieServerUrl } from "../../../utils/constants";
 import { UserMoviesContext } from "../../../context/context";
 

@@ -87,7 +87,6 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
 
     if (filtered.length === 0) {
       setIsMoviesNotFound(true)
-      console.log("Нет совпадений");
     }
     
     setFilteredMovies(filtered);

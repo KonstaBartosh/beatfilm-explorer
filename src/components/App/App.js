@@ -12,8 +12,8 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import * as api from "../../utils/MainApi";
-import * as moviesApi from "../../utils/MoviesApi";
+import * as api from "../../utils/mainApi";
+import * as moviesApi from "../../utils/moviesApi";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
@@ -47,7 +47,6 @@ function App() {
   useEffect(() => {
     if (isLoggedIn) {
       getUserData();
-      getMovies();
     }
   }, [isLoggedIn]); 
   
@@ -179,6 +178,7 @@ function App() {
                   isRequestError={isRequestError}
                   isLoading={isLoading}
                   moviesList={moviesList}
+                  getMovies={getMovies}
                 />
               }
             />
