@@ -16,7 +16,6 @@ function SearchForm({
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(`searchQuery: ${searchQuery}`);
     if (searchQuery === "") {
       setValidationError("Нужно ввести ключевое слово");
       return;
