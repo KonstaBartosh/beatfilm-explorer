@@ -5,17 +5,24 @@ import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-export default function Movies({ isRequestError, isLoading, moviesList }) {
+export default function Movies({ isRequestError, isLoading, moviesList, getMovies }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);
   const [displayCards, setDisplayCards] = useState(16);
-  const fiteredToShowMovies = filteredMovies.slice(0, displayCards);
+  const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
+
+  const cardsToShow = filteredMovies.slice(0, displayCards);
+
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
   const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : ''  ;
   const localStorageIsToggled = localStorage.getItem("isToggled");
+
+  useEffect(() => {
+    getMovies();
+  }, []);
 
   //** обновляем состояние isToggled из localStorage  */
   //** и возвращаем предыдущий поисковый запрос если он был */
@@ -74,8 +81,14 @@ export default function Movies({ isRequestError, isLoading, moviesList }) {
   function handleSearchSubmit() {
     const filtered = moviesList.filter((movie) => {
       const movieName = movie.nameRU || movie.nameEN;
+
       return movieName.toLowerCase().includes(searchQuery.toLowerCase());
     });
+
+    if (filtered.length === 0) {
+      setIsMoviesNotFound(true)
+      console.log("Нет совпадений");
+    }
     
     setFilteredMovies(filtered);
     // обновление localStorage при изменении filteredMovies
@@ -133,7 +146,8 @@ export default function Movies({ isRequestError, isLoading, moviesList }) {
           isLoading={isLoading}
           isRequestError={isRequestError}
           onAddMore={handleAddMoreCards}
-          cards={fiteredToShowMovies}
+          cards={cardsToShow}
+          isMoviesNotFound={isMoviesNotFound}
         />
     </section>
   );
