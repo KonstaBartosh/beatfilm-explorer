@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import "../Movies/Movies.css";
+import "./SavedMovies.css";
 import SearchForm from "../Movies/SearchForm/SearchForm";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
 import { UserMoviesContext } from "../../context/context";
@@ -58,7 +58,7 @@ function SavedMovies({ getUserMovies }) {
   }
 
   return (
-    <section className="movies">  
+    <section className="saved-movies">  
       <SearchForm
         onSearchClick={handleSearchUserMovies}
         handleSearchChange={handleOnChange}
