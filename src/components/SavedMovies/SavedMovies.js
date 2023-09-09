@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./SavedMovies.css";
-import SearchForm from "../Movies/SearchForm/SearchForm";
-import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList";
-import { UserMoviesContext } from "../../context/context";
+import SearchForm from "../Movies/SearchForm/SearchForm.js";
+import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList.js";
+import { UserMoviesContext } from "../../context/context.js";
 
 function SavedMovies({ getUserMovies }) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);

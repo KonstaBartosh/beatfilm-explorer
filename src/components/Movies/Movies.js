@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 
 import "./Movies.css";
-import SearchForm from "./SearchForm/SearchForm";
-import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import SearchForm from "./SearchForm/SearchForm.js";
+import MoviesCardList from "./MoviesCardList/MoviesCardList.js";
 
 export default function Movies({ isRequestError, isLoading, moviesList, getMovies }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
