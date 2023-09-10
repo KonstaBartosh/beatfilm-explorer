@@ -31,7 +31,19 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
     handleLocalStorageData();
   }, [localStorageIsToggled]);
 
+  //** изменение кол-ва карточек в зависимости от ширины экрана */
+  useEffect(() => {
+    updateDisplayCards();
+    //** динамическое изменение кол-ва карточек */
+    window.addEventListener("resize", () => {
+      updateDisplayCards();
+    });
 
+    return () => {
+      window.removeEventListener("resize", updateDisplayCards);
+    };
+  }, [filteredMovies]);
+  
   function setToggleState() {
     if (localStorageIsToggled) {
       setIsToggled(true);
@@ -64,18 +76,6 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
     }
   }
 
-  //** изменение кол-ва карточек в зависимости от ширины экрана */
-  useEffect(() => {
-    updateDisplayCards();
-    //** динамическое изменение кол-ва карточек */
-    window.addEventListener("resize", () => {
-      updateDisplayCards();
-    });
-
-    return () => {
-      window.removeEventListener("resize", updateDisplayCards);
-    };
-  }, []);
 
   /** отправка формы поиска */
   function handleSearchSubmit() {
