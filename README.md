@@ -29,6 +29,6 @@
 - `npm run build` для финальной сборки
 - `npm run server` запуск билд версии на
 
-ссылка на pull request: github.com/KonstaBartosh/movies-explorer-frontend/pull/2
+ссылка на pull request: KonstaBartosh/movies-explorer-frontend/pull/2
 
 макет light 2: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=1-298&mode=design
