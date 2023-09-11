@@ -17,7 +17,7 @@ function SavedMovies({ getUserMovies }) {
   //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {
     getUserMovies();
-  }, [])
+  }, []);
 
   useEffect(() => {
     setFilteredUserMovies(userMovies);

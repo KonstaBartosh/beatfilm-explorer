@@ -5,23 +5,23 @@ import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm.js";
 import MoviesCardList from "./MoviesCardList/MoviesCardList.js";
 
-export default function Movies({ isRequestError, isLoading, moviesList, getMovies }) {
+export default function Movies({ isRequestError, isLoading, moviesList, getMovies, getUserMovies }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);
   const [displayCards, setDisplayCards] = useState(16);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
-
   const cardsToShow = filteredMovies.slice(0, displayCards);
-
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
   const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : ''  ;
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
+  //** подгружаем БД всех фильмов и избранные фильмы */
   useEffect(() => {
     getMovies();
+    getUserMovies();
   }, []);
 
   //** обновляем состояние isToggled из localStorage  */

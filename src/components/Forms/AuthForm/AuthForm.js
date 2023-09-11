@@ -14,7 +14,6 @@ function AuthForm({
   isValid
 }) {
 
-  console.log(isValid)
   return (
     <div className="auth-form">
       <div className="auth-form__container">

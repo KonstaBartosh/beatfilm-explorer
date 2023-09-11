@@ -179,6 +179,7 @@ function App() {
                   isLoading={isLoading}
                   moviesList={moviesList}
                   getMovies={getMovies}
+                  getUserMovies={getUserMovies}
                 />
               }
             />
