@@ -66,14 +66,17 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
 
   function updateDisplayCards() {
     const screenWidth = window.innerWidth;
+    let number;
 
     if (screenWidth >= 1280) {
-      setDisplayCards(16);
+      number = 16;
     } else if (screenWidth >= 768) {
-      setDisplayCards(8);
+      number = 8;
     } else {
-      setDisplayCards(5);
+      number = 5;
     }
+
+    setDisplayCards(number);
   }
 
 
@@ -123,10 +126,21 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
 
   //** добавление карточек из списка */
   const handleAddMoreCards = () => {
-    setDisplayCards(
-      window.innerWidth > 768 ? displayCards + 4 : displayCards + 2
-    );
+    const windowWidth = window.innerWidth;
+    let number;
+  
+    if (windowWidth >= 1280) {
+      number = 4;
+    } else if (windowWidth < 1280 && windowWidth > 989) {
+      number = 3;
+    } else {
+      number = 2;
+    }
+  
+    const numberOfCards = displayCards + number;
+    setDisplayCards(numberOfCards);
   };
+  
   
 
   return (
