@@ -3,7 +3,7 @@ import React from "react";
 import "./Portfolio.css";
 import Title from "../Title/Title";
 import photo from "../../../images/photo.jpeg";
-import { sampleWorkOne, sampleWorkThree, sampleWorkTwo } from "../../../utils/constants";
+import { SAMPLE_WORK } from "../../../utils/constants";
 
 export default function Portfolio() {
   const getSampleMarkup = (title, link) => {
@@ -48,9 +48,9 @@ export default function Portfolio() {
       
       <span className="portfolio__sign">Портфолио</span>
       <div className="portfolio__exaples-container">
-        {getSampleMarkup("Статичный сайт", sampleWorkOne)}
-        {getSampleMarkup("Адаптивный сайт", sampleWorkTwo)}
-        {getSampleMarkup("Одностраничное приложение", sampleWorkThree)}
+        {getSampleMarkup("Статичный сайт", SAMPLE_WORK.ONE)}
+        {getSampleMarkup("Адаптивный сайт", SAMPLE_WORK.TWO)}
+        {getSampleMarkup("Одностраничное приложение", SAMPLE_WORK.THREE)}
       </div>
     </section>
   );

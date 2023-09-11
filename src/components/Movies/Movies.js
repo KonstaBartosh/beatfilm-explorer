@@ -4,6 +4,7 @@ import { useState } from "react";
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm.js";
 import MoviesCardList from "./MoviesCardList/MoviesCardList.js";
+import { ADD_MORE_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
 
 export default function Movies({ isRequestError, isLoading, moviesList, getMovies, getUserMovies }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -74,12 +75,12 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
     const screenWidth = window.innerWidth;
     let number;
 
-    if (screenWidth >= 1280) {
-      number = 16;
-    } else if (screenWidth >= 768) {
-      number = 8;
+    if (screenWidth >= SCREEN_WIDTH.LARGE) {
+      number = CARDS_AMMOUNT.LARGE;
+    } else if (screenWidth >= SCREEN_WIDTH.TABLET) {
+      number = CARDS_AMMOUNT.MEDIUM;
     } else {
-      number = 5;
+      number = CARDS_AMMOUNT.SMALL;
     }
 
     setDisplayCards(number);
@@ -106,7 +107,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
 
   //** фильтрации короткометражных фильмов */
   function filterShortMovies() {
-    return filteredMovies.filter((movie) => movie.duration < 40);
+    return filteredMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH);
   }
   
   //** переключатель короткометражек */
@@ -136,12 +137,12 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
     const windowWidth = window.innerWidth;
     let number;
   
-    if (windowWidth >= 1280) {
-      number = 4;
-    } else if (windowWidth < 1280 && windowWidth > 989) {
-      number = 3;
+    if (windowWidth >= SCREEN_WIDTH.LARGE) {
+      number = ADD_MORE_CARDS.FOUR;
+    } else if (windowWidth < SCREEN_WIDTH.LARGE && windowWidth > 989) {
+      number = ADD_MORE_CARDS.THREE;;
     } else {
-      number = 2;
+      number = ADD_MORE_CARDS.TWO;
     }
   
     const numberOfCards = displayCards + number;

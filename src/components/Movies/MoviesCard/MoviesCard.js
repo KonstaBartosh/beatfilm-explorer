@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 
 import "./MoviesCard.css";
 import * as api from "../../../utils/mainApi";
-import { movieServerUrl } from "../../../utils/constants";
 import { UserMoviesContext } from "../../../context/context";
+import { URL_MOVIE_SERVER } from "../../../utils/constants";
 
 function MoviesCard({ movie }) {
   const location = useLocation();
@@ -13,7 +13,7 @@ function MoviesCard({ movie }) {
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);
   const isMoviesPath = location.pathname === "/movies";
-  const picture = isMoviesPath ? `${movieServerUrl}${image.url}` : image.url;
+  const picture = isMoviesPath ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
 
   //** стили для кнопки */
   const buttonText = isMoviesPath ? null : "✗";

@@ -1,6 +1,5 @@
-import { movieServerUrl } from "./constants";
+import { BASE_URL, URL_MOVIE_SERVER } from "./constants";
 
-const BASE_URL = 'https://api.moviexplorer.nomoreparties.co';
 const jsonHeaders = {
 	'Content-Type': 'application/json',
 	'Accept': 'application/json'
@@ -93,11 +92,11 @@ export const saveUserMovie = (movie) => {
 			duration: movie.duration,
 			year: movie.year,
 			description: movie.description,
-			image: {url: `${movieServerUrl}${movie.image.url}`},
+			image: {url: `${URL_MOVIE_SERVER}${movie.image.url}`},
 			trailerLink: movie.trailerLink,
 			nameRU: movie.nameRU,
 			nameEN: movie.nameEN,
-			thumbnail: `${movieServerUrl}${movie.image.url}`,
+			thumbnail: `${URL_MOVIE_SERVER}${movie.image.url}`,
 			movieId: movie.id,
 		})
 	})

@@ -4,6 +4,7 @@ import "./SavedMovies.css";
 import SearchForm from "../Movies/SearchForm/SearchForm.js";
 import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList.js";
 import { UserMoviesContext } from "../../context/context.js";
+import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
 
 function SavedMovies({ getUserMovies }) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
@@ -46,7 +47,7 @@ function SavedMovies({ getUserMovies }) {
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (isToggled === false) {
-      const shortMoviesList = userMovies.filter((movie) => movie.duration < 40)
+      const shortMoviesList = userMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH)
       setIsToggled(true);
       setUserMovies(shortMoviesList);;
       localStorage.setItem('userMovies', JSON.stringify(userMovies));
