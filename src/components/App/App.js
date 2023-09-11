@@ -28,20 +28,18 @@ function App() {
   const [isProfileChangePopupOpen, setIProfileChangePopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isUserDataChanged, setUserDataChanged] = useState(false);
-
   const [moviesList, setMoviesList] = useState([]);
   const [isRequestError, setRequestError] = useState(false);
   const [isLoading, setLoading] = useState(true);
-
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
-
   const handleError = (err) => console.error(err);
 
   useEffect(() => {
     handleTokenCheck();
+    console.log(isLoggedIn)
   }, []);
 
   useEffect(() => {
@@ -59,7 +57,6 @@ function App() {
         .checkToken()
         .then(() => {
           setLoggedIn(true);
-          navigate("/");
         })
         .catch(handleError);
     }
@@ -160,12 +157,16 @@ function App() {
       <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           {shouldShowHeader && <Header isLoggedIn={isLoggedIn} />}
-          <Routes>
+            <Routes>
+            {!isLoggedIn && 
+            <>
             <Route
               path="/sign-up"
               element={<Register onRegister={handleRegister} />}
             />
             <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
+            </>
+            }
             <Route path="/" element={<Main />} />
             <Route
               path="/movies"
