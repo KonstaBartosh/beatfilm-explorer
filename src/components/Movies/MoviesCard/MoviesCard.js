@@ -72,7 +72,7 @@ function MoviesCard({ movie }) {
 
   return (
     <div className="card">
-      <a href={trailerLink}>
+      <a href={trailerLink} target="_blank" rel="noreferrer">
         <img src={picture} alt={nameRU} className="card__image" />
       </a>
       <div className="card__header">
