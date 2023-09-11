@@ -105,7 +105,7 @@ function App() {
       .then(() => {
         setIsRegistered(true);
         setIsInfoPopupOpen(true);
-        navigate("/sign-in");
+        navigate("/movies");
         setTimeout(() => {
           setIsInfoPopupOpen(false);
         }, 2000);
