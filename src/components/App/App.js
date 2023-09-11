@@ -12,8 +12,8 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import * as api from "../../utils/mainApi.js";
-import * as moviesApi from "../../utils/moviesApi";
+import * as api from "../../utils/MainApi.js";
+import * as moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
