@@ -38,7 +38,7 @@ function App() {
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
 
-  const handleError = (err) => console.error(`Возникла ошибка ${err}`);
+  const handleError = (err) => console.error(err);
 
   useEffect(() => {
     handleTokenCheck();
@@ -110,9 +110,9 @@ function App() {
           setIsInfoPopupOpen(false);
         }, 2000);
       })
-      .catch(() => {
+      .catch((err) => {
         setIsInfoPopupOpen(true);
-        handleError();
+        handleError(err);
       });
   }
 
@@ -144,9 +144,9 @@ function App() {
           setIProfileChangePopupOpen(false);
         }, 2000);
       })
-      .catch(() => {
+      .catch((err) => {
         setIProfileChangePopupOpen(true);
-        handleError();
+        handleError(err);
       });
   }
 
