@@ -18,9 +18,15 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : ''  ;
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
-  //** подгружаем БД всех фильмов и избранные фильмы */
+  //** подгружаем БД всех фильмов  */
   useEffect(() => {
-    getMovies();
+    if (moviesList.length === 0) {
+      getMovies();
+    }
+  }, []);
+
+  //** подгружаем БД избранных фильмов для отображения лайков */
+  useEffect(() => {
     getUserMovies();
   }, []);
 
@@ -82,6 +88,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
 
   /** отправка формы поиска */
   function handleSearchSubmit() {
+    
     const filtered = moviesList.filter((movie) => {
       const movieName = movie.nameRU || movie.nameEN;
 

@@ -30,7 +30,7 @@ function App() {
   const [isUserDataChanged, setUserDataChanged] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
   const [isRequestError, setRequestError] = useState(false);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
@@ -39,7 +39,6 @@ function App() {
 
   useEffect(() => {
     handleTokenCheck();
-    console.log(isLoggedIn)
   }, []);
 
   useEffect(() => {
