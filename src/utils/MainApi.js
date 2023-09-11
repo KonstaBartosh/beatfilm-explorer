@@ -7,11 +7,14 @@ const jsonHeaders = {
 }
 
 const checkResponse = (res) => {
-	if (res.ok) {
-		return res.json();
-	}
-	return Promise.reject(`Упс...Ошибка: ${res.status}`);
+  if (res.ok) {
+    return res.json();
+  }
+  return res.json().then((data) => {
+    return Promise.reject(`Ошибка: ${data.message}`);
+  });
 }
+
 
 export const register = ({ name, email, password }) => {
 	return fetch(`${BASE_URL}/signup`, {

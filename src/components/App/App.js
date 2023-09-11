@@ -35,7 +35,11 @@ function App() {
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
-  const handleError = (err) => console.error(err);
+
+  const handleError = (err) => {
+    setErrorMessage(err);
+    setIsInfoPopupOpen(true);
+  }
 
   useEffect(() => {
     handleTokenCheck();
@@ -82,6 +86,7 @@ function App() {
       .catch(() => {
         setLoading(false);
         setRequestError(true);
+        handleError();
     });
   }
 
@@ -106,10 +111,7 @@ function App() {
           setIsInfoPopupOpen(false);
         }, 2000);
       })
-      .catch((err) => {
-        setIsInfoPopupOpen(true);
-        handleError(err);
-      });
+      .catch(handleError);
   }
 
   function handleLogin({ email, password }) {
@@ -117,6 +119,7 @@ function App() {
       .login({ email, password })
       .then((data) => {
         localStorage.setItem("token", data.token);
+        localStorage.setItem("isLoggedIn", true);
         setLoggedIn(true);
         navigate("/movies");
       })
@@ -140,10 +143,7 @@ function App() {
           setIProfileChangePopupOpen(false);
         }, 2000);
       })
-      .catch((err) => {
-        setIProfileChangePopupOpen(true);
-        handleError(err);
-      });
+      .catch(handleError);
   }
 
   function handleClosePopup() {
@@ -210,18 +210,11 @@ function App() {
         </CurrentUserContext.Provider>
       </UserMoviesContext.Provider>
       <InfoTooltip
-        isOpen={isProfileChangePopupOpen}
-        onClose={handleClosePopup}
-        condition={isUserDataChanged}
-        successTitle={'Профиль успешно изменен!'}
-        deniedTitle={'При обновлении профиля произошла ошибка.'}
-      />
-      <InfoTooltip
         isOpen={isInfoPopupOpen}
         onClose={handleClosePopup}
         condition={isRegistered}
         successTitle={'Вы успешно зарегистрировались!'}
-        deniedTitle={'Что-то пошло не так! Попробуйте ещё раз.'}
+        deniedTitle={errorMessage}
       />
     </div>
   );
