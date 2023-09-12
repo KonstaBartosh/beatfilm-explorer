@@ -78,7 +78,7 @@
 	font-size: 11px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 989px) {
 	.card {
 		width: 339px;
 		height: 257px;

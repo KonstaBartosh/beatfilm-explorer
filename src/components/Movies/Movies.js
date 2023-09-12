@@ -71,16 +71,19 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
     setSearchQuery(formattedQuery);
   }
 
+  /** обновляет количество отображаемых карточек в зависимости от ширины экрана */
   function updateDisplayCards() {
     const screenWidth = window.innerWidth;
     let number;
 
     if (screenWidth >= SCREEN_WIDTH.LARGE) {
       number = CARDS_AMMOUNT.LARGE;
-    } else if (screenWidth >= SCREEN_WIDTH.TABLET) {
+    } else if (screenWidth < SCREEN_WIDTH.LARGE && screenWidth > SCREEN_WIDTH.TABLET) {
       number = CARDS_AMMOUNT.MEDIUM;
-    } else {
+    } else if (screenWidth > SCREEN_WIDTH.MOBILE && screenWidth <= SCREEN_WIDTH.TABLET) {
       number = CARDS_AMMOUNT.SMALL;
+    } else {
+      number = CARDS_AMMOUNT.X_SMALL;
     }
 
     setDisplayCards(number);

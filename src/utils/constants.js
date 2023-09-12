@@ -12,7 +12,8 @@ export const SAMPLE_WORK = {
 
 export const SCREEN_WIDTH = {
 	LARGE: 1280,
-	TABLET: 768,
+	TABLET: 989,
+	MOBILE: 480,
 }
 
 export const ADD_MORE_CARDS = {
@@ -23,6 +24,7 @@ export const ADD_MORE_CARDS = {
 
 export const CARDS_AMMOUNT = {
 	LARGE: 16,
-	MEDIUM: 8,
-	SMALL: 5,
+	MEDIUM: 12,
+	SMALL: 8,
+	X_SMALL: 5,
 }
