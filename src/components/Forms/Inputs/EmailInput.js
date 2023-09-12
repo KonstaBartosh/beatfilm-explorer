@@ -1,3 +1,4 @@
+import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../../utils/constants";
 import "../AuthForm/AuthForm.css";
 
 export default function EmailInput({
@@ -9,10 +10,6 @@ export default function EmailInput({
   placeholder,
   defaultValue,
 }) {
-
-	const emailPatternMessage = `Адрес электронной почты должен содержать символ ' @ ' 
-    и минимум 2 символа для домена`;
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
 
   return (
     <>
@@ -29,8 +26,8 @@ export default function EmailInput({
             message: "Электронная почта должна содержать не более 40 символов",
           },
           pattern: {
-            value: emailRegex,
-            message: emailPatternMessage,
+            value: EMAIL_REGEX,
+            message: INVALID_EMAIL_MESSAGE,
           },
         })}
         id={`${title}-input`}

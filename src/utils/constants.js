@@ -1,5 +1,8 @@
 export const URL_MOVIE_SERVER = 'https://api.nomoreparties.co';
 export const BASE_URL = 'https://api.moviexplorer.nomoreparties.co';
+export const INVALID_EMAIL_MESSAGE = `Адрес электронной почты должен содержать символ ' @ ' 
+и минимум 2 символа для домена`;
+export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
 export const SHORT_MOVIE_LENGTH = 40;
 export const SAMPLE_WORK = {
 	ONE: "https://konstabartosh.github.io/how-to-learn/",
