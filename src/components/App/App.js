@@ -25,7 +25,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
-  const [isProfileChangePopupOpen, setIsrofileChangePopupOpen] = useState(false);
+  const [isProfileChangePopupOpen, setIsEditProfileOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isUserDataChanged, setUserDataChanged] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
@@ -139,18 +139,13 @@ function App() {
       .then((data) => {
         setCurrentUser(data);
         setUserDataChanged(true);
-
-        setIsrofileChangePopupOpen(true);
-        setTimeout(() => {
-          setIsrofileChangePopupOpen(false);
-        }, 2000);
       })
       .catch(handleError);
   }
 
   function handleClosePopup() {
     setIsInfoPopupOpen(false);
-    setIsrofileChangePopupOpen(false);
+    setIsEditProfileOpen(false);
   }
 
   return (
