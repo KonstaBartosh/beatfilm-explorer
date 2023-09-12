@@ -25,7 +25,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
-  const [isProfileChangePopupOpen, setIProfileChangePopupOpen] = useState(false);
+  const [isProfileChangePopupOpen, setIsrofileChangePopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [isUserDataChanged, setUserDataChanged] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
@@ -104,9 +104,10 @@ function App() {
     api
       .register({ name, email, password })
       .then(() => {
+        handleLogin({ email, password });
         setIsRegistered(true);
+
         setIsInfoPopupOpen(true);
-        navigate("/movies");
         setTimeout(() => {
           setIsInfoPopupOpen(false);
         }, 2000);
@@ -120,8 +121,8 @@ function App() {
       .then((data) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("isUserLogin", true);
-        setLoggedIn(true);
         navigate("/movies");
+        setLoggedIn(true);
       })
       .catch(handleError);
   }
@@ -138,9 +139,10 @@ function App() {
       .then((data) => {
         setCurrentUser(data);
         setUserDataChanged(true);
-        setIProfileChangePopupOpen(true);
+
+        setIsrofileChangePopupOpen(true);
         setTimeout(() => {
-          setIProfileChangePopupOpen(false);
+          setIsrofileChangePopupOpen(false);
         }, 2000);
       })
       .catch(handleError);
@@ -148,7 +150,7 @@ function App() {
 
   function handleClosePopup() {
     setIsInfoPopupOpen(false);
-    setIProfileChangePopupOpen(false);
+    setIsrofileChangePopupOpen(false);
   }
 
   return (
@@ -161,7 +163,7 @@ function App() {
             <>
             <Route
               path="/sign-up"
-              element={<Register onRegister={handleRegister} />}
+              element={<Register onRegister={handleRegister} isRegistered={isRegistered} />}
             />
             <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
             </>
