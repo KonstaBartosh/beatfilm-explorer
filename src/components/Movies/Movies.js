@@ -80,7 +80,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
       number = CARDS_AMMOUNT.LARGE;
     } else if (screenWidth < SCREEN_WIDTH.LARGE && screenWidth > SCREEN_WIDTH.TABLET) {
       number = CARDS_AMMOUNT.MEDIUM;
-    } else if (screenWidth > SCREEN_WIDTH.MOBILE && screenWidth <= SCREEN_WIDTH.TABLET) {
+    } else if (screenWidth < SCREEN_WIDTH.TABLET && screenWidth >= SCREEN_WIDTH.TABLET_SMALL) {
       number = CARDS_AMMOUNT.SMALL;
     } else {
       number = CARDS_AMMOUNT.X_SMALL;
@@ -88,7 +88,6 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
 
     setDisplayCards(number);
   }
-
 
   /** отправка формы поиска */
   function handleSearchSubmit() {

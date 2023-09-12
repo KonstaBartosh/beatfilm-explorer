@@ -13,6 +13,7 @@ export const SAMPLE_WORK = {
 export const SCREEN_WIDTH = {
 	LARGE: 1280,
 	TABLET: 989,
+	TABLET_SMALL: 768,
 	MOBILE: 480,
 }
 
