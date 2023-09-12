@@ -36,8 +36,8 @@ export default function Profile({ onLogOut, onSave }) {
   };
 	
 	const submitData = (data) => {
+    setIsnputsVisible(false);
 		onSave(data);
-		setIsnputsVisible(false);
 	}
 
   return (
