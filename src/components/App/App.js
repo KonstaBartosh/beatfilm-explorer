@@ -119,7 +119,7 @@ function App() {
       .login({ email, password })
       .then((data) => {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("isLoggedIn", true);
+        localStorage.setItem("isUserLogin", true);
         setLoggedIn(true);
         navigate("/movies");
       })
