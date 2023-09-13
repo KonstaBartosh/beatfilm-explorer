@@ -16,12 +16,14 @@ import * as api from "../../utils/MainApi.js";
 import * as moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [succesMessage, setSuccesMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
@@ -104,7 +106,7 @@ function App() {
       .then(() => {
         handleLogin({ email, password });
         setIsRegistered(true);
-        openSuccesPopup();
+        openSuccesPopup(SUCCES_REGISTRATION_MESSAGE);
       })
       .catch(handleError);
   }
@@ -121,7 +123,7 @@ function App() {
       .catch(handleError);
   }
 
-  function handleLogOut() {
+  function handleLogout() {
     setLoggedIn(false);
     localStorage.clear();
     navigate("/");
@@ -134,11 +136,12 @@ function App() {
       .catch(handleError);
   }
 
-  function openSuccesPopup() {
+  function openSuccesPopup(message) {
+    setSuccesMessage(message);
     setIsInfoPopupOpen(true);
     setTimeout(() => {
       setIsInfoPopupOpen(false);
-    }, 2000);
+    }, 3000);
   }
 
   const handleClosePopup = () => {
@@ -193,7 +196,7 @@ function App() {
                 <ProtectedRoute
                   element={Profile}
                   isLoggedIn={isLoggedIn}
-                  onLogOut={handleLogOut}
+                  onLogOut={handleLogout}
                   onSave={handleChangeProfile}
                 />
               }
@@ -207,7 +210,7 @@ function App() {
         isOpen={isInfoPopupOpen}
         onClose={handleClosePopup}
         condition={isRegistered}
-        successTitle={'Вы успешно зарегистрировались!'}
+        successTitle={succesMessage}
         deniedTitle={errorMessage}
       />
     </div>
