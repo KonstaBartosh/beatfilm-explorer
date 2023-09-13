@@ -36,11 +36,6 @@ function App() {
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
 
-  const handleError = (err) => {
-    setErrorMessage(err);
-    setIsInfoPopupOpen(true);
-  }
-
   useEffect(() => {
     handleTokenCheck();
   }, []);
@@ -50,6 +45,11 @@ function App() {
       getUserData();
     }
   }, [isLoggedIn]); 
+
+  const handleError = (err) => {
+    setErrorMessage(err);
+    setIsInfoPopupOpen(true);
+  }
   
   //** проверка валидности токена */
   function handleTokenCheck() {

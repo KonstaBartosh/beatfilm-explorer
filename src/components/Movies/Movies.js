@@ -8,7 +8,7 @@ import { ADD_MORE_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from 
 
 export default function Movies({ isRequestError, isLoading, moviesList, getMovies, getUserMovies }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(('searchQuery') || '');
   const [isToggled, setIsToggled] = useState(false);
   const [displayCards, setDisplayCards] = useState(16);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
@@ -16,7 +16,6 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
-  const formattedQuery = localStorageQuery ? localStorageQuery.slice(1, -1) : ''  ;
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
   //** подгружаем БД всех фильмов  */
@@ -67,8 +66,6 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
     localStorageShortMovies 
     ? setFilteredMovies(localStorageShortMovies)
     : setFilteredMovies(localStorageMovies);
-
-    setSearchQuery(formattedQuery);
   }
 
   /** обновляет количество отображаемых карточек в зависимости от ширины экрана */
@@ -131,7 +128,8 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   const handleSearchChange = (evt) => {
     const value = evt.target.value;
     setSearchQuery(value);
-    localStorage.setItem("query", JSON.stringify(value));
+    // localStorage.setItem("query", JSON.stringify(value));
+    localStorage.setItem("query", value);
   };
 
   //** добавление карточек из списка */
@@ -160,7 +158,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
           handleSearchChange={handleSearchChange}
           setFilteredMovies={setFilteredMovies}
           onToggle={handleToggleSwitch}
-          defaultValue={formattedQuery}
+          defaultValue={localStorageQuery}
           isToggled={isToggled}
           searchQuery={searchQuery}
         />
