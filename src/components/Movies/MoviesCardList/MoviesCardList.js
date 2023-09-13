@@ -1,16 +1,51 @@
 import React from "react";
+
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../../Preloader/Preloader";
+import { useLocation } from "react-router-dom";
 
-export default function MoviesCardList({sampleItems}) {
-  return (
+function MoviesCardList({
+  arrayList,
+  isLoading,
+  isRequestError,
+  onAddMore,
+  cards,
+  isMoviesNotFound,
+}) {
+  const location = useLocation();
+  const moviesPageLocation = location.pathname === "/movies";
+  const notFoundMessage = "Ничего не найдено";
+  const requestErrorMessage = `Во время запроса произошла ошибка. Возможно, 
+    проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`;
+    
+  const handleMoviesNotFound = isMoviesNotFound ? notFoundMessage : '';
+
+
+  return isLoading ? (
+    <Preloader />
+  ) : (
     <>
       <section className="movies-card-list">
-        {Array.from({ length: sampleItems }, (_, index) => (
-          <MoviesCard key={index} />
-        ))}
+        {cards.length > 0 ? (
+          cards.map((movie) => {
+            return <MoviesCard key={movie.nameRU} movie={movie} />;
+          })
+        ) : (
+          <p className="movies-card-list__message">
+            {isRequestError ? requestErrorMessage : handleMoviesNotFound}
+          </p>
+        )
+        }
       </section>
-      <button className="movies-card-list__button">Еще</button>
+
+      {moviesPageLocation && arrayList.length > cards.length && (
+        <button onClick={onAddMore} className="movies-card-list__button">
+          Еще
+        </button>
+      )}
     </>
   );
 }
+
+export default MoviesCardList;

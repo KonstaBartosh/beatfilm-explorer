@@ -1,7 +1,8 @@
+import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../../utils/constants";
 import "../AuthForm/AuthForm.css";
 
-export default function TextInput({
-  type,
+export default function EmailInput({
+	type,
   title,
   label,
   register,
@@ -9,23 +10,25 @@ export default function TextInput({
   placeholder,
   defaultValue,
 }) {
-  const namePattern = /^[a-zA-Zа-яА-Я\s-]*$/;
 
   return (
     <>
       <label className="auth-form__label">{label}</label>
       <input
-        {...register(title, {
+        {...register("email", {
           required: "Заполните это поле.",
           minLength: {
-            value: 2,
-            message: "Текст должен быть не короче 2 символов",
+            value: 6,
+            message: "Минимум 6 символов",
           },
-          maxLength: 40,
+          maxLength: {
+            value: 40,
+            message: "Электронная почта должна содержать не более 40 символов",
+          },
           pattern: {
-            value: namePattern,
-            message: 'Данное поле содержит недопустимые символы.'
-          }
+            value: EMAIL_REGEX,
+            message: INVALID_EMAIL_MESSAGE,
+          },
         })}
         id={`${title}-input`}
         type={type}

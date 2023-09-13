@@ -1,4 +1,4 @@
-.movies {
+.saved-movies {
 	min-height: calc(100vh - 77px - 170px);
 	display: flex;
 	flex-direction: column;

@@ -33,7 +33,7 @@
 .searchform__input {
 	width: 100%;
 	background-color: #F9F9F9;
-	padding: 22px 14px;
+	padding: 22px 20px;
 	position: relative;
 }
 
@@ -70,6 +70,15 @@
 .searchform__border-bottom {
 	border-bottom: 1px solid #E8E8E8;
 	padding-top: 70px;
+}
+
+.searchform__validation {
+	text-align: center;
+	font-size: 12px;
+	line-height: 12px;
+	color: #EE3465;
+	padding-top: 10px;
+	margin-bottom: -20px;
 }
 
 @media screen and (max-width: 768px) {

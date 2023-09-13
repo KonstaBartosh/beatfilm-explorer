@@ -39,16 +39,16 @@ function BurgerMenu() {
         />
         <ul className="burger-menu__nav">
           <li className="burger-menu__li">
-            <NavLink to="/" className="burger-menu__link">Главная</NavLink>
+            <NavLink to="/" className="burger-menu__link" onClick={toggleMenu}>Главная</NavLink>
           </li>
           <li className="burger-menu__li">
-            <NavLink to="movies" className="burger-menu__link">Фильмы</NavLink>
+            <NavLink to="movies" className="burger-menu__link" onClick={toggleMenu}>Фильмы</NavLink>
           </li>
           <li className="burger-menu__li">
-            <NavLink to="/saved-movies"className="burger-menu__link">Сохраненные фильмы</NavLink>
+            <NavLink to="/saved-movies"className="burger-menu__link" onClick={toggleMenu}>Сохраненные фильмы</NavLink>
           </li>
         </ul>
-        <NavLink to="/profile" className="burger-menu__btn-acc">Аккаунт</NavLink>
+        <NavLink to="/profile" className="burger-menu__btn-acc" onClick={toggleMenu}>Аккаунт</NavLink>
       </nav>
     </div>
   );

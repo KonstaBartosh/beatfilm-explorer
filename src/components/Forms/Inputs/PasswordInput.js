@@ -1,6 +1,6 @@
 import "../AuthForm/AuthForm.css";
 
-export default function TextInput({
+export default function PasswordInput({
   type,
   title,
   label,
@@ -9,23 +9,18 @@ export default function TextInput({
   placeholder,
   defaultValue,
 }) {
-  const namePattern = /^[a-zA-Zа-яА-Я\s-]*$/;
 
   return (
     <>
       <label className="auth-form__label">{label}</label>
       <input
-        {...register(title, {
+        {...register("password", {
           required: "Заполните это поле.",
           minLength: {
-            value: 2,
-            message: "Текст должен быть не короче 2 символов",
+            value: 5,
+            message: "Минимум 5 символов",
           },
           maxLength: 40,
-          pattern: {
-            value: namePattern,
-            message: 'Данное поле содержит недопустимые символы.'
-          }
         })}
         id={`${title}-input`}
         type={type}

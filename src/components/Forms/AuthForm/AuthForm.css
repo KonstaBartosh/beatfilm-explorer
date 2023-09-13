@@ -28,7 +28,7 @@
 	color: black;
 	padding: 15px;
 	font-size: 13px;
-	font-weight: 500;
+	font-weight: 400;
 	height: 46px;
 	border: 0;
 	box-sizing: border-box;
@@ -52,7 +52,12 @@
 	width: 100%;
 }
 
-.auth-form__button:hover {
+.auth-form__button_inactive {
+	background-color: #A0A0A0;
+	cursor: default;
+}
+
+.auth-form__button:not(:disabled):hover {
 	opacity: 0.8;
 }
 
@@ -98,7 +103,7 @@
 	display: inline;
 }
 
-#password.auth-form__input {
+#password-input.auth-form__input {
 	color: #EE3465;
 }
 

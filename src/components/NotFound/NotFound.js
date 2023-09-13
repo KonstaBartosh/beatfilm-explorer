@@ -9,7 +9,7 @@ export default function NotFound() {
 	const onGetBack = () => navigate(-1);
 
 	return(
-		<div className="notfound">
+		<section className="notfound">
 			<div className="notfound__container">
 				<div className="notfound__main">
 					<h1 className="notfound__title">404</h1>
@@ -18,6 +18,6 @@ export default function NotFound() {
 
 				<button onClick={onGetBack} className="notfound__link">Назад</button>
 			</div>
-		</div>
+		</section>
 	);
 }
