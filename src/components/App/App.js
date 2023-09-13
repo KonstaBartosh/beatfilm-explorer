@@ -25,9 +25,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
-  const [isProfileChangePopupOpen, setIsEditProfileOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [isUserDataChanged, setUserDataChanged] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
   const [isRequestError, setRequestError] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -133,19 +131,15 @@ function App() {
     navigate("/");
   }
 
-  function handleChangeUserData({ name, email }) {
+  function handleChangeProfile({ name, email }) {
     api
       .changeUserData({ name, email })
-      .then((data) => {
-        setCurrentUser(data);
-        setUserDataChanged(true);
-      })
+      .then((data) => setCurrentUser(data))
       .catch(handleError);
   }
 
-  function handleClosePopup() {
+  const handleClosePopup = () => {
     setIsInfoPopupOpen(false);
-    setIsEditProfileOpen(false);
   }
 
   return (
@@ -197,7 +191,7 @@ function App() {
                   element={Profile}
                   isLoggedIn={isLoggedIn}
                   onLogOut={handleLogOut}
-                  onSave={handleChangeUserData}
+                  onSave={handleChangeProfile}
                 />
               }
             />

@@ -15,7 +15,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
-  const [searchQuery, setSearchQuery] = useState(localStorageQuery|| '');
+  const [searchQuery, setSearchQuery] = useState(localStorageQuery || '');
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
   //** подгружаем БД всех фильмов  */
