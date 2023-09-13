@@ -8,7 +8,6 @@ import { ADD_MORE_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from 
 
 export default function Movies({ isRequestError, isLoading, moviesList, getMovies, getUserMovies }) {
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState(('searchQuery') || '');
   const [isToggled, setIsToggled] = useState(false);
   const [displayCards, setDisplayCards] = useState(16);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
@@ -16,6 +15,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
+  const [searchQuery, setSearchQuery] = useState(localStorageQuery|| '');
   const localStorageIsToggled = localStorage.getItem("isToggled");
 
   //** подгружаем БД всех фильмов  */
