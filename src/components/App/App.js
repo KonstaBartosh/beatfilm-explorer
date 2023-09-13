@@ -104,11 +104,7 @@ function App() {
       .then(() => {
         handleLogin({ email, password });
         setIsRegistered(true);
-
-        setIsInfoPopupOpen(true);
-        setTimeout(() => {
-          setIsInfoPopupOpen(false);
-        }, 2000);
+        openSuccesPopup();
       })
       .catch(handleError);
   }
@@ -136,6 +132,13 @@ function App() {
       .changeUserData({ name, email })
       .then((data) => setCurrentUser(data))
       .catch(handleError);
+  }
+
+  function openSuccesPopup() {
+    setIsInfoPopupOpen(true);
+    setTimeout(() => {
+      setIsInfoPopupOpen(false);
+    }, 2000);
   }
 
   const handleClosePopup = () => {
