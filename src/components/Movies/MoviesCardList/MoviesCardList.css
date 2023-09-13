@@ -30,12 +30,11 @@
 	line-height: 22px;
 }
 
-@media screen and (max-width: 989px) {
+@media screen and (max-width: 768px) {
 	.movies-card-list {
 		padding: 70px 30px 30px;
 		row-gap: 36px;
 		column-gap: 30px;
-		justify-content: center;
 	}
 }
 
