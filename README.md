@@ -1,18 +1,20 @@
-# SPA Movies explorer на React.js
+# Movies explorer на React.js
 
+Это сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 Приложение написано на React JS с использованием функциональных компонентов. После регистрации и аутентификации пользователю становятся доступен основной функционал приложения:
 
+- реализованы асинхронные GET- и POST-запросы к API
 - поиск фильмов по базе данных Beat Films
 - сохранение понравишихся фильмов в избранное
+- полученные фильмы фильтруются на стороне клиента.
 - удаление фильмов
 - редактирования профиля
 - данные пользователя валидируется перед отправкой на сервер
 
 ## Используемые инструменты
 
-- JAVASCRIPT
+- JavaScript
 - REACT
-- JSX
 - REACT HOOK FORMS
 - REACT CONTEXT
 - REACT ROUTER DOM
@@ -30,7 +32,3 @@
 - `npm run server` запуск билд версии на
 
 ссылка на проект: http://moviexplorer.nomoredomainsicu.ru/movies
-
-ссылка на pull request: `https://github.com/KonstaBartosh/movies-explorer-frontend/pull/2`
-
-макет light 2: https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=1-298&mode=design
