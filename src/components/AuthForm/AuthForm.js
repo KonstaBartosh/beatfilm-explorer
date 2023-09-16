@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 
 import "./AuthForm.css";
-import Logo from "../../Logo/Logo";
+import Logo from "../Logo/Logo";
 
 function AuthForm({
   title,

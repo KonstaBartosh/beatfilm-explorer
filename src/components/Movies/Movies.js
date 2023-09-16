@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./Movies.css";
-import SearchForm from "./SearchForm/SearchForm.js";
-import MoviesCardList from "./MoviesCardList/MoviesCardList.js";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
 import { ADD_MORE_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
+import { filterMovies } from "../../utils/filterMovies";
 
-export default function Movies({ isRequestError, isLoading, moviesList, getMovies, getUserMovies }) {
+function Movies({ 
+  isRequestError, 
+  isLoading, 
+  moviesList, 
+  getMovies, 
+  getUserMovies 
+}) {
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [isToggled, setIsToggled] = useState(false);
   const [displayCards, setDisplayCards] = useState(16);
@@ -40,7 +46,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   //** изменение кол-ва карточек в зависимости от ширины экрана */
   useEffect(() => {
     updateDisplayCards();
-    //** динамическое изменение кол-ва карточек */
+
     window.addEventListener("resize", () => {
       updateDisplayCards();
     });
@@ -87,32 +93,22 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   }
 
   /** отправка формы поиска */
-  function handleSearchSubmit() {
-    
-    const filtered = moviesList.filter((movie) => {
-      const movieName = movie.nameRU || movie.nameEN;
-
-      return movieName.toLowerCase().includes(searchQuery.toLowerCase());
-    });
+  function handleSearchMovies() {
+    const filtered = filterMovies(moviesList, isToggled, searchQuery);
 
     if (filtered.length === 0) {
       setIsMoviesNotFound(true)
     }
-    
+
     setFilteredMovies(filtered);
-    // обновление localStorage при изменении filteredMovies
+
     localStorage.setItem("moviesList", JSON.stringify(filtered));
   }
 
-  //** фильтрации короткометражных фильмов */
-  function filterShortMovies() {
-    return filteredMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH);
-  }
-  
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (isToggled === false) {
-      const shortMoviesList = filterShortMovies();
+      const shortMoviesList = filteredMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH);
       setIsToggled(true);
       localStorage.setItem('isToggled', true);
       localStorage.setItem('shortMovies', JSON.stringify(shortMoviesList));
@@ -128,7 +124,6 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   const handleSearchChange = (evt) => {
     const value = evt.target.value;
     setSearchQuery(value);
-    // localStorage.setItem("query", JSON.stringify(value));
     localStorage.setItem("query", value);
   };
 
@@ -154,7 +149,7 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
   return (
     <section className="movies">
         <SearchForm
-          onSearchClick={handleSearchSubmit}
+          onSearchClick={handleSearchMovies}
           handleSearchChange={handleSearchChange}
           setFilteredMovies={setFilteredMovies}
           onToggle={handleToggleSwitch}
@@ -173,3 +168,5 @@ export default function Movies({ isRequestError, isLoading, moviesList, getMovie
     </section>
   );
 }
+
+export default Movies;

@@ -1,5 +1,5 @@
-import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../../utils/constants";
 import "../AuthForm/AuthForm.css";
+import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../utils/constants";
 
 export default function EmailInput({
 	type,

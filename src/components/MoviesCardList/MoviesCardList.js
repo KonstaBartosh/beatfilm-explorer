@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./MoviesCardList.css";
-import MoviesCard from "../Movies/MoviesCard/MoviesCard";
+import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 import { useLocation } from "react-router-dom";
 import { MOVIES_NOT_FOUND_MESSAGE, MOVIES_SERVER_ERR_MESSAGE } from "../../utils/constants";

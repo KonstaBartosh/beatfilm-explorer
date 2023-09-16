@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./SavedMovies.css";
-import SearchForm from "../Movies/SearchForm/SearchForm.js";
-import MoviesCardList from "../Movies/MoviesCardList/MoviesCardList.js";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
 import { UserMoviesContext } from "../../context/context.js";
 import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
+import { filterMovies } from "../../utils/filterMovies";
 
 function SavedMovies({ getUserMovies }) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
@@ -12,8 +13,7 @@ function SavedMovies({ getUserMovies }) {
   const [query, setQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
-
-  console.log(filteredUserMovies)
+  // const localStorageMovies = JSON.parse(localStorage.getItem("userMovies"));
 
   //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {
@@ -25,10 +25,7 @@ function SavedMovies({ getUserMovies }) {
   }, [userMovies])
 
   function handleSearchUserMovies() {
-    const filtered = userMovies.filter((movie) => {
-      const movieName = movie.nameRU || movie.nameEN;
-      return movieName.toLowerCase().includes(query.toLowerCase());
-    });
+    const filtered = filterMovies(userMovies, isToggled, query)
 
     if (filtered.length === 0) {
       setIsMoviesNotFound(true)
@@ -42,8 +39,6 @@ function SavedMovies({ getUserMovies }) {
     setQuery(value);
   }
 
-  const localStorageMovies = JSON.parse(localStorage.getItem("userMovies"));
-
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (isToggled === false) {
@@ -53,7 +48,7 @@ function SavedMovies({ getUserMovies }) {
       localStorage.setItem('userMovies', JSON.stringify(userMovies));
     } else {
       setIsToggled(false);
-      setUserMovies(localStorageMovies);
+      setUserMovies(JSON.parse(localStorage.getItem("userMovies")));
       localStorage.removeItem("userMovies");
     }
   }

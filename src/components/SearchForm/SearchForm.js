@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 import "./SearchForm.css";
-import logo from "../../../images/search_icon.svg";
-import ToggleSwitch from "./ToggleSwitch/ToggleSwitch";
+import logo from "../../images/search_icon.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function SearchForm({
   searchQuery,

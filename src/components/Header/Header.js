@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import "./Header.css";
-import Navigation from "./Navigation/Navigation";
-import BurgerMenu from "./BurgerMenu/BurgerMenu";
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import Navigation from "../Navigation/Navigation";
 
 function Header({ isLoggedIn }) {
   const url = useLocation();

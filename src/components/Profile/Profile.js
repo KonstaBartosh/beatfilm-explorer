@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 
 import "./Profile.css";
 import { CurrentUserContext } from "../../context/context";
-import TextInput from "../Forms/Inputs/TextInput";
 import { useForm } from "react-hook-form";
-import EmailInput from "../Forms/Inputs/EmailInput";
+import TextInput from "../Inputs/TextInput";
+import EmailInput from "../Inputs/EmailInput";
 
 export default function Profile({ onLogOut, onSave }) {
 	const {
@@ -17,7 +17,7 @@ export default function Profile({ onLogOut, onSave }) {
 	const nameInputValue = watch('name');
 	const emailInputValue = watch('email');
   const { currentUser } = useContext(CurrentUserContext);
-  const [isInputsVisible, setIsnputsVisible] = useState(false);
+  const [isInputsVisible, setIsInputsVisible] = useState(false);
 	const [isSaveButtonValid, setIsSaveButtonValid] = useState(false);
 	const isButtonDisabled = isValid && isSaveButtonValid;
 	const saveBtnClassName = `profile__save-button ${isButtonDisabled ? "" : "profile__save-button_disabled"}`
@@ -32,11 +32,11 @@ export default function Profile({ onLogOut, onSave }) {
 	
 
   const handleUnlockInputs = () => {
-    setIsnputsVisible(true);
+    setIsInputsVisible(true);
   };
 	
 	const submitData = (data) => {
-    setIsnputsVisible(false);
+    setIsInputsVisible(false);
 		onSave(data);
 	}
 
