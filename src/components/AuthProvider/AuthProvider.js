@@ -31,7 +31,7 @@ function AuthProvider({
         <div>
 
           <button
-            className={`auth-form__button ${isValid ? "" : "auth-form__button_inactive"}`}
+            className={`auth-form__button ${!isValid && "auth-form__button_inactive"}`}
             type="submit"
             form="form__auth"
             disabled={!isValid}

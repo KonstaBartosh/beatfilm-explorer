@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
+import AuthProvider from "../../components/AuthProvider/AuthProvider";
+import TextInput from "../../components/Inputs/TextInput";
+import EmailInput from "../../components/Inputs/EmailInput";
+import PasswordInput from "../../components/Inputs/PasswordInput";
 
-import TextInput from "../Inputs/TextInput";
-import EmailInput from "../Inputs/EmailInput";
-import PasswordInput from "../Inputs/PasswordInput";
-import AuthProvider from "../AuthProvider/AuthProvider";
 
 export default function Register({ onRegister }) {
 	

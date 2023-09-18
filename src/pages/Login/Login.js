@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import EmailInput from "../Inputs/EmailInput";
-import PasswordInput from "../Inputs/PasswordInput";
-import AuthProvider from "../AuthProvider/AuthProvider";
+import AuthProvider from "../../components/AuthProvider/AuthProvider";
+import EmailInput from "../../components/Inputs/EmailInput";
+import PasswordInput from "../../components/Inputs/PasswordInput";
 
 export default function Login({ onLogin }) {
   const {
