@@ -1,33 +1,31 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-
-import TextInput from "../Inputs/TextInput";
-import EmailInput from "../Inputs/EmailInput";
-import PasswordInput from "../Inputs/PasswordInput";
-import AuthProvider from "../AuthProvider/AuthProvider";
+import TextInput from "../../components/Inputs/TextInput";
+import EmailInput from "../../components/Inputs/EmailInput";
+import PasswordInput from "../../components/Inputs/PasswordInput";
+import AuthForm from "../../components/AuthForm/AuthForm";
 
 export default function Register({ onRegister }) {
-	
   const {
     register,
-		handleSubmit,
+    handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-	const submitData = (data) => {
-		onRegister(data);
-	}
+  const submitData = (data) => {
+    onRegister(data);
+  };
 
   return (
-    <AuthProvider
+    <AuthForm
       title={"Добро пожаловать!"}
       buttonText={"Зарегистрироваться"}
       navLink={"/sign-in"}
       question={"Уже зарегистрированы?"}
       navLinkTitle={"Войти"}
-			onSubmit={handleSubmit(submitData)}
-			isValid={isValid}
+      onSubmit={handleSubmit(submitData)}
+      isValid={isValid}
     >
       <TextInput
         type={"text"}
@@ -55,6 +53,6 @@ export default function Register({ onRegister }) {
         register={register}
         errors={errors}
       />
-    </AuthProvider>
+    </AuthForm>
   );
 }

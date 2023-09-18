@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import EmailInput from "../Inputs/EmailInput";
-import PasswordInput from "../Inputs/PasswordInput";
-import AuthProvider from "../AuthProvider/AuthProvider";
+import EmailInput from "../../components/Inputs/EmailInput";
+import PasswordInput from "../../components/Inputs/PasswordInput";
+import AuthForm from "../../components/AuthForm/AuthForm";
 
 export default function Login({ onLogin }) {
   const {
@@ -17,7 +17,7 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <AuthProvider
+    <AuthForm
       title={"Рады видеть!"}
       buttonText={"Войти"}
       navLink={"/sign-up"}
@@ -42,6 +42,6 @@ export default function Login({ onLogin }) {
         register={register}
         errors={errors}
       />
-    </AuthProvider>
+    </AuthForm>
   );
 }

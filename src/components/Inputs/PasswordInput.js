@@ -1,4 +1,4 @@
-import "../AuthProvider/AuthProvider.css";
+import "../AuthForm/AuthForm.css";
 
 export default function PasswordInput({
   type,
