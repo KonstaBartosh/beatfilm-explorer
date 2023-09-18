@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-import AuthForm from "../AuthForm/AuthForm";
+
 import TextInput from "../Inputs/TextInput";
 import EmailInput from "../Inputs/EmailInput";
 import PasswordInput from "../Inputs/PasswordInput";
+import AuthProvider from "../AuthProvider/AuthProvider";
 
 export default function Register({ onRegister }) {
 	
@@ -19,7 +20,7 @@ export default function Register({ onRegister }) {
 	}
 
   return (
-    <AuthForm
+    <AuthProvider
       title={"Добро пожаловать!"}
       buttonText={"Зарегистрироваться"}
       navLink={"/sign-in"}
@@ -54,6 +55,6 @@ export default function Register({ onRegister }) {
         register={register}
         errors={errors}
       />
-    </AuthForm>
+    </AuthProvider>
   );
 }

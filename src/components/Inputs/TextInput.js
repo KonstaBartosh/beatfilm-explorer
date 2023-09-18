@@ -1,4 +1,4 @@
-import "../AuthForm/AuthForm.css";
+import "../AuthProvider/AuthProvider.css";
 
 export default function TextInput({
   type,

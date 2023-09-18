@@ -1,4 +1,4 @@
-import "../AuthForm/AuthForm.css";
+import "../AuthProvider/AuthProvider.css";
 import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../utils/constants";
 
 export default function EmailInput({

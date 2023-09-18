@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 
-import "./AuthForm.css";
+import "./AuthProvider.css";
 import Logo from "../Logo/Logo";
 
-function AuthForm({
+function AuthProvider({
   title,
   buttonText,
   question,
@@ -51,4 +51,4 @@ function AuthForm({
   );
 }
 
-export default AuthForm;
+export default AuthProvider;
