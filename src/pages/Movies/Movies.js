@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import "./Movies.css";
-import SearchForm from "../SearchForm/SearchForm";
-import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
+import SearchForm from "../../components/SearchForm/SearchForm";
+import MoviesCardList from "../../components/MoviesCardList/MoviesCardList.js";
 import { ADD_MORE_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 

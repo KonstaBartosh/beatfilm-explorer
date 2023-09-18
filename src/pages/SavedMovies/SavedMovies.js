@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./SavedMovies.css";
-import SearchForm from "../SearchForm/SearchForm";
-import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
+import SearchForm from "../../components/SearchForm/SearchForm";
+import MoviesCardList from "../../components/MoviesCardList/MoviesCardList.js";
 import { UserMoviesContext } from "../../context/context.js";
 import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
@@ -13,7 +13,6 @@ function SavedMovies({ getUserMovies }) {
   const [query, setQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
-  // const localStorageMovies = JSON.parse(localStorage.getItem("userMovies"));
 
   //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {

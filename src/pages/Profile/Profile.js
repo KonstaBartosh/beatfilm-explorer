@@ -3,8 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import { CurrentUserContext } from "../../context/context";
 import { useForm } from "react-hook-form";
-import TextInput from "../Inputs/TextInput";
-import EmailInput from "../Inputs/EmailInput";
+import TextInput from "../../components/Inputs/TextInput";
+import EmailInput from "../../components/Inputs/EmailInput";
+
 
 export default function Profile({ onLogOut, onSave }) {
 	const {

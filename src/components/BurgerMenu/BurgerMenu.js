@@ -8,9 +8,8 @@ import burgerIconWhite from "../../images/burger-icon-white.svg";
 
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
-
-  const urlPath = useLocation();
-  const iconBurger = urlPath.pathname === "/" ? burgerIconWhite : burgerIconBlack;
+  const { pathname } = useLocation();
+  const iconBurger = pathname === "/" ? burgerIconWhite : burgerIconBlack;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
