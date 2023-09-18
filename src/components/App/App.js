@@ -152,7 +152,7 @@ function App() {
     <div className="app">
       <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
-          {shouldShowHeader && <Header isLoggedIn={isLoggedIn} />}
+          {shouldShowHeader && <Header />}
             <Routes>
             {!isLoggedIn && 
             <>

@@ -1,22 +1,22 @@
 import React from "react";
-
-import "./Header.css";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import { NavLink, useLocation } from "react-router-dom";
+import "./Header.css";
+
+import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 
-function Header({ isLoggedIn }) {
-  const url = useLocation();
 
-  const headerStyle =
-    url.pathname === "/movies" ||
-    url.pathname === "/saved-movies" ||
-    url.pathname === "/profile"
-      ? "header_movies-logged-in"
-      : "header_main-logged-in";
+function Header() {
+  const isUserLogin = localStorage.getItem('isUserLogin')
+  const { pathname } = useLocation();
+  const isLoggedInPaths = ["/profile", "/movies", "/saved-movies"];
+  const headerStyle = isLoggedInPaths.includes(pathname)
+    ? "header_movies-logged-in"
+    : "header_main-logged-in";
 
-  const profileMarkup = isLoggedIn ? (
+
+  const profileMarkup = isUserLogin ? (
     <NavLink to="/profile" className="header__button header__button_account">
       Аккаунт
     </NavLink>
@@ -32,12 +32,12 @@ function Header({ isLoggedIn }) {
   );
 
   return (
-    <header className={`header ${isLoggedIn ? headerStyle : ""}`}>
+    <header className={`header ${isUserLogin && headerStyle}`}>
       <div className="header__container">
         <Logo />
-        {isLoggedIn ? <Navigation /> : null}
+        {isUserLogin && <Navigation />}
         {profileMarkup}
-        {isLoggedIn ? <BurgerMenu /> : null}
+        {isUserLogin && <BurgerMenu />}
       </div>
     </header>
   );
