@@ -2,6 +2,7 @@
 	height: calc(100vh - 74px);
 	max-width: 1280px;
 	display: flex;
+	color: white;
 }
 
 .profile__container {
@@ -68,6 +69,7 @@
 	font-size: 13px;
 	font-weight: 400;
 	cursor: pointer;
+	color: white;
 }
 
 .profile__btn:hover {

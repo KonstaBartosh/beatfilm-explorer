@@ -5,6 +5,7 @@
 	background-color: inherit;
 	display: flex;
 	flex-direction: column;
+	color: white;
 }
 
 .auth-form__container {
@@ -24,8 +25,8 @@
 }
 
 .auth-form__input {
-	background-color: #F9F9F9;
-	color: black;
+	background-color: #2F2F2F;
+	color: white;
 	padding: 15px;
 	font-size: 13px;
 	font-weight: 400;
@@ -33,6 +34,7 @@
 	border: 0;
 	box-sizing: border-box;
 	border-radius: 8px;
+	outline: none;
 }
 
 .auth-form__input::placeholder {
@@ -83,7 +85,6 @@
 	padding-top: 40px;
 	font-size: 24px;
 	font-weight: 500;
-	color: black;
 	margin: 0;
 }
 

@@ -1,6 +1,5 @@
 .footer {
 	padding: 80px 70px 20px;
-	background-color: #FAFAFA;
 	display: flex;
 	flex-direction: column;
 }
@@ -8,6 +7,7 @@
 .footer__title, .footer__copyright, .footer__link {
 	margin: 0;
 	font-size: 13px;
+	color: white;
 }
 
 .footer__title {
@@ -17,7 +17,7 @@
 }
 
 .footer__title_underline {
-	border-bottom: 1px solid #E8E8E8;
+	border-bottom: 1px solid #424242;
 	padding-bottom: 20px;
 }
 
@@ -34,7 +34,6 @@
 }
 
 .footer__link {
-	color: black;
 	text-decoration: none;
 }
 

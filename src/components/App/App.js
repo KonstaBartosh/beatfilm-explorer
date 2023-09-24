@@ -145,7 +145,7 @@ function App() {
             <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
             </>
             }
-            <Route path="/" element={<Main />} />
+            {/* <Route path="/" element={<Main />} /> */}
             <Route
               path="/movies"
               element={

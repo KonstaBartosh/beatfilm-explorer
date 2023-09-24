@@ -1,6 +1,7 @@
 .notfound {
 	min-height: 100vh;
 	display: flex;
+	color: white;
 }
 
 .notfound__container{

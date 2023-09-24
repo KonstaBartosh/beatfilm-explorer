@@ -22,7 +22,8 @@
 
 .searchform__toggle-title {
 	font-size: 14px;
-	line-height: 18px; /* 128.571% */
+	line-height: 18px;
+	color: #A0A0A0;
 }
 
 .searchform__input, .searchform__button {
@@ -32,9 +33,11 @@
 
 .searchform__input {
 	width: 100%;
-	background-color: #F9F9F9;
+	color: white;
+	background-color: #2F2F2F;
 	padding: 22px 20px;
 	position: relative;
+	outline: none;
 }
 
 .searchform__input::placeholder {
@@ -68,7 +71,7 @@
 }
 
 .searchform__border-bottom {
-	border-bottom: 1px solid #E8E8E8;
+	border-bottom: 1px solid #424242;
 	padding-top: 70px;
 }
 

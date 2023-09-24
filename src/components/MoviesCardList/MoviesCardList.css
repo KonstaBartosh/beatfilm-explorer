@@ -14,7 +14,8 @@
 	max-width: 1140px;
 	border: 0;
 	border-radius: 6px;
-	background-color: #F9F9F9;
+	color: white;
+	background-color: #2F2F2F;
 	font-size: 12px;
 	cursor: pointer;
 }

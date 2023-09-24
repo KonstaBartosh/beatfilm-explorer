@@ -9,8 +9,8 @@
 }	
 
 .header.header_movies-logged-in {
-	color: black;
-	background-color: white;
+	color: white;
+	background-color: inherit;
 }	
 
 .header__container {
@@ -46,7 +46,8 @@
 .header__button_account {
 	border-radius: 20px;
 	font-size: 14px;
-	background-color: #F9F9F9;
+	color: #A0A0A0;
+	background-color: #2F2F2F;
 	width: 100px;
 }
 
