@@ -10,12 +10,9 @@ import SavedMovies from "../../pages/SavedMovies/SavedMovies";
 import Profile from "../../pages/Profile/Profile";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
-import Register from "../../pages/Register/Register";
-import Login from "../../pages/Login/Login";
 import NotFound from "../NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as api from "../../utils/MainApi.js";
-import * as moviesApi from "../../utils/MoviesApi";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
@@ -31,9 +28,6 @@ function App() {
   const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const [moviesList, setMoviesList] = useState([]);
-  const [isRequestError, setRequestError] = useState(false);
-  const [isLoading, setLoading] = useState(false);
   const validFooterPaths = ["/", "/movies", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
@@ -76,21 +70,6 @@ function App() {
         setCurrentUser(userData);
       })
       .catch(handleError);
-  }
-
-  //** получить фильмы из отдельной БД  */
-  function getMovies() {
-    moviesApi
-      .getMovies()
-      .then((data) => {
-        setLoading(false);
-        setMoviesList(data);
-      })
-      .catch(() => {
-        setLoading(false);
-        setRequestError(true);
-        handleError();
-    });
   }
 
   //** получить фильмы из избранного  */
@@ -175,11 +154,8 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   errorMessage={errorMessage}
                   setErrorMessage={setErrorMessage}
-                  isRequestError={isRequestError}
-                  isLoading={isLoading}
-                  moviesList={moviesList}
-                  getMovies={getMovies}
                   getUserMovies={getUserMovies}
+                  handleError={handleError}
                 />
               }
             />

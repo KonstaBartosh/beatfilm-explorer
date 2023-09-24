@@ -1,33 +1,47 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 
 import "./Movies.css";
+import * as moviesApi from "../../utils/MoviesApi";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList.js";
 import { ADD_MORE_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 
-function Movies({ 
-  isRequestError, 
-  isLoading, 
-  moviesList, 
-  getMovies, 
-  getUserMovies 
-}) {
-  const [filteredMovies, setFilteredMovies] = useState([]);
+function Movies({ getUserMovies, handleError }) {
+  const AllMovies = JSON.parse(localStorage.getItem("allMovies")) || [];
+  const [moviesList, setMoviesList] = useState(AllMovies || []);
+  const [filteredMovies, setFilteredMovies] = useState(AllMovies || []);
   const [isToggled, setIsToggled] = useState(false);
+  const [isRequestError, setRequestError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [displayCards, setDisplayCards] = useState(16);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
   const cardsToShow = filteredMovies.slice(0, displayCards);
-  const localStorageMovies = JSON.parse(localStorage.getItem("moviesList"));
+  const localStorageMovies = JSON.parse(localStorage.getItem("searchedList"));
   const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
   const localStorageQuery = localStorage.getItem("query");
   const [searchQuery, setSearchQuery] = useState(localStorageQuery || '');
   const localStorageIsToggled = localStorage.getItem("isToggled");
-
+  
   //** подгружаем БД всех фильмов  */
   useEffect(() => {
     if (moviesList.length === 0) {
-      getMovies();
+      setLoading(true);
+      
+      moviesApi
+        .getMovies()
+        .then((data) => {
+          setMoviesList(data);
+          setFilteredMovies(data);
+          localStorage.setItem("allMovies", JSON.stringify(data));
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
+          setRequestError(true);
+          handleError();
+      });
     }
   }, []);
 
@@ -102,7 +116,7 @@ function Movies({
 
     setFilteredMovies(filtered);
 
-    localStorage.setItem("moviesList", JSON.stringify(filtered));
+    localStorage.setItem("searchedList", JSON.stringify(filtered));
   }
 
   //** переключатель короткометражек */
