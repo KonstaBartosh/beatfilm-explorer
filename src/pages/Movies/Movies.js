@@ -9,21 +9,32 @@ import { ADD_MORE_CARDS, AMMOUNT_OF_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MO
 import { filterMovies } from "../../utils/filterMovies";
 
 function Movies({ getUserMovies, handleError }) {
-  const allMovies = JSON.parse(localStorage.getItem("allMovies")) || [];
-  const [moviesList, setMoviesList] = useState(allMovies || []);
-  const [filteredMovies, setFilteredMovies] = useState(allMovies || []);
+  //** чтение значений из localStorage */
+  const storageAllMovies = getFromLocalStorage("allMovies" || []);
+  const storageMovies = getFromLocalStorage("searchList");
+  const storageShortMovies = getFromLocalStorage("shortMovies");
+  const storageQuery = getFromLocalStorage("query", "");
+  const storageIsToggled = getFromLocalStorage("isToggled");
+  
+  const [moviesList, setMoviesList] = useState(storageAllMovies || []);
+  const [filteredMovies, setFilteredMovies] = useState(storageAllMovies || []);
+  const [searchQuery, setSearchQuery] = useState(storageQuery || '');
   const [isToggled, setIsToggled] = useState(false);
   const [isRequestError, setRequestError] = useState(false);
+  const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [displayCards, setDisplayCards] = useState(AMMOUNT_OF_CARDS);
-  const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
   const cardsToShow = filteredMovies.slice(0, displayCards);
-  const localStorageMovies = JSON.parse(localStorage.getItem("searchedList"));
-  const localStorageShortMovies = JSON.parse(localStorage.getItem("shortMovies"));
-  const localStorageQuery = localStorage.getItem("query");
-  const [searchQuery, setSearchQuery] = useState(localStorageQuery || '');
-  const localStorageIsToggled = localStorage.getItem("isToggled");
-  
+
+  function getFromLocalStorage(key, value = null) {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : value;
+  }
+
+  function setLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
   //** подгружаем БД всех фильмов  */
   useEffect(() => {
     if (moviesList.length === 0) {
@@ -34,7 +45,7 @@ function Movies({ getUserMovies, handleError }) {
         .then((data) => {
           setMoviesList(data);
           setFilteredMovies(data);
-          localStorage.setItem("allMovies", JSON.stringify(data));
+          setLocalStorage("allMovies", data);
           setLoading(false);
         })
         .catch(() => {
@@ -55,7 +66,7 @@ function Movies({ getUserMovies, handleError }) {
   useEffect(() => {
     setToggleState();
     handleLocalStorageData();
-  }, [localStorageIsToggled]);
+  }, [storageIsToggled]);
 
   //** изменение кол-ва карточек в зависимости от ширины экрана */
   useEffect(() => {
@@ -71,7 +82,7 @@ function Movies({ getUserMovies, handleError }) {
   }, [filteredMovies]);
   
   function setToggleState() {
-    if (localStorageIsToggled) {
+    if (storageIsToggled) {
       setIsToggled(true);
     } else {
       setIsToggled(false);
@@ -79,13 +90,13 @@ function Movies({ getUserMovies, handleError }) {
   }
 
   function handleLocalStorageData() {
-    if (localStorageMovies === null) {
+    if (storageMovies === null) {
       return;
     }
 
-    localStorageShortMovies 
-    ? setFilteredMovies(localStorageShortMovies)
-    : setFilteredMovies(localStorageMovies);
+    storageShortMovies 
+    ? setFilteredMovies(storageShortMovies)
+    : setFilteredMovies(storageMovies);
   }
 
   /** обновляет количество отображаемых карточек в зависимости от ширины экрана */
@@ -115,20 +126,20 @@ function Movies({ getUserMovies, handleError }) {
     }
 
     setFilteredMovies(filtered);
-
-    localStorage.setItem("searchedList", JSON.stringify(filtered));
+    setLocalStorage("searchList", filtered);
   }
 
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (isToggled === false) {
-      const shortMoviesList = filteredMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH);
+      const shortFilms = filteredMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH);
       setIsToggled(true);
-      localStorage.setItem('isToggled', true);
-      localStorage.setItem('shortMovies', JSON.stringify(shortMoviesList));
+      setLocalStorage("isToggled", true);
+      setLocalStorage("shortMovies", shortFilms);
+      setFilteredMovies(shortFilms)
     } else {
       setIsToggled(false);
-      setFilteredMovies(localStorageMovies);
+      setFilteredMovies(storageMovies || storageAllMovies);
       localStorage.removeItem('isToggled');
       localStorage.removeItem("shortMovies");
     }
@@ -138,7 +149,7 @@ function Movies({ getUserMovies, handleError }) {
   const handleSearchChange = (evt) => {
     const value = evt.target.value;
     setSearchQuery(value);
-    localStorage.setItem("query", value);
+    setLocalStorage("query", value);
   };
 
   //** добавление карточек из списка */
@@ -165,9 +176,8 @@ function Movies({ getUserMovies, handleError }) {
         <SearchForm
           onSearchClick={handleSearchMovies}
           handleSearchChange={handleSearchChange}
-          setFilteredMovies={setFilteredMovies}
           onToggle={handleToggleSwitch}
-          defaultValue={localStorageQuery}
+          defaultValue={storageQuery}
           isToggled={isToggled}
           searchQuery={searchQuery}
         />
