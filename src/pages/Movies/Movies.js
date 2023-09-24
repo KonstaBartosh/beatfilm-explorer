@@ -5,17 +5,17 @@ import "./Movies.css";
 import * as moviesApi from "../../utils/MoviesApi";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList.js";
-import { ADD_MORE_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
+import { ADD_MORE_CARDS, AMMOUNT_OF_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 
 function Movies({ getUserMovies, handleError }) {
-  const AllMovies = JSON.parse(localStorage.getItem("allMovies")) || [];
-  const [moviesList, setMoviesList] = useState(AllMovies || []);
-  const [filteredMovies, setFilteredMovies] = useState(AllMovies || []);
+  const allMovies = JSON.parse(localStorage.getItem("allMovies")) || [];
+  const [moviesList, setMoviesList] = useState(allMovies || []);
+  const [filteredMovies, setFilteredMovies] = useState(allMovies || []);
   const [isToggled, setIsToggled] = useState(false);
   const [isRequestError, setRequestError] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [displayCards, setDisplayCards] = useState(16);
+  const [displayCards, setDisplayCards] = useState(AMMOUNT_OF_CARDS);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
   const cardsToShow = filteredMovies.slice(0, displayCards);
   const localStorageMovies = JSON.parse(localStorage.getItem("searchedList"));
