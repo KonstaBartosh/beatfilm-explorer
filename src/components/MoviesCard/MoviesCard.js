@@ -13,7 +13,7 @@ function MoviesCard({ movie }) {
   const { nameRU, duration, image, trailerLink } = movie;
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);
-  const isMoviesPath = location.pathname === "/movies";
+  const isMoviesPath = location.pathname === "/";
   const picture = isMoviesPath ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
 
   //** стили для кнопки */
@@ -79,7 +79,7 @@ function MoviesCard({ movie }) {
       <div className="card__header">
         <div className="card__header-wrapper">
           <h2 className="card__title">{nameRU}</h2>
-            <button className={buttonClassName} type="submit" onClick={toggleLike}>
+            <button className={buttonClassName} type="submit" onClick={toggleLike} >
               {buttonText}
             </button>
         </div>

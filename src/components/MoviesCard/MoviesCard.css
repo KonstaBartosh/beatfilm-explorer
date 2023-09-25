@@ -54,7 +54,7 @@
 }
 
 .card__like_active {
-	background-color: #2BE080;
+	background-color: #EE3465;
 }
 
 .card__btn:hover {
@@ -62,9 +62,9 @@
 }
 
 .card__like_rm {
-	background-color: white;
-	color: black;
+	color: white;
 	border: 0;
+	font-size: large;
 }
 
 .card__title {
