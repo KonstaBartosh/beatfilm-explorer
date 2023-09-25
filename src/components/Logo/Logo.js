@@ -1,7 +1,7 @@
 import React from "react";
 
 import './Logo.css';
-import logo from '../../images/logo.svg';
+import logo from '../../images/beat-logo.svg';
 import { NavLink } from "react-router-dom";
 
 export default function Logo() {
