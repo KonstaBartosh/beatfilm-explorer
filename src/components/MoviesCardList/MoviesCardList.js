@@ -3,7 +3,6 @@ import React from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
-import { useLocation } from "react-router-dom";
 import { MOVIES_NOT_FOUND_MESSAGE, MOVIES_SERVER_ERR_MESSAGE } from "../../utils/constants";
 
 function MoviesCardList({
@@ -14,8 +13,6 @@ function MoviesCardList({
   cards,
   isMoviesNotFound,
 }) {
-  const location = useLocation();
-  const moviesPageLocation = location.pathname === "/movies";
   const handleMoviesNotFound = isMoviesNotFound ? MOVIES_NOT_FOUND_MESSAGE : '';
 
 
@@ -35,12 +32,10 @@ function MoviesCardList({
         )
         }
       </section>
-
-      {moviesPageLocation && arrayList.length > cards.length && (
-        <button onClick={onAddMore} className="movies-card-list__button">
-          Еще
-        </button>
-      )}
+      {arrayList.length > cards.length && 
+      <button onClick={onAddMore} className="movies-card-list__button">
+        Еще
+      </button>}
     </>
   );
 }
