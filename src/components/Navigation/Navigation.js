@@ -6,7 +6,7 @@ function Navigation() {
   return (
     <nav className="navigation">
       <div className="navigation__movies">
-        <NavLink to="/movies" className="navigation__movies-link">
+        <NavLink to="/" className="navigation__movies-link">
           Фильмы
         </NavLink>
         <NavLink to="/saved-movies" className="navigation__movies-link">

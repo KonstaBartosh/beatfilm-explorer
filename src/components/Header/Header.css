@@ -1,17 +1,8 @@
 .header {
 	max-width: 1280px;
 	height: 74px;
-	background-color: #465DFF;
+	color: white;
 }
-
-.header.header_main-logged-in {
-	color: white;
-}	
-
-.header.header_movies-logged-in {
-	color: white;
-	background-color: inherit;
-}	
 
 .header__container {
 	display: flex;
@@ -52,7 +43,7 @@
 }
 
 .header__button_logout {
-	background-color: #2BE080;
+	background-color: #f1eb53;
 	border-radius: 3px;
 }
 

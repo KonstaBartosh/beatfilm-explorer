@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Header.css";
 
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
@@ -9,12 +9,6 @@ import Navigation from "../Navigation/Navigation";
 
 function Header() {
   const isUserLogin = localStorage.getItem('isUserLogin')
-  const { pathname } = useLocation();
-  const isLoggedInPaths = ["/profile", "/movies", "/saved-movies"];
-  const headerStyle = isLoggedInPaths.includes(pathname)
-    ? "header_movies-logged-in"
-    : "header_main-logged-in";
-
 
   const profileMarkup = isUserLogin ? (
     <NavLink to="/profile" className="header__button header__button_account">
@@ -32,7 +26,7 @@ function Header() {
   );
 
   return (
-    <header className={`header ${isUserLogin && headerStyle}`}>
+    <header className="header">
       <div className="header__container">
         <Logo />
         {isUserLogin && <Navigation />}

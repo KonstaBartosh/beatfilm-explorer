@@ -58,7 +58,11 @@ function Movies({ getUserMovies, handleError }) {
 
   //** подгружаем БД избранных фильмов для отображения лайков */
   useEffect(() => {
-    getUserMovies();
+    const isUserLogin = getFromLocalStorage("isUserLogin");
+    
+    if (isUserLogin) {
+      getUserMovies();
+    }
   }, []);
 
   //** обновляем состояние isToggled из localStorage  */
