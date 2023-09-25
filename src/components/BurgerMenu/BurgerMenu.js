@@ -3,30 +3,22 @@ import { NavLink, useLocation } from "react-router-dom";
 
 import "./BurgerMenu.css";
 import closeIcon from "../../images/close_icon.svg";
-import burgerIconBlack from "../../images/icon_burger.svg";
-import burgerIconWhite from "../../images/burger-icon-white.svg";
+import burgerIcon from "../../images/burger-icon-white.svg";
 
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
-  const { pathname } = useLocation();
-  const iconBurger = pathname === "/" ? burgerIconWhite : burgerIconBlack;
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <div className={`burger-menu ${isOpen ? "open" : ""}`}>
+    <div className={`burger-menu ${isOpen && "open"}`}>
       <button className="burger__button">
-        <img
-        onClick={toggleMenu}
-        src={iconBurger}
-        alt="меню"
-      />
+        <img onClick={toggleMenu} src={burgerIcon} alt="меню" />
       </button>
-
       <div
-        className={`burger-menu__overlay ${isOpen ? "open" : ""}`}
+        className={`burger-menu__overlay ${isOpen && "open"}`}
         onClick={toggleMenu}
       />
       <nav className="burger-menu__container">
