@@ -192,6 +192,7 @@ function Movies({ getUserMovies, handleError }) {
           onAddMore={handleAddMoreCards}
           cards={cardsToShow}
           isMoviesNotFound={isMoviesNotFound}
+          handleError={handleError}
         />
     </section>
   );

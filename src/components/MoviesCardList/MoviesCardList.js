@@ -12,6 +12,7 @@ function MoviesCardList({
   onAddMore,
   cards,
   isMoviesNotFound,
+  handleError
 }) {
   const handleMoviesNotFound = isMoviesNotFound ? MOVIES_NOT_FOUND_MESSAGE : '';
 
@@ -23,7 +24,7 @@ function MoviesCardList({
       <section className="movies-card-list">
         {cards.length > 0 ? (
           cards.map((movie) => {
-            return <MoviesCard key={movie.nameRU} movie={movie} />;
+            return <MoviesCard key={movie.nameRU} movie={movie} handleError={handleError}/>;
           })
         ) : (
           <p className="movies-card-list__message">

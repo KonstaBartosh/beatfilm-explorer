@@ -7,7 +7,7 @@ import { URL_MOVIE_SERVER } from "../../utils/constants";
 import { UserMoviesContext } from "../../context/context";
 
 
-function MoviesCard({ movie }) {
+function MoviesCard({ movie, handleError }) {
   const location = useLocation();
   const { userMovies, setUserMovies } = useContext(UserMoviesContext);
   const { nameRU, duration, image, trailerLink } = movie;
@@ -28,9 +28,12 @@ function MoviesCard({ movie }) {
   
   // есть ли фильм в списке лайкнутых => установить начальное состояние isLiked
   useEffect(() => {
-    setIsLiked(
+    if (localStorage.getItem("isUserLogin")) {
+      setIsLiked(
       userMovies.some((userMovie) => userMovie.nameRU === movie.nameRU)
     );
+    }
+
   }, [userMovies, movie.nameRU]);
 
   function formatTime(duration) {
@@ -57,7 +60,7 @@ function MoviesCard({ movie }) {
         //** добавляем фильм в userMovies после сохранения */
         setUserMovies([...userMovies, movie]);
       })
-      .catch((err) => console.error(`Возникла ошибка ${err.message}`));
+      .catch(handleError);
   }
   
   function handleRemoveMovie(movieToRemove) {
@@ -67,7 +70,7 @@ function MoviesCard({ movie }) {
         setIsLiked(false);
         setUserMovies(userMovies.filter((userMovie) => userMovie._id !== movieToRemove._id));
       })
-      .catch((err) => console.error(`Возникла ошибка ${err.message}`));
+      .catch(handleError);
   }
   
 
