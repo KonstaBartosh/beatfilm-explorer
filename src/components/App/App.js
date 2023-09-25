@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import Header from "../Header/Header";
-import Main from "../../pages/Main/Main";
 import Footer from "../Footer/Footer";
 import Movies from "../../pages/Movies/Movies";
 import SavedMovies from "../../pages/SavedMovies/SavedMovies";
@@ -16,7 +16,6 @@ import * as api from "../../utils/MainApi.js";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
-
 
 function App() {
   const location = useLocation();
@@ -41,13 +40,13 @@ function App() {
     if (isLoggedIn) {
       getUserData();
     }
-  }, [isLoggedIn]); 
+  }, [isLoggedIn]);
 
   const handleError = (err) => {
     setErrorMessage(err);
     setIsInfoPopupOpen(true);
-  }
-  
+  };
+
   //** проверка валидности токена */
   function handleTokenCheck() {
     const token = localStorage.getItem("token");
@@ -99,7 +98,7 @@ function App() {
       .then((data) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("isUserLogin", true);
-        navigate("/movies");
+        navigate("/");
         setLoggedIn(true);
       })
       .catch(handleError);
@@ -128,44 +127,47 @@ function App() {
 
   const handleClosePopup = () => {
     setIsInfoPopupOpen(false);
-  }
+  };
 
   return (
     <div className="app">
       <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
         <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           {shouldShowHeader && <Header />}
-            <Routes>
-            {!isLoggedIn && 
-            <>
+          <Routes>
             <Route
-              path="/sign-up"
-              element={<Register onRegister={handleRegister} isRegistered={isRegistered} />}
-            />
-            <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
-            </>
-            }
-            {/* <Route path="/" element={<Main />} /> */}
-            <Route
-              path="/movies"
+              path="/"
               element={
-                <ProtectedRoute
-                  element={Movies}
+                <Movies
                   isLoggedIn={isLoggedIn}
                   errorMessage={errorMessage}
                   setErrorMessage={setErrorMessage}
                   getUserMovies={getUserMovies}
                   handleError={handleError}
                 />
-              }
+            }
             />
+            {!isLoggedIn && (
+              <>
+                <Route
+                  path="/sign-up"
+                  element={
+                    <Register onRegister={handleRegister} isRegistered={isRegistered} />
+                  }
+                />
+                <Route
+                  path="/sign-in"
+                  element={<Login onLogin={handleLogin} />}
+                />
+              </>
+            )}
             <Route
               path="/saved-movies"
               element={
                 <ProtectedRoute
                   element={SavedMovies}
                   isLoggedIn={isLoggedIn}
-                  getUserMovies={getUserMovies} 
+                  getUserMovies={getUserMovies}
                 />
               }
             />
