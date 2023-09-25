@@ -10,12 +10,6 @@ export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
 export const SHORT_MOVIE_LENGTH = 40;
 export const AMMOUNT_OF_CARDS = 16;
 
-export const SAMPLE_WORK = {
-  ONE: "https://konstabartosh.github.io/how-to-learn/",
-  TWO: "https://konstabartosh.github.io/russian-travel/",
-  THREE: "https://konstabartosh.github.io/mesto-react-auth/#/sign-in",
-};
-
 export const SCREEN_WIDTH = {
   LARGE: 1280,
   TABLET: 989,
