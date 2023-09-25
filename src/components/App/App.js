@@ -15,7 +15,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as api from "../../utils/MainApi.js";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { SUCCES_REGISTRATION_MESSAGE, SIGN_IN_MESSAGE } from "../../utils/constants";
+import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 
 function App() {
   const location = useLocation();

@@ -34,10 +34,10 @@ export default function Register({ onRegister }) {
         placeholder={"Имя"}
         register={register}
         errors={errors}
+        autoComplete={"name"}
       />
 
       <EmailInput
-        type={"email"}
         title={"email"}
         label={"E-mail"}
         placeholder={"E-mail"}
@@ -46,12 +46,12 @@ export default function Register({ onRegister }) {
       />
 
       <PasswordInput
-        type={"password"}
         title={"password"}
         label={"Пароль"}
         placeholder={"Пароль"}
         register={register}
         errors={errors}
+        autoComplete={"new-password"}
       />
     </AuthForm>
   );

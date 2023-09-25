@@ -27,7 +27,6 @@ export default function Login({ onLogin }) {
       isValid={isValid}
     >
       <EmailInput
-        type={"email"}
         title={"email"}
         label={"E-mail"}
         placeholder={"E-mail"}
@@ -35,12 +34,12 @@ export default function Login({ onLogin }) {
         errors={errors}
       />
       <PasswordInput
-        type={"password"}
         title={"password"}
         label={"Пароль"}
         placeholder={"Пароль"}
         register={register}
         errors={errors}
+        autoComplete={"current-password"}
       />
     </AuthForm>
   );

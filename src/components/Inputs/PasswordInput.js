@@ -1,34 +1,51 @@
-import "../AuthForm/AuthForm.css";
+import { useState } from "react";
+import "./Input.css"
 
 export default function PasswordInput({
-  type,
   title,
   label,
   register,
   errors,
   placeholder,
   defaultValue,
+  autoComplete
 }) {
+  const [iShowPassword, setShowPassword] = useState(false);
+  
+  const toggleShowPassword = () => {
+    setShowPassword(!iShowPassword);
+  }
 
   return (
     <>
-      <label className="auth-form__label">{label}</label>
-      <input
-        {...register("password", {
-          required: "Заполните это поле.",
-          minLength: {
-            value: 5,
-            message: "Минимум 5 символов",
-          },
-          maxLength: 40,
-        })}
-        id={`${title}-input`}
-        type={type}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
-        className="auth-form__input"
-      />
-      <span className="auth-form__error-message auth-form__error-message_active">
+      <label className="label">{label}</label>
+      <div className="input-wrap">
+        <input
+          {...register("password", {
+            required: "Заполните это поле.",
+            minLength: {
+              value: 5,
+              message: "Минимум 5 символов",
+            },
+            maxLength: 40,
+          })}
+          id={`${title}-input`}
+          type={iShowPassword ? 'text' : 'password'}
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          autoComplete={autoComplete}
+          className="input"
+        />
+        <button
+          className="show-password-button"
+          type="button"
+          onClick={toggleShowPassword}
+          >
+            🔑
+        </button>
+      </div>
+
+      <span className="error-message error-message_active">
         {errors?.[title] && <div>{errors?.[title]?.message}</div>}
       </span>
     </>

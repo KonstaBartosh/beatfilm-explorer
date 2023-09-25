@@ -1,4 +1,4 @@
-import "../AuthForm/AuthForm.css";
+import "./Input.css"
 import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../utils/constants";
 
 export default function EmailInput({
@@ -13,7 +13,7 @@ export default function EmailInput({
 
   return (
     <>
-      <label className="auth-form__label">{label}</label>
+      <label className="label">{label}</label>
       <input
         {...register("email", {
           required: "Заполните это поле.",
@@ -31,12 +31,13 @@ export default function EmailInput({
           },
         })}
         id={`${title}-input`}
-        type={type}
+        type='email'
         placeholder={placeholder}
         defaultValue={defaultValue}
-        className="auth-form__input"
+        className="input"
+        autoComplete="email"
       />
-      <span className="auth-form__error-message auth-form__error-message_active">
+      <span className="error-message error-message_active">
         {errors?.[title] && <div>{errors?.[title]?.message}</div>}
       </span>
     </>

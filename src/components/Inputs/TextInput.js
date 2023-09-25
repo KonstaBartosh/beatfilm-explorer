@@ -1,4 +1,4 @@
-import "../AuthForm/AuthForm.css";
+import "./Input.css"
 
 export default function TextInput({
   type,
@@ -8,12 +8,13 @@ export default function TextInput({
   errors,
   placeholder,
   defaultValue,
+  autoComplete
 }) {
   const namePattern = /^[a-zA-Zа-яА-Я\s-]*$/;
 
   return (
     <>
-      <label className="auth-form__label">{label}</label>
+      <label className="label">{label}</label>
       <input
         {...register(title, {
           required: "Заполните это поле.",
@@ -31,9 +32,10 @@ export default function TextInput({
         type={type}
         placeholder={placeholder}
         defaultValue={defaultValue}
-        className="auth-form__input"
+        className="input"
+        autoComplete={autoComplete}
       />
-      <span className="auth-form__error-message auth-form__error-message_active">
+      <span className="error-message error-message_active">
         {errors?.[title] && <div>{errors?.[title]?.message}</div>}
       </span>
     </>
