@@ -1,12 +1,13 @@
 import React from "react";
 
 import "./Footer.css";
+import { FOOTER_TITLE } from "../../utils/constants";
 
 export default function Footer() {
   return (
     <footer className="footer">
       <p className="footer__title footer__title_underline">
-        Учебный проект Яндекс.Практикум х BeatFilm.
+        {FOOTER_TITLE}
       </p>
       <div className="footer__container">
         <p className="footer__copyright">&#64; {new Date().getFullYear()}</p>

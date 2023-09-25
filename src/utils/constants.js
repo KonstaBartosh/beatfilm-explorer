@@ -4,6 +4,8 @@ export const SUCCES_REGISTRATION_MESSAGE = "Вы успешно зарегист
 export const INVALID_EMAIL_MESSAGE = `Адрес электронной почты должен содержать символ ' @ ' и минимум 2 символа для домена`;
 export const MOVIES_NOT_FOUND_MESSAGE = "Ничего не найдено";
 export const MOVIES_SERVER_ERR_MESSAGE = `Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз`;
+export const FOOTER_TITLE = "Beat Film Festival — международный фестиваль документального кино о новой культуре"
+
 export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/i;
 export const SHORT_MOVIE_LENGTH = 40;
 export const AMMOUNT_OF_CARDS = 16;
