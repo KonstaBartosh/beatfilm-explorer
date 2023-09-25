@@ -28,7 +28,7 @@
 
 .searchform__input, .searchform__button {
 	border: 0;
-	border-radius: 40px;
+	border-radius: 2px;
 }
 
 .searchform__input {
