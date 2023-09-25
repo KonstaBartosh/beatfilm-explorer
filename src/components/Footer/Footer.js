@@ -13,11 +13,11 @@ export default function Footer() {
         <nav className="footer__nav">
           <a
             className="footer__link"
-            href="https://practicum.yandex.ru/"
+            href="https://beatfilmfestival.ru/"
             target="_blank"
             rel="noreferrer noopener"
           >
-            Яндекс.Практикум
+            BeatFilm Festival
           </a>
           <a
             className="footer__link"
