@@ -12,7 +12,7 @@ function MoviesCardList({
   onAddMore,
   cards,
   isMoviesNotFound,
-  handleError
+  handleError,
 }) {
   const handleMoviesNotFound = isMoviesNotFound ? MOVIES_NOT_FOUND_MESSAGE : '';
 

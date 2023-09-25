@@ -15,7 +15,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as api from "../../utils/MainApi.js";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
+import { SUCCES_REGISTRATION_MESSAGE, SIGN_IN_MESSAGE } from "../../utils/constants";
 
 function App() {
   const location = useLocation();
@@ -27,7 +27,7 @@ function App() {
   const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
-  const validFooterPaths = ["/", "/movies", "/saved-movies"];
+  const validFooterPaths = ["/", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
   const shouldShowHeader = validHeaderPaths.includes(location.pathname);
   const shouldShowFooter = validFooterPaths.includes(location.pathname);
@@ -42,8 +42,8 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  const handleError = (err) => {
-    setErrorMessage(err);
+  const handleError = (message) => {
+    setErrorMessage(message);
     setIsInfoPopupOpen(true);
   };
 
@@ -57,7 +57,7 @@ function App() {
         .then(() => {
           setLoggedIn(true);
         })
-        .catch(handleError);
+        .catch((err) => handleError(err));
     }
   }
 
@@ -68,7 +68,7 @@ function App() {
       .then((userData) => {
         setCurrentUser(userData);
       })
-      .catch(handleError);
+      .catch((err) => handleError(err));
   }
 
   //** получить фильмы из избранного  */
@@ -78,7 +78,7 @@ function App() {
       .then((data) => {
         setUserMovies(data);
       })
-      .catch(handleError);
+      .catch((err) => handleError(err));
   }
 
   function handleRegister({ name, email, password }) {
@@ -89,7 +89,7 @@ function App() {
         setIsRegistered(true);
         openSuccesPopup(SUCCES_REGISTRATION_MESSAGE);
       })
-      .catch(handleError);
+      .catch((err) => handleError(err));
   }
 
   function handleLogin({ email, password }) {
@@ -101,7 +101,7 @@ function App() {
         navigate("/");
         setLoggedIn(true);
       })
-      .catch(handleError);
+      .catch((err) => handleError(err));
   }
 
   function handleLogout() {
@@ -114,7 +114,7 @@ function App() {
     api
       .changeUserData({ name, email })
       .then((data) => setCurrentUser(data))
-      .catch(handleError);
+      .catch((err) => handleError(err));
   }
 
   function openSuccesPopup(message) {

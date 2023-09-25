@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import "./MoviesCard.css";
 import * as api from "../../utils/MainApi";
-import { URL_MOVIE_SERVER } from "../../utils/constants";
+import { SIGN_IN_MESSAGE, URL_MOVIE_SERVER } from "../../utils/constants";
 import { UserMoviesContext } from "../../context/context";
 
 
@@ -60,7 +60,7 @@ function MoviesCard({ movie, handleError }) {
         //** добавляем фильм в userMovies после сохранения */
         setUserMovies([...userMovies, movie]);
       })
-      .catch(handleError);
+      .catch(() => handleError(SIGN_IN_MESSAGE));
   }
   
   function handleRemoveMovie(movieToRemove) {
@@ -70,7 +70,7 @@ function MoviesCard({ movie, handleError }) {
         setIsLiked(false);
         setUserMovies(userMovies.filter((userMovie) => userMovie._id !== movieToRemove._id));
       })
-      .catch(handleError);
+      .catch((err) => handleError(err));
   }
   
 
