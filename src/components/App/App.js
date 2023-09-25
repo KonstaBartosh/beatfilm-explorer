@@ -10,7 +10,7 @@ import SavedMovies from "../../pages/SavedMovies/SavedMovies";
 import Profile from "../../pages/Profile/Profile";
 import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
-import NotFound from "../NotFound/NotFound";
+import NotFound from "../../pages/NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import * as api from "../../utils/MainApi.js";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
