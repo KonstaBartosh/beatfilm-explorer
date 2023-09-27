@@ -1,11 +1,10 @@
 import React from "react";
 
-import "../InfoTooltip/InfoTooltip.css";
+import "../popups/popup.css";
 import successLogo from "../../images/registration-success.svg";
 import deniedLogo from "../../images/registration-denied.svg";
 
 function InfoTooltip({
-  name,
   isOpen,
   onClose,
   condition,

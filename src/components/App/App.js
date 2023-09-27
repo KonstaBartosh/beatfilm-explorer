@@ -12,9 +12,9 @@ import Login from "../../pages/Login/Login";
 import Register from "../../pages/Register/Register";
 import NotFound from "../../pages/NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import InfoToolTip from "../popups/InfoTooltip";
 import * as api from "../../utils/MainApi.js";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 
 function App() {
@@ -187,7 +187,7 @@ function App() {
           {shouldShowFooter && <Footer />}
         </CurrentUserContext.Provider>
       </UserMoviesContext.Provider>
-      <InfoTooltip
+      <InfoToolTip
         isOpen={isInfoPopupOpen}
         onClose={handleClosePopup}
         condition={isRegistered}
