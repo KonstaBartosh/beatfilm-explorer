@@ -31,7 +31,7 @@
 	position: relative;
 }
 
-.popup__title_infotooltip {
+.popup__title {
 	margin: 0;
 	font-style: normal;
 	font-weight: 900;
@@ -41,7 +41,7 @@
 	text-align: center;
 }
 
-.popup__image_infotooltip {
+.popup__image {
 	width: 120px;
 	height: 120px;
 	align-self: center;
