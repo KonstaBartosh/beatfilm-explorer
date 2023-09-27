@@ -1,5 +1,7 @@
 import { useState } from "react";
-import "./Input.css"
+
+import "./Input.css";
+import icon from '../../images/eye_icon.svg';
 
 export default function PasswordInput({
   title,
@@ -41,7 +43,7 @@ export default function PasswordInput({
           type="button"
           onClick={toggleShowPassword}
           >
-            🔑
+            <img src={icon} alt="Показать пароль" />
         </button>
       </div>
 
