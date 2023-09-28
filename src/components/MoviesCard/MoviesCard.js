@@ -5,14 +5,17 @@ import "./MoviesCard.css";
 import * as api from "../../utils/MainApi";
 import { SIGN_IN_MESSAGE, URL_MOVIE_SERVER } from "../../utils/constants";
 import { UserMoviesContext } from "../../context/context";
+import { useMovieContext } from "../../context/MovieContext";
 
 
 function MoviesCard({ movie, handleError }) {
   const location = useLocation();
   const { userMovies, setUserMovies } = useContext(UserMoviesContext);
-  const { nameRU, duration, image, trailerLink } = movie;
+  const { openMoviePopup } = useMovieContext();
+  const { nameRU, duration, image } = movie;
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);
+
   const isMoviesPath = location.pathname === "/";
   const picture = isMoviesPath ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
 
@@ -72,13 +75,14 @@ function MoviesCard({ movie, handleError }) {
       })
       .catch((err) => handleError(err));
   }
-  
+
+  function handleMoviePopup() {
+    openMoviePopup(movie);
+  }
 
   return (
     <div className="card">
-      <a href={trailerLink} target="_blank" rel="noreferrer">
-        <img src={picture} alt={nameRU} className="card__image" />
-      </a>
+      <img src={picture} alt={nameRU} className="card__image" onClick={handleMoviePopup}/>
       <div className="card__header">
         <div className="card__header-wrapper">
           <h2 className="card__title">{nameRU}</h2>

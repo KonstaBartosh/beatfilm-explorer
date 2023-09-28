@@ -13,6 +13,7 @@ import Register from "../../pages/Register/Register";
 import NotFound from "../../pages/NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoToolTip from "../popups/InfoTooltip";
+import MoviePopup from "../popups/MoviePopup";
 import * as api from "../../utils/MainApi.js";
 import { CurrentUserContext, UserMoviesContext } from "../../context/context";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
@@ -26,6 +27,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
+  const [isMoviePopupOpen, setIsMoviePopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const validFooterPaths = ["/", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
@@ -125,9 +127,10 @@ function App() {
     }, 3000);
   }
 
-  const handleClosePopup = () => {
+  const handleClosePopups = () => {
     setIsInfoPopupOpen(false);
-  };
+    setIsMoviePopupOpen(false);
+  }
 
   return (
     <div className="app">
@@ -139,9 +142,6 @@ function App() {
               path="/"
               element={
                 <Movies
-                  isLoggedIn={isLoggedIn}
-                  errorMessage={errorMessage}
-                  setErrorMessage={setErrorMessage}
                   getUserMovies={getUserMovies}
                   handleError={handleError}
                 />
@@ -189,10 +189,14 @@ function App() {
       </UserMoviesContext.Provider>
       <InfoToolTip
         isOpen={isInfoPopupOpen}
-        onClose={handleClosePopup}
+        onClose={handleClosePopups}
         condition={isRegistered}
         successTitle={succesMessage}
         deniedTitle={errorMessage}
+      />
+      <MoviePopup
+        isOpen={isMoviePopupOpen}
+        onClose={handleClosePopups}
       />
     </div>
   );

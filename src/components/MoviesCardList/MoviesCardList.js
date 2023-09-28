@@ -16,25 +16,30 @@ function MoviesCardList({
 }) {
   const handleMoviesNotFound = isMoviesNotFound ? MOVIES_NOT_FOUND_MESSAGE : '';
 
-  return isLoading ? (
-    <Preloader />
-  ) : (
+  return isLoading 
+  ? ( <Preloader />) 
+  : (
     <>
       <section className="movies-card-list">
-        {cards.length > 0
-          // eslint-disable-next-line max-len
-          ? (cards.map((movie) => <MoviesCard key={movie.nameRU} movie={movie} handleError={handleError} />)
-          ) : (
+        {cards.length > 0 
+        ? (cards.map((movie) => (
+            <MoviesCard
+              key={movie.nameRU}
+              movie={movie}
+              handleError={handleError}
+            />
+          ))) 
+        : (
           <p className="movies-card-list__message">
             {isRequestError ? MOVIES_SERVER_ERR_MESSAGE : handleMoviesNotFound}
           </p>
-          )
-        }
+        )}
       </section>
-      {arrayList.length > cards.length
-      && <button onClick={onAddMore} className="movies-card-list__button">
-        Еще
-      </button>}
+      {arrayList.length > cards.length && (
+        <button onClick={onAddMore} className="movies-card-list__button">
+          Еще
+        </button>
+      )}
     </>
   );
 }
