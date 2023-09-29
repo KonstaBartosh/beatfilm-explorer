@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
@@ -15,14 +15,16 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoToolTip from "../popups/InfoTooltip";
 import MoviePopup from "../popups/MoviePopup";
 import * as api from "../../utils/MainApi.js";
-import { CurrentUserContext, UserMoviesContext } from "../../context/context";
+import { UserMoviesContext } from "../../context/context";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  // const [currentUser, setCurrentUser] = useState({});
+  const { setCurrentUser } = useContext(CurrentUserContext);
   const [succesMessage, setSuccesMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [userMovies, setUserMovies] = useState([]);
@@ -135,7 +137,7 @@ function App() {
   return (
     <div className="app">
       <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
-        <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+        {/* <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}> */}
           {shouldShowHeader && <Header />}
           <Routes>
             <Route
@@ -185,7 +187,7 @@ function App() {
             <Route path="/*" element={<NotFound />} />
           </Routes>
           {shouldShowFooter && <Footer />}
-        </CurrentUserContext.Provider>
+        {/* </CurrentUserContext.Provider> */}
       </UserMoviesContext.Provider>
       <InfoToolTip
         isOpen={isInfoPopupOpen}

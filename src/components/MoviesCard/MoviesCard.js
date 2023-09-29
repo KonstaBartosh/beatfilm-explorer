@@ -5,13 +5,13 @@ import "./MoviesCard.css";
 import * as api from "../../utils/MainApi";
 import { SIGN_IN_MESSAGE, URL_MOVIE_SERVER } from "../../utils/constants";
 import { UserMoviesContext } from "../../context/context";
-import { useMovieContext } from "../../context/MovieContext";
+import { MovieContext, useMovieContext } from "../../context/MovieContext";
 
 
 function MoviesCard({ movie, handleError }) {
   const location = useLocation();
   const { userMovies, setUserMovies } = useContext(UserMoviesContext);
-  const { openMoviePopup } = useMovieContext();
+  const { openMoviePopup } = useContext(MovieContext);
   const { nameRU, duration, image } = movie;
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);

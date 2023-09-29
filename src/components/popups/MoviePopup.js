@@ -1,15 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "../popups/popup.css";
-import { useMovieContext } from "../../context/MovieContext";
+import { MovieContext, useMovieContext } from "../../context/MovieContext";
 import { URL_MOVIE_SERVER } from "../../utils/constants";
 import { useLocation } from "react-router-dom";
 
 function MoviePopup({ handleOverlayClick }) {
-  const { selectedMovie, closeMoviePopup } = useMovieContext();
-  const location = useLocation();
-  const isMoviesPath = location.pathname === "/";
-
+  const { selectedMovie, closeMoviePopup } = useContext(MovieContext);
+  const { pathname } = useLocation();
 
   return (
     selectedMovie && (
@@ -22,7 +20,7 @@ function MoviePopup({ handleOverlayClick }) {
           <img 
             className="popup__image-movie"
             alt={selectedMovie.nameRU} 
-            src={ isMoviesPath
+            src={ pathname === "/"
               ? `${URL_MOVIE_SERVER}${selectedMovie.image.url}`
               : selectedMovie.image.url
             } 

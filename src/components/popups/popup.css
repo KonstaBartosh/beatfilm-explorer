@@ -132,15 +132,21 @@
 	color: black;
 }
 
-
-@media screen and (max-width: 540px) {
-	.popup__title_infotooltip {
-			font-size: 18px;
-			line-height: 22px;
+@media screen and (max-width: 768px) {
+	.popup__close-button {
+		background-image: url(../../images/close_icon.svg);
+		right: 15px;
+		top: 15px;
 	}
 }
 
 @media screen and (max-width: 540px) {
+	.popup__container {
+		max-width: 282px;
+		height: 500px;
+		padding: 25px 22px;
+	}
+
 	.popup__text {
 		font-size: 11px;
 	}
@@ -151,6 +157,11 @@
 		line-height: normal;
 	}
 
+	.popup__title_infotooltip {
+		font-size: 18px;
+		line-height: 22px;
+	}
+
 	.popup__thumbnail-wrap {
 		flex-direction: column;
 		gap: 10px;
@@ -158,19 +169,5 @@
 
 	.popup__header-wrap {
 		gap: 20px;
-	}
-}
-
-@media screen and (max-width: 540px) {
-	.popup__container {
-			max-width: 282px;
-			height: 500px;
-			padding: 25px 22px;
-	}
-
-	.popup__close-button {
-		background-image: url(../../images/close_icon.svg);
-		right: 15px;
-		top: 15px;
 	}
 }
