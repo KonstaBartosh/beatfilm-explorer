@@ -20,20 +20,21 @@ import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 
 function App() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setUserMovies } = useContext(UserMoviesContext);
+  const { pathname } = useLocation();
+  const [isLoggedIn, setLoggedIn] = useState(false);
   const [succesMessage, setSuccesMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isMoviePopupOpen, setIsMoviePopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+
   const validFooterPaths = ["/", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
-  const shouldShowHeader = validHeaderPaths.includes(location.pathname);
-  const shouldShowFooter = validFooterPaths.includes(location.pathname);
+  const shouldShowHeader = validHeaderPaths.includes(pathname);
+  const shouldShowFooter = validFooterPaths.includes(pathname);
 
   useEffect(() => {
     handleTokenCheck();
@@ -131,7 +132,7 @@ function App() {
   const handleClosePopups = () => {
     setIsInfoPopupOpen(false);
     setIsMoviePopupOpen(false);
-  }
+  };
 
   return (
     <div className="app">
@@ -140,24 +141,21 @@ function App() {
         <Route
           path="/"
           element={
-            <Movies
-              getUserMovies={getUserMovies}
-              handleError={handleError}
-            />
-        }
+            <Movies getUserMovies={getUserMovies} handleError={handleError} />
+          }
         />
         {!isLoggedIn && (
           <>
             <Route
               path="/sign-up"
               element={
-                <Register onRegister={handleRegister} isRegistered={isRegistered} />
+                <Register
+                  onRegister={handleRegister}
+                  isRegistered={isRegistered}
+                />
               }
             />
-            <Route
-              path="/sign-in"
-              element={<Login onLogin={handleLogin} />}
-            />
+            <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
           </>
         )}
         <Route
@@ -191,10 +189,7 @@ function App() {
         successTitle={succesMessage}
         deniedTitle={errorMessage}
       />
-      <MoviePopup
-        isOpen={isMoviePopupOpen}
-        onClose={handleClosePopups}
-      />
+      <MoviePopup isOpen={isMoviePopupOpen} onClose={handleClosePopups} />
     </div>
   );
 }
