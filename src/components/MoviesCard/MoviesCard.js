@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 import * as api from "../../utils/MainApi";
 import { SIGN_IN_MESSAGE, URL_MOVIE_SERVER } from "../../utils/constants";
-import { UserMoviesContext } from "../../context/context";
-import { MovieContext, useMovieContext } from "../../context/MovieContext";
+import { UserMoviesContext } from "../../context/UserMoviesContext";
+import { MovieContext } from "../../context/MovieContext";
 
 
 function MoviesCard({ movie, handleError }) {

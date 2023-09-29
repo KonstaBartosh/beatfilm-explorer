@@ -15,19 +15,18 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoToolTip from "../popups/InfoTooltip";
 import MoviePopup from "../popups/MoviePopup";
 import * as api from "../../utils/MainApi.js";
-import { UserMoviesContext } from "../../context/context";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
+import { UserMoviesContext } from "../../context/UserMoviesContext";
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoggedIn, setLoggedIn] = useState(false);
-  // const [currentUser, setCurrentUser] = useState({});
   const { setCurrentUser } = useContext(CurrentUserContext);
+  const { setUserMovies } = useContext(UserMoviesContext);
   const [succesMessage, setSuccesMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [userMovies, setUserMovies] = useState([]);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isMoviePopupOpen, setIsMoviePopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
@@ -136,59 +135,55 @@ function App() {
 
   return (
     <div className="app">
-      <UserMoviesContext.Provider value={{ userMovies, setUserMovies }}>
-        {/* <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}> */}
-          {shouldShowHeader && <Header />}
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Movies
-                  getUserMovies={getUserMovies}
-                  handleError={handleError}
-                />
-            }
+      {shouldShowHeader && <Header />}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Movies
+              getUserMovies={getUserMovies}
+              handleError={handleError}
             />
-            {!isLoggedIn && (
-              <>
-                <Route
-                  path="/sign-up"
-                  element={
-                    <Register onRegister={handleRegister} isRegistered={isRegistered} />
-                  }
-                />
-                <Route
-                  path="/sign-in"
-                  element={<Login onLogin={handleLogin} />}
-                />
-              </>
-            )}
+        }
+        />
+        {!isLoggedIn && (
+          <>
             <Route
-              path="/saved-movies"
+              path="/sign-up"
               element={
-                <ProtectedRoute
-                  element={SavedMovies}
-                  isLoggedIn={isLoggedIn}
-                  getUserMovies={getUserMovies}
-                />
+                <Register onRegister={handleRegister} isRegistered={isRegistered} />
               }
             />
             <Route
-              path="/profile"
-              element={
-                <ProtectedRoute
-                  element={Profile}
-                  isLoggedIn={isLoggedIn}
-                  onLogOut={handleLogout}
-                  onSave={handleChangeProfile}
-                />
-              }
+              path="/sign-in"
+              element={<Login onLogin={handleLogin} />}
             />
-            <Route path="/*" element={<NotFound />} />
-          </Routes>
-          {shouldShowFooter && <Footer />}
-        {/* </CurrentUserContext.Provider> */}
-      </UserMoviesContext.Provider>
+          </>
+        )}
+        <Route
+          path="/saved-movies"
+          element={
+            <ProtectedRoute
+              element={SavedMovies}
+              isLoggedIn={isLoggedIn}
+              getUserMovies={getUserMovies}
+            />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute
+              element={Profile}
+              isLoggedIn={isLoggedIn}
+              onLogOut={handleLogout}
+              onSave={handleChangeProfile}
+            />
+          }
+        />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+      {shouldShowFooter && <Footer />}
       <InfoToolTip
         isOpen={isInfoPopupOpen}
         onClose={handleClosePopups}

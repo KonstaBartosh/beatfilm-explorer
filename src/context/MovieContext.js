@@ -1,10 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
-const MovieContext = createContext();
-
-export const useMovieContext = () => {
-  return useContext(MovieContext);
-};
+export const MovieContext = createContext();
 
 export const MovieProvider = ({ children }) => {
   const [selectedMovie, setSelectedMovie] = useState(null);

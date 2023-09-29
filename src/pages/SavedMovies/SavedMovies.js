@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 
 import "./SavedMovies.css";
 import SearchForm from "../../components/SearchForm/SearchForm";
-import MoviesCardList from "../../components/MoviesCardList/MoviesCardList.js";
-import { UserMoviesContext } from "../../context/context.js";
+import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
+import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 

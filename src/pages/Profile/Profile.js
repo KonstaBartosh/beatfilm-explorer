@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./Profile.css";
-import { CurrentUserContext } from "../../context/context";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { useForm } from "react-hook-form";
 import TextInput from "../../components/Inputs/TextInput";
 import EmailInput from "../../components/Inputs/EmailInput";
