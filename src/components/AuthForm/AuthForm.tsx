@@ -1,7 +1,19 @@
+import React, { ReactNode } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./AuthForm.css";
 import Logo from "../Logo/Logo";
+
+interface AuthFormProps {
+  title: string;
+  buttonText: string;
+  question: string;
+  navLink: string;
+  navLinkTitle: string;
+  children: ReactNode;
+  onSubmit: any;
+  isValid: boolean;
+}
 
 function AuthForm({
   title,
@@ -12,7 +24,7 @@ function AuthForm({
   children,
   onSubmit,
   isValid
-}) {
+}: AuthFormProps) {
 
   return (
     <div className="auth-form">

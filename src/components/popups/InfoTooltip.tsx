@@ -8,14 +8,12 @@ function InfoTooltip({
   isOpen,
   onClose,
   condition,
-  handleOverlayClick,
   successTitle,
   deniedTitle,
 }) {
   return (
     <section
       className={`popup ${isOpen && "popup_opened"}`}
-      onClick={handleOverlayClick}
     >
       <div className="popup__container overlay">
         {condition ? (

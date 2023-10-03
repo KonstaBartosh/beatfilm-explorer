@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./BurgerMenu.css";
-import closeIcon from "../../images/close_icon.svg";
-import burgerIcon from "../../images/burger-icon-white.svg";
+// import closeIcon from "../../images/close_icon.svg";
+// import burgerIcon from "../../images/burger-icon-white.svg";
+const burgerIcon = require('../../images/burger-icon-white.svg') as string;
+const closeIcon = require('../../images/close_icon.svg') as string;
 
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);

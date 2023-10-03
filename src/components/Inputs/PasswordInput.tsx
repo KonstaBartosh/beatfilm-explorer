@@ -1,7 +1,19 @@
+import React from "react";
 import { useState } from "react";
 
 import "./Input.css";
 import icon from '../../images/eye_icon.svg';
+import { DeepMap, FieldError, FieldValues, UseFormRegister } from "react-hook-form";
+
+interface PasswordInputType {
+  title: string;
+  register: UseFormRegister<FieldValues>;
+  errors: DeepMap<FieldValues, FieldError>;
+  label?: string;
+  placeholder?: string;
+  defaultValue?: string;
+  autoComplete?: string;
+}
 
 export default function PasswordInput({
   title,
@@ -11,7 +23,7 @@ export default function PasswordInput({
   placeholder,
   defaultValue,
   autoComplete
-}) {
+}: PasswordInputType) {
   const [iShowPassword, setShowPassword] = useState(false);
   
   const toggleShowPassword = () => {

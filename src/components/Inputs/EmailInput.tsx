@@ -1,15 +1,26 @@
+import React from "react";
+
 import "./Input.css"
 import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../utils/constants";
+import { DeepMap, FieldValues, UseFormRegister, FieldError } from "react-hook-form";
+
+interface EmailInputType {
+  title: string;
+  register: UseFormRegister<FieldValues>;
+  errors: DeepMap<FieldValues, FieldError>;
+  label?: string;
+  placeholder?: string;
+  defaultValue?: string;
+}
 
 export default function EmailInput({
-	type,
   title,
   label,
   register,
   errors,
   placeholder,
   defaultValue,
-}) {
+}: EmailInputType) {
 
   return (
     <>

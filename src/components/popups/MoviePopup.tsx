@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 
 import "../popups/popup.css";
-import { MovieContext, useMovieContext } from "../../context/MovieContext";
+import { MovieContext } from "../../context/MovieContext";
 import { URL_MOVIE_SERVER } from "../../utils/constants";
 import { useLocation } from "react-router-dom";
 
-function MoviePopup({ handleOverlayClick }) {
+function MoviePopup() {
   const { selectedMovie, closeMoviePopup } = useContext(MovieContext);
   const { pathname } = useLocation();
 
@@ -13,7 +13,6 @@ function MoviePopup({ handleOverlayClick }) {
     selectedMovie && (
     <section
       className="popup popup_opened"
-      onClick={handleOverlayClick}
     >
       <div className="popup__container popup__container_movie overlay">
         <div className="popup__thumbnail-wrap">

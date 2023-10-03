@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 
 import "./Movies.css";
 import * as moviesApi from "../../utils/MoviesApi";
 import SearchForm from "../../components/SearchForm/SearchForm";
-import MoviesCardList from "../../components/MoviesCardList/MoviesCardList.js";
+import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
 import { ADD_MORE_CARDS, AMMOUNT_OF_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 
@@ -13,7 +12,7 @@ function Movies({ getUserMovies, handleError }) {
   const storageAllMovies = getFromLocalStorage("allMovies" || []);
   const storageMovies = getFromLocalStorage("searchList");
   const storageShortMovies = getFromLocalStorage("shortMovies");
-  const storageQuery = getFromLocalStorage("query", "");
+  const storageQuery = getFromLocalStorage("query");
   const storageIsToggled = getFromLocalStorage("isToggled");
   
   const [moviesList, setMoviesList] = useState(storageAllMovies || []);

@@ -3,13 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import "./SavedMovies.css";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
-import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
+import { UserMoviesContext } from "../../context/UserMoviesContext";
+import { MovieType } from "../../utils/types";
 
 function SavedMovies({ getUserMovies }) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
-  const [filteredUserMovies, setFilteredUserMovies] = useState([]);
+  const [filteredUserMovies, setFilteredUserMovies] = useState<MovieType[]>([]);
   const [query, setQuery] = useState('');
   const [isToggled, setIsToggled] = useState(false);
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
@@ -58,13 +59,15 @@ function SavedMovies({ getUserMovies }) {
         onSearchClick={handleSearchUserMovies}
         handleSearchChange={handleOnChange}
         onToggle={handleToggleSwitch}
-        searchQuery={query}
-      />
+        searchQuery={query} defaultValue={undefined} isToggled={undefined}/>
       <MoviesCardList 
         arrayList={userMovies}
         cards={filteredUserMovies}
-        userMovies={userMovies}
-        isMoviesNotFound={isMoviesNotFound}
+        isMoviesNotFound={isMoviesNotFound} 
+        isLoading={undefined} 
+        isRequestError={undefined} 
+        onAddMore={undefined} 
+        handleError={undefined}      
       />
     </section>
   );

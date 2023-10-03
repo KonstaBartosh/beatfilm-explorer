@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
@@ -14,7 +15,7 @@ import NotFound from "../../pages/NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoToolTip from "../popups/InfoTooltip";
 import MoviePopup from "../popups/MoviePopup";
-import * as api from "../../utils/MainApi.js";
+import * as api from "../../utils/MainApi";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
@@ -28,7 +29,6 @@ function App() {
   const [succesMessage, setSuccesMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
-  const [isMoviePopupOpen, setIsMoviePopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
 
   const validFooterPaths = ["/", "/saved-movies"];
@@ -101,7 +101,7 @@ function App() {
       .login({ email, password })
       .then((data) => {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("isUserLogin", true);
+        localStorage.setItem("isUserLogin", 'true');
         navigate("/");
         setLoggedIn(true);
       })
@@ -131,7 +131,6 @@ function App() {
 
   const handleClosePopups = () => {
     setIsInfoPopupOpen(false);
-    setIsMoviePopupOpen(false);
   };
 
   return (
@@ -148,12 +147,7 @@ function App() {
           <>
             <Route
               path="/sign-up"
-              element={
-                <Register
-                  onRegister={handleRegister}
-                  isRegistered={isRegistered}
-                />
-              }
+              element={<Register onRegister={handleRegister} />}
             />
             <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
           </>
@@ -189,7 +183,7 @@ function App() {
         successTitle={succesMessage}
         deniedTitle={errorMessage}
       />
-      <MoviePopup isOpen={isMoviePopupOpen} onClose={handleClosePopups} />
+      <MoviePopup />
     </div>
   );
 }

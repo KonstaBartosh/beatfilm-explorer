@@ -69,7 +69,6 @@ export default function Profile({ onLogOut, onSave }) {
             </span>
             <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
               <EmailInput
-                type={"email"}
                 title={"email"}
                 defaultValue={currentUser.email}
                 register={register}
