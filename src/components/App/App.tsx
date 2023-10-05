@@ -19,6 +19,7 @@ import * as api from "../../utils/MainApi";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
+import { MovieType, UserType } from "../../utils/types";
 
 function App() {
   const navigate = useNavigate();
@@ -47,8 +48,8 @@ function App() {
   }, [isLoggedIn]);
 
   const handleError = (message) => {
-    setErrorMessage(message);
     setIsInfoPopupOpen(true);
+    setErrorMessage(message);
   };
 
   //** проверка валидности токена */
@@ -79,13 +80,13 @@ function App() {
   function getUserMovies() {
     api
       .getUserMovies()
-      .then((data) => {
+      .then((data: MovieType[]) => {
         setUserMovies(data);
       })
       .catch((err) => handleError(err));
   }
 
-  function handleRegister({ name, email, password }) {
+  function handleRegister({ name, email, password }: UserType) {
     api
       .register({ name, email, password })
       .then(() => {
@@ -96,7 +97,7 @@ function App() {
       .catch((err) => handleError(err));
   }
 
-  function handleLogin({ email, password }) {
+  function handleLogin({ email, password }: UserType) {
     api
       .login({ email, password })
       .then((data) => {
@@ -114,14 +115,14 @@ function App() {
     navigate("/");
   }
 
-  function handleChangeProfile({ name, email }) {
+  function handleChangeProfile({ name, email }: UserType) {
     api
       .changeUserData({ name, email })
       .then((data) => setCurrentUser(data))
       .catch((err) => handleError(err));
   }
 
-  function openSuccesPopup(message) {
+  function openSuccesPopup(message: string) {
     setSuccesMessage(message);
     setIsInfoPopupOpen(true);
     setTimeout(() => {

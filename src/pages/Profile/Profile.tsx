@@ -1,13 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 import "./Profile.css";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import { useForm } from "react-hook-form";
-import TextInput from "../../components/Inputs/TextInput";
-import EmailInput from "../../components/Inputs/EmailInput";
+import TextInput from "../../components/UI/Inputs/TextInput";
+import EmailInput from "../../components/UI/Inputs/EmailInput";
+import { UserType } from "../../utils/types";
+
+interface ProfileProps {
+  onLogOut: () => void;
+  onSave: (userData: UserType) => void;
+}
 
 
-export default function Profile({ onLogOut, onSave }) {
+function Profile({ onLogOut, onSave }: ProfileProps) {
 	const {
     register,
     handleSubmit,
@@ -15,28 +21,29 @@ export default function Profile({ onLogOut, onSave }) {
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-	const nameInputValue = watch('name');
-	const emailInputValue = watch('email');
   const { currentUser } = useContext(CurrentUserContext);
-  const [isInputsVisible, setIsInputsVisible] = useState(false);
-	const [isSaveButtonValid, setIsSaveButtonValid] = useState(false);
-	const isButtonDisabled = isValid && isSaveButtonValid;
-	const saveBtnClassName = `profile__save-button ${isButtonDisabled ? "" : "profile__save-button_disabled"}`
+	const nameInputValue: string = watch('name');
+	const emailInputValue: string = watch('email');
+  const [isInputsVisible, setIsInputsVisible] = useState<boolean>(false);
+	const [isSaveButtonValid, setIsSaveButtonValid] = useState<boolean>(false);
+	const isButtonDisabled: boolean = isValid && isSaveButtonValid;
+	const saveBtnClassName: string = `profile__save-button ${!isButtonDisabled && "profile__save-button_disabled"}`
 
 	//** сравниваем дефолтные инпуты и управляем кнопкой сохранить */
-	useEffect(() => {
-		const isNameEqual = nameInputValue === currentUser.name;
-		const isEmailEqual = emailInputValue === currentUser.email;
-
-		setIsSaveButtonValid(!(isNameEqual && isEmailEqual));
-	}, [nameInputValue, emailInputValue, currentUser]);
+  useEffect(() => {
+    const areInputsChanged: boolean =
+      nameInputValue !== currentUser.name || emailInputValue !== currentUser.email;
+  
+    setIsSaveButtonValid(areInputsChanged);
+  }, [nameInputValue, emailInputValue, currentUser]);
+  
 	
 
   const handleUnlockInputs = () => {
     setIsInputsVisible(true);
   };
 	
-	const submitData = (data) => {
+	const submitData = (data: UserType) => {
     setIsInputsVisible(false);
 		onSave(data);
 	}
@@ -53,7 +60,6 @@ export default function Profile({ onLogOut, onSave }) {
             </span>
             <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
               <TextInput
-                type={"text"}
                 title={"name"}
                 defaultValue={currentUser.name}
                 register={register}
@@ -104,3 +110,5 @@ export default function Profile({ onLogOut, onSave }) {
     </section>
   );
 }
+
+export default  Profile;

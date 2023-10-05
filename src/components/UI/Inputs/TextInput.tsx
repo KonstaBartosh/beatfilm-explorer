@@ -1,20 +1,8 @@
-import React from "react";
-import "./Input.css"
-import { DeepMap, UseFormRegister, FieldValues, FieldError } from "react-hook-form";
+import "./styles/Input.css"
+import { Inputs } from "../../../utils/types";
 
-interface TextInputType {
-  type: string;
-  title: string;
-  register: UseFormRegister<FieldValues>;
-  errors: DeepMap<FieldValues, FieldError>;
-  label?: string;
-  placeholder?: string;
-  defaultValue?: string;
-  autoComplete?: string;
-}
 
 export default function TextInput({
-  type,
   title,
   label,
   register,
@@ -22,8 +10,8 @@ export default function TextInput({
   placeholder,
   defaultValue,
   autoComplete
-}: TextInputType) {
-  const namePattern = /^[a-zA-Zа-яА-Я\s-]*$/;
+}: Inputs) {
+  const namePattern: RegExp = /^[a-zA-Zа-яА-Я\s-]*$/;
 
   return (
     <>
@@ -42,7 +30,7 @@ export default function TextInput({
           }
         })}
         id={`${title}-input`}
-        type={type}
+        type='text'
         placeholder={placeholder}
         defaultValue={defaultValue}
         className="input"

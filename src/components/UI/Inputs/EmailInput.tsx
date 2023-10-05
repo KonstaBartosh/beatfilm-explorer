@@ -1,17 +1,6 @@
-import React from "react";
-
-import "./Input.css"
-import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../utils/constants";
-import { DeepMap, FieldValues, UseFormRegister, FieldError } from "react-hook-form";
-
-interface EmailInputType {
-  title: string;
-  register: UseFormRegister<FieldValues>;
-  errors: DeepMap<FieldValues, FieldError>;
-  label?: string;
-  placeholder?: string;
-  defaultValue?: string;
-}
+import "./styles/Input.css"
+import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../../utils/constants";
+import { Inputs } from "../../../utils/types";
 
 export default function EmailInput({
   title,
@@ -20,7 +9,7 @@ export default function EmailInput({
   errors,
   placeholder,
   defaultValue,
-}: EmailInputType) {
+}: Inputs) {
 
   return (
     <>

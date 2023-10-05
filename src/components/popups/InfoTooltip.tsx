@@ -4,13 +4,21 @@ import "../popups/popup.css";
 import successLogo from "../../images/registration-success.svg";
 import deniedLogo from "../../images/registration-denied.svg";
 
+interface ToolTipProps {
+  isOpen: boolean;
+  condition: boolean;
+  onClose: () => void;
+  successTitle: string;
+  deniedTitle: string;
+}
+
 function InfoTooltip({
   isOpen,
-  onClose,
   condition,
+  onClose,
   successTitle,
   deniedTitle,
-}) {
+}: ToolTipProps) {
   return (
     <section
       className={`popup ${isOpen && "popup_opened"}`}

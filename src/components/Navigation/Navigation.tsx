@@ -1,17 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import "./Navigation.css";
+import NavButton from "../UI/NavButton/NavButton";
 
 function Navigation() {
   return (
     <nav className="navigation">
       <div className="navigation__movies">
-        <NavLink to="/" className="navigation__movies-link">
-          Фильмы
-        </NavLink>
-        <NavLink to="/saved-movies" className="navigation__movies-link">
-          Сохраненные фильмы
-        </NavLink>
+        <NavButton
+          text="Фильмы"
+          path="/"
+          className="navigation__movies-link"
+        />
+        <NavButton
+          text="Сохраненные фильмы"
+          path="/saved-movies"
+          className="navigation__movies-link"
+        />
       </div>
     </nav>
   );

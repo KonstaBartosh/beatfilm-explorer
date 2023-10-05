@@ -8,24 +8,33 @@
   import { UserMoviesContext } from "../../context/UserMoviesContext";
   import { MovieContext } from "../../context/MovieContext";
   import { MovieType } from "../../utils/types";
+  import { formatTime } from "../../utils/helpers";
 
-  function MoviesCard({ movie, handleError }) {
-    const { nameRU, duration, image } = movie as MovieType;
-    const location = useLocation();
+  interface Props {
+    movie: MovieType;
+    handleError: (arg: string) => void;
+  }
+
+  function MoviesCard({ movie, handleError }: Props) {
     const { userMovies, setUserMovies } = useContext(UserMoviesContext);
     const { openMoviePopup } = useContext(MovieContext);
+    const { nameRU, duration, image } = movie;
     const formattedDuration = useMemo(() => formatTime(duration), [duration]);
-    const [isLiked, setIsLiked] = useState(false);
-    const isMoviesPath = location.pathname === "/";
-    const picture = isMoviesPath ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
+    const [isLiked, setIsLiked] = useState<boolean>(false);
+    
+    const { pathname } = useLocation();
+    const isMoviesPath: boolean = pathname === "/";
+    const picture: string = pathname === "/" ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
+
     //** стили для кнопки */
-    const buttonText = isMoviesPath ? null : "✗";
-    const baseButtonClassName = "card__btn";
-    const likeButtonClassName = `card__like ${isLiked && "card__like_active"}`;
-    const removeButtonClassName = "card__like_rm";
-    const buttonClassName = ` ${baseButtonClassName} ${
-      isMoviesPath ? likeButtonClassName : removeButtonClassName
-    }`;
+    const buttonText: string | null = isMoviesPath ? null : "✗";
+    const baseButtonClassName: string = "card__btn";
+    const likeButtonClassName: string = `card__like ${isLiked && "card__like_active"}`;
+    const removeButtonClassName: string = "card__like_rm";
+
+    const buttonClassName: string = isMoviesPath
+      ? ` ${baseButtonClassName} ${likeButtonClassName}`
+      : `${baseButtonClassName} ${removeButtonClassName}`;
     
     // есть ли фильм в списке лайкнутых => установить начальное состояние isLiked
     useEffect(() => {
@@ -36,12 +45,6 @@
       }
 
     }, [userMovies, movie.nameRU]);
-
-    function formatTime(duration) {
-      const hours = Math.floor(duration / 60);
-      const minutes = duration % 60;
-      return `${hours ? `${hours}ч` : ""} ${minutes}м`;
-    }
 
     function toggleLike() {
       //** ищем фильм в userMovies */

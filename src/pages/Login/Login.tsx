@@ -1,18 +1,21 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 
-import EmailInput from "../../components/Inputs/EmailInput";
-import PasswordInput from "../../components/Inputs/PasswordInput";
+import EmailInput from "../../components/UI/Inputs/EmailInput";
+import PasswordInput from "../../components/UI/Inputs/PasswordInput";
 import AuthForm from "../../components/AuthForm/AuthForm";
+import { UserType } from "../../utils/types";
 
-export default function Login({ onLogin }) {
+type OnLoginType = (userData: UserType) => void;
+
+
+function Login({ onLogin }: { onLogin: OnLoginType }) {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onChange" });
 
-  const submitData = (data) => {
+  const submitData = (data: UserType) => {
     onLogin(data);
   };
 
@@ -44,3 +47,5 @@ export default function Login({ onLogin }) {
     </AuthForm>
   );
 }
+
+export default Login;

@@ -1,21 +1,9 @@
-import React from "react";
 import { useState } from "react";
+import "./styles/Input.css";
+import icon from '../../../images/eye_icon.svg';
+import { Inputs } from "../../../utils/types";
 
-import "./Input.css";
-import icon from '../../images/eye_icon.svg';
-import { DeepMap, FieldError, FieldValues, UseFormRegister } from "react-hook-form";
-
-interface PasswordInputType {
-  title: string;
-  register: UseFormRegister<FieldValues>;
-  errors: DeepMap<FieldValues, FieldError>;
-  label?: string;
-  placeholder?: string;
-  defaultValue?: string;
-  autoComplete?: string;
-}
-
-export default function PasswordInput({
+function PasswordInput({
   title,
   label,
   register,
@@ -23,8 +11,8 @@ export default function PasswordInput({
   placeholder,
   defaultValue,
   autoComplete
-}: PasswordInputType) {
-  const [iShowPassword, setShowPassword] = useState(false);
+}: Inputs) {
+  const [iShowPassword, setShowPassword] = useState<boolean>(false);
   
   const toggleShowPassword = () => {
     setShowPassword(!iShowPassword);
@@ -65,3 +53,5 @@ export default function PasswordInput({
     </>
   );
 }
+
+export default PasswordInput;

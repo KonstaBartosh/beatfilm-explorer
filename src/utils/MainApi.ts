@@ -1,4 +1,5 @@
 import { BASE_URL, URL_MOVIE_SERVER } from "./constants";
+import { UserType } from "./types";
 
 const jsonHeaders = {
 	'Content-Type': 'application/json',
@@ -15,7 +16,7 @@ const checkResponse = (res) => {
 }
 
 
-export const register = ({ name, email, password }) => {
+export const register = ({ name, email, password }: UserType) => {
 	return fetch(`${BASE_URL}/signup`, {
 		method: 'POST',
 		headers: jsonHeaders,
@@ -24,7 +25,7 @@ export const register = ({ name, email, password }) => {
 	.then(checkResponse)
 };
 
-export const login = ({ email, password }) => {
+export const login = ({ email, password }: UserType) => {
 	return fetch(`${BASE_URL}/signin`, {
 		method: 'POST',
 		headers: jsonHeaders,
@@ -67,7 +68,7 @@ export function getUserMovies() {
 	.then(checkResponse)
 }
 
-export function changeUserData({ name, email }) {
+export function changeUserData({ name, email }: UserType) {
 	return fetch(`${BASE_URL}/users/me`, {
 		method: 'PATCH',
 		headers: {

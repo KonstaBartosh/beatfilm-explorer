@@ -4,13 +4,6 @@
   "private": true,
   "homepage": "https://konstabartosh.github.io/movies-explorer-frontend/",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^29.5.5",
-    "@types/node": "^20.8.0",
-    "@types/react": "^18.2.23",
-    "@types/react-dom": "^18.2.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
@@ -45,6 +38,10 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.8.2",
+    "@types/react": "^18.2.24",
+    "@types/react-dom": "^18.2.10",
     "gh-pages": "^6.0.0",
     "typescript": "^5.2.2"
   }

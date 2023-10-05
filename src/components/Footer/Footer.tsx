@@ -1,20 +1,21 @@
 import React from "react";
 
 import "./Footer.css";
-import { FOOTER_TITLE } from "../../utils/constants";
+import { BEAT_FILM_URL, FOOTER_TITLE, GITHUB_URL } from "../../utils/constants";
+import { GET_YEAR } from '../../utils/helpers';
 
-export default function Footer() {
+function Footer() {
   return (
     <footer className="footer">
       <p className="footer__title footer__title_underline">
         {FOOTER_TITLE}
       </p>
       <div className="footer__container">
-        <p className="footer__copyright">&#64; {new Date().getFullYear()}</p>
+        <p className="footer__copyright">&#64; {GET_YEAR}</p>
         <nav className="footer__nav">
           <a
             className="footer__link"
-            href="https://beatfilmfestival.ru/"
+            href={BEAT_FILM_URL}
             target="_blank"
             rel="noreferrer noopener"
           >
@@ -22,7 +23,7 @@ export default function Footer() {
           </a>
           <a
             className="footer__link"
-            href="https://github.com/KonstaBartosh"
+            href={GITHUB_URL}
             target="_blank"
             rel="noreferrer noopener"
           >
@@ -33,3 +34,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;

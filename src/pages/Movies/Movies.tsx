@@ -1,28 +1,38 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import "./Movies.css";
 import * as moviesApi from "../../utils/MoviesApi";
-import SearchForm from "../../components/SearchForm/SearchForm";
+import SearchForm from "../../components/UI/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
-import { ADD_MORE_CARDS, AMMOUNT_OF_CARDS, CARDS_AMMOUNT, SCREEN_WIDTH, SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
+import { 
+  ADD_MORE_CARDS, 
+  AMMOUNT_OF_CARDS, 
+  CARDS_AMMOUNT, 
+  SCREEN_WIDTH, 
+  SHORT_MOVIE_LENGTH 
+} from "../../utils/constants";
+import { MovieType } from "../../utils/types";
+// import { LOCAL_STORAGE, setLocalStorage } from "../../utils/localStorage";
 
 function Movies({ getUserMovies, handleError }) {
-  //** чтение значений из localStorage */
-  const storageAllMovies = getFromLocalStorage("allMovies" || []);
-  const storageMovies = getFromLocalStorage("searchList");
-  const storageShortMovies = getFromLocalStorage("shortMovies");
-  const storageQuery = getFromLocalStorage("query");
-  const storageIsToggled = getFromLocalStorage("isToggled");
+  // //** чтение значений из localStorage */
+  const LOCAL_STORAGE = {
+    IS_USER_LOGGED: getFromLocalStorage("isUserLogin"),
+    ALL_MOVIES: getFromLocalStorage("allMovies" || []),
+    SHORT_MOVIES: getFromLocalStorage("shortMovies"),
+    SEARCH_LIST: getFromLocalStorage("searchList"),
+    SEARCH_QUERY: getFromLocalStorage("query"),
+    IS_TOGGLED: getFromLocalStorage("isToggled"),
+  }
   
-  const [moviesList, setMoviesList] = useState(storageAllMovies || []);
-  const [filteredMovies, setFilteredMovies] = useState(storageAllMovies || []);
-  const [searchQuery, setSearchQuery] = useState(storageQuery || '');
-  const [isToggled, setIsToggled] = useState(false);
-  const [isRequestError, setRequestError] = useState(false);
-  const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const [displayCards, setDisplayCards] = useState(AMMOUNT_OF_CARDS);
+  const [moviesList, setMoviesList] = useState<MovieType[]>(LOCAL_STORAGE.ALL_MOVIES || []);
+  const [filteredMovies, setFilteredMovies] = useState<MovieType[]>(LOCAL_STORAGE.ALL_MOVIES || []);
+  const [searchQuery, setSearchQuery] = useState<string>(LOCAL_STORAGE.SEARCH_QUERY || '');
+  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const [isRequestError, setRequestError] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const [displayCards, setDisplayCards] = useState<number>(AMMOUNT_OF_CARDS);
   const cardsToShow = filteredMovies.slice(0, displayCards);
 
   function getFromLocalStorage(key, value = null) {
@@ -41,7 +51,7 @@ function Movies({ getUserMovies, handleError }) {
       
       moviesApi
         .getMovies()
-        .then((data) => {
+        .then((data: MovieType[]) => {
           setMoviesList(data);
           setFilteredMovies(data);
           setLocalStorage("allMovies", data);
@@ -50,16 +60,13 @@ function Movies({ getUserMovies, handleError }) {
         .catch(() => {
           setLoading(false);
           setRequestError(true);
-          handleError();
       });
     }
   }, []);
 
   //** подгружаем БД избранных фильмов для отображения лайков */
   useEffect(() => {
-    const isUserLogin = getFromLocalStorage("isUserLogin");
-    
-    if (isUserLogin) {
+    if (LOCAL_STORAGE.IS_USER_LOGGED) {
       getUserMovies();
     }
   }, []);
@@ -67,9 +74,11 @@ function Movies({ getUserMovies, handleError }) {
   //** обновляем состояние isToggled из localStorage  */
   //** и возвращаем предыдущий поисковый запрос если он был */
   useEffect(() => {
-    setToggleState();
+    setToggleState(); 
     handleLocalStorageData();
-  }, [storageIsToggled]);
+  }, [LOCAL_STORAGE.IS_TOGGLED]);
+
+  console.log(LOCAL_STORAGE.IS_TOGGLED)
 
   //** изменение кол-ва карточек в зависимости от ширины экрана */
   useEffect(() => {
@@ -85,7 +94,7 @@ function Movies({ getUserMovies, handleError }) {
   }, [filteredMovies]);
   
   function setToggleState() {
-    if (storageIsToggled) {
+    if (LOCAL_STORAGE.IS_TOGGLED) {
       setIsToggled(true);
     } else {
       setIsToggled(false);
@@ -93,13 +102,13 @@ function Movies({ getUserMovies, handleError }) {
   }
 
   function handleLocalStorageData() {
-    if (storageMovies === null) {
+    if (LOCAL_STORAGE.SEARCH_LIST === null) {
       return;
     }
 
-    storageShortMovies 
-    ? setFilteredMovies(storageShortMovies)
-    : setFilteredMovies(storageMovies);
+    LOCAL_STORAGE.SHORT_MOVIES 
+    ? setFilteredMovies(LOCAL_STORAGE.SHORT_MOVIES)
+    : setFilteredMovies(LOCAL_STORAGE.SEARCH_LIST);
   }
 
   /** обновляет количество отображаемых карточек в зависимости от ширины экрана */
@@ -124,10 +133,6 @@ function Movies({ getUserMovies, handleError }) {
   function handleSearchMovies() {
     const filtered = filterMovies(moviesList, isToggled, searchQuery);
 
-    if (filtered.length === 0) {
-      setIsMoviesNotFound(true)
-    }
-
     setFilteredMovies(filtered);
     setLocalStorage("searchList", filtered);
   }
@@ -135,14 +140,14 @@ function Movies({ getUserMovies, handleError }) {
   //** переключатель короткометражек */
   function handleToggleSwitch() {
     if (isToggled === false) {
-      const shortFilms = filteredMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH);
+      const shortMovies = filteredMovies.filter((movie) => movie.duration < SHORT_MOVIE_LENGTH);
       setIsToggled(true);
-      setLocalStorage("isToggled", true);
-      setLocalStorage("shortMovies", shortFilms);
-      setFilteredMovies(shortFilms)
+      setLocalStorage("isToggled", "true");
+      setLocalStorage("shortMovies", shortMovies);
+      setFilteredMovies(shortMovies)
     } else {
       setIsToggled(false);
-      setFilteredMovies(storageMovies || storageAllMovies);
+      setFilteredMovies(LOCAL_STORAGE.SEARCH_LIST || LOCAL_STORAGE.ALL_MOVIES);
       localStorage.removeItem('isToggled');
       localStorage.removeItem("shortMovies");
     }
@@ -180,7 +185,7 @@ function Movies({ getUserMovies, handleError }) {
           onSearchClick={handleSearchMovies}
           handleSearchChange={handleSearchChange}
           onToggle={handleToggleSwitch}
-          defaultValue={storageQuery}
+          defaultValue={LOCAL_STORAGE.SEARCH_QUERY}
           isToggled={isToggled}
           searchQuery={searchQuery}
         />
@@ -188,9 +193,8 @@ function Movies({ getUserMovies, handleError }) {
           arrayList={filteredMovies}
           isLoading={isLoading}
           isRequestError={isRequestError}
-          onAddMore={handleAddMoreCards}
           cards={cardsToShow}
-          isMoviesNotFound={isMoviesNotFound}
+          onAddMore={handleAddMoreCards}
           handleError={handleError}
         />
     </section>

@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import "./SearchForm.css";
-import logo from "../../images/search_icon.svg";
+import logo from "../../../images/search_icon.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+
+interface SearchFormProps {
+  searchQuery: string;
+  defaultValue: string;
+  isToggled: boolean;
+  onSearchClick: () => void;
+  onToggle: () => void;
+  handleSearchChange: (evt: ChangeEvent<HTMLInputElement>) => void;
+}
 
 function SearchForm({
   searchQuery,
@@ -11,8 +20,8 @@ function SearchForm({
   onToggle,
   defaultValue,
   isToggled,
-}) {
-  const [validationError, setValidationError] = useState("");
+}: SearchFormProps) {
+  const [validationError, setValidationError] = useState<string>("");
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

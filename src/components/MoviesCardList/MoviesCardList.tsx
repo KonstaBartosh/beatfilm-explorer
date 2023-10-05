@@ -1,20 +1,30 @@
-import React from 'react';
-
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../UI/Preloader/Preloader';
 import { MOVIES_NOT_FOUND_MESSAGE, MOVIES_SERVER_ERR_MESSAGE } from '../../utils/constants';
+import { MovieType } from '../../utils/types';
+import { useLocation } from 'react-router-dom';
+
+interface CardListProps {
+  cards: MovieType[];
+  arrayList: MovieType[];
+  isLoading: boolean;
+  isRequestError: boolean;
+  onAddMore: () => void;
+  handleError: (arg: string) => void;
+}
 
 function MoviesCardList({
+  cards,
   arrayList,
   isLoading,
   isRequestError,
   onAddMore,
-  cards,
-  isMoviesNotFound,
   handleError,
-}) {
-  const handleMoviesNotFound = isMoviesNotFound ? MOVIES_NOT_FOUND_MESSAGE : '';
+}: CardListProps) {
+  const { pathname } = useLocation();
+  const mainPage = pathname === '/';
+  const warningMessage: string = isRequestError ? MOVIES_SERVER_ERR_MESSAGE: MOVIES_NOT_FOUND_MESSAGE;
 
   return isLoading 
   ? ( <Preloader />) 
@@ -30,12 +40,10 @@ function MoviesCardList({
             />
           ))) 
         : (
-          <p className="movies-card-list__message">
-            {isRequestError ? MOVIES_SERVER_ERR_MESSAGE : handleMoviesNotFound}
-          </p>
+          <p className="movies-card-list__message">{warningMessage}</p>
         )}
       </section>
-      {arrayList.length > cards.length && (
+      {mainPage && arrayList.length > cards.length && (
         <button onClick={onAddMore} className="movies-card-list__button">
           Еще
         </button>

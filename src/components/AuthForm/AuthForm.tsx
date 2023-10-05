@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react";
-import { NavLink } from "react-router-dom";
+import React, { FormEvent, ReactNode } from "react";
 
 import "./AuthForm.css";
-import Logo from "../Logo/Logo";
+import Logo from "../UI/Logo/Logo";
+import NavButton from "../UI/NavButton/NavButton";
 
 interface AuthFormProps {
   title: string;
@@ -10,9 +10,9 @@ interface AuthFormProps {
   question: string;
   navLink: string;
   navLinkTitle: string;
-  children: ReactNode;
-  onSubmit: any;
   isValid: boolean;
+  children: ReactNode;
+  onSubmit: (evt: FormEvent) => void;
 }
 
 function AuthForm({
@@ -21,9 +21,9 @@ function AuthForm({
   question,
   navLink,
   navLinkTitle,
+  isValid,
   children,
-  onSubmit,
-  isValid
+  onSubmit
 }: AuthFormProps) {
 
   return (
@@ -34,14 +34,11 @@ function AuthForm({
             <Logo />
             <h2 className="auth-form__title">{title}</h2>
           </div>
-
           <form className="auth-form__form" id="form__auth" onSubmit={onSubmit}>
             {children}
           </form>
-
         </div>
         <div>
-
           <button
             className={`auth-form__button ${!isValid && "auth-form__button_inactive"}`}
             type="submit"
@@ -50,12 +47,13 @@ function AuthForm({
           >
             {buttonText}
           </button>
-
           <p className="auth-form__question">
             {question}
-            <NavLink to={navLink} className="auth-form__link">
-              &nbsp;{navLinkTitle}
-            </NavLink>
+            <NavButton
+              text={navLinkTitle}
+              path={navLink}
+              className="auth-form__link"
+            />
           </p>
         </div>
       </div>

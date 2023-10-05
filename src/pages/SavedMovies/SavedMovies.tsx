@@ -1,19 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./SavedMovies.css";
-import SearchForm from "../../components/SearchForm/SearchForm";
+import SearchForm from "../../components/UI/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
 import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieType } from "../../utils/types";
 
-function SavedMovies({ getUserMovies }) {
+interface SavedMoviesProps {
+  getUserMovies: () => void;
+}
+
+
+function SavedMovies({ getUserMovies }: SavedMoviesProps) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
   const [filteredUserMovies, setFilteredUserMovies] = useState<MovieType[]>([]);
-  const [query, setQuery] = useState('');
-  const [isToggled, setIsToggled] = useState(false);
-  const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isToggled, setIsToggled] = useState<boolean>(false);
 
   //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {
@@ -25,18 +29,13 @@ function SavedMovies({ getUserMovies }) {
   }, [userMovies])
 
   function handleSearchUserMovies() {
-    const filtered = filterMovies(userMovies, isToggled, query)
-
-    if (filtered.length === 0) {
-      setIsMoviesNotFound(true)
-    }
-
+    const filtered: MovieType[] = filterMovies(userMovies, isToggled, searchQuery)
     setFilteredUserMovies(filtered);
   }
 
   const handleOnChange = (evt) => {
-    const value = evt.target.value;
-    setQuery(value);
+    const value: string = evt.target.value;
+    setSearchQuery(value);
   }
 
   //** переключатель короткометражек */
@@ -59,15 +58,17 @@ function SavedMovies({ getUserMovies }) {
         onSearchClick={handleSearchUserMovies}
         handleSearchChange={handleOnChange}
         onToggle={handleToggleSwitch}
-        searchQuery={query} defaultValue={undefined} isToggled={undefined}/>
+        searchQuery={searchQuery}
+        defaultValue=''
+        isToggled={isToggled}
+      />
       <MoviesCardList 
         arrayList={userMovies}
         cards={filteredUserMovies}
-        isMoviesNotFound={isMoviesNotFound} 
-        isLoading={undefined} 
-        isRequestError={undefined} 
-        onAddMore={undefined} 
-        handleError={undefined}      
+        isLoading={false} 
+        isRequestError={false} 
+        onAddMore={() => {}} 
+        handleError={() => {}}      
       />
     </section>
   );
