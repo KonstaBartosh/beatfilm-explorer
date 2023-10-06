@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
 import { useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
@@ -20,17 +19,18 @@ import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieType, UserType } from "../../utils/types";
+import { getFromLocalStorage } from "../../utils/helpers";
 
 function App() {
   const navigate = useNavigate();
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setUserMovies } = useContext(UserMoviesContext);
   const { pathname } = useLocation();
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [succesMessage, setSuccesMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState<boolean>(false);
+  const [isRegistered, setIsRegistered] = useState<boolean>(false);
+  const [succesMessage, setSuccesMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const validFooterPaths = ["/", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
@@ -47,14 +47,14 @@ function App() {
     }
   }, [isLoggedIn]);
 
-  const handleError = (message) => {
+  const handleError = (message: string) => {
     setIsInfoPopupOpen(true);
     setErrorMessage(message);
   };
 
   //** проверка валидности токена */
   function handleTokenCheck() {
-    const token = localStorage.getItem("token");
+    const token = getFromLocalStorage("token");
 
     if (token) {
       api

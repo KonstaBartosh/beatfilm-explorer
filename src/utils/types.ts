@@ -30,3 +30,12 @@ export interface Inputs {
   defaultValue?: string;
   autoComplete?: string;
 }
+
+export interface LocalStorageDataType {
+  IS_USER_LOGGED: boolean | null;
+  ALL_MOVIES: MovieType[];
+  SHORT_MOVIES: MovieType[]; 
+  SEARCH_LIST: MovieType[]; 
+  SEARCH_QUERY: string | null;
+  IS_TOGGLED: boolean | null;
+}
