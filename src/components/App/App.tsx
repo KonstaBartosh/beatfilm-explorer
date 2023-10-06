@@ -19,7 +19,6 @@ import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieType, UserType } from "../../utils/types";
-import { getFromLocalStorage } from "../../utils/helpers";
 
 function App() {
   const navigate = useNavigate();
@@ -54,7 +53,7 @@ function App() {
 
   //** проверка валидности токена */
   function handleTokenCheck() {
-    const token = getFromLocalStorage("token");
+    const token = localStorage.getItem("token");
 
     if (token) {
       api
