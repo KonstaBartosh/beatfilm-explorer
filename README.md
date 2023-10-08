@@ -14,7 +14,7 @@
 
 ## Используемые инструменты
 
-- TypeScript
+- TYPESCRIPT
 - REACT
 - REACT HOOK FORMS
 - REACT CONTEXT
