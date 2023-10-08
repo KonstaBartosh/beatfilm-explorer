@@ -8,12 +8,8 @@ import { filterMovies } from "../../utils/filterMovies";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieType } from "../../utils/types";
 
-interface SavedMoviesProps {
-  getUserMovies: () => void;
-}
 
-
-function SavedMovies({ getUserMovies }: SavedMoviesProps) {
+function SavedMovies({ getUserMovies }: {getUserMovies: () => void}) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
   const [filteredUserMovies, setFilteredUserMovies] = useState<MovieType[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -33,7 +29,7 @@ function SavedMovies({ getUserMovies }: SavedMoviesProps) {
     setFilteredUserMovies(filtered);
   }
 
-  const handleOnChange = (evt) => {
+  const handleOnChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const value: string = evt.target.value;
     setSearchQuery(value);
   }

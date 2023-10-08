@@ -4,7 +4,7 @@ interface NavButtonProps {
 	text: string;
 	path: string;
 	className: string;
-	onClick?: () => void; 
+	onClick?: (evt) => void; 
 }
 
 const NavButton = ({ text, path, className, onClick } : NavButtonProps) => {

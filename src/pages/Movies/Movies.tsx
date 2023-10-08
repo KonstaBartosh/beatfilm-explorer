@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 import "./Movies.css";
-import * as moviesApi from "../../utils/MoviesApi";
+import * as moviesApi from "../../utils/moviesApi";
 import SearchForm from "../../components/UI/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
 import { filterMovies } from "../../utils/filterMovies";
@@ -130,7 +130,7 @@ function Movies({ getUserMovies, handleError }: MoviesProps) {
   }
 
   //** запись значения в поиске в стейт-переменную */
-  const handleSearchChange = (evt) => {
+  const handleSearchChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setSearchQuery(value);
     setLocalStorage("searchQuery", value);

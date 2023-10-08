@@ -1,5 +1,5 @@
-import React, { ReactNode, createContext, useState } from 'react';
-import { MovieType } from '../utils/types';
+import { createContext, useState } from 'react';
+import { ChildrenType, MovieType } from '../utils/types';
 
 interface MovieContextType {
   selectedMovie: null | MovieType;
@@ -15,11 +15,7 @@ const defaultMovieContext: MovieContextType = {
 
 export const MovieContext = createContext<MovieContextType>(defaultMovieContext);
 
-interface MovieProviderProps {
-  children: ReactNode;
-}
-
-export const MovieProvider: React.FC<MovieProviderProps> = ({ children }) => {
+export const MovieProvider = ({ children }: ChildrenType) => {
   const [selectedMovie, setSelectedMovie] = useState<MovieType | null>(null);
 
   const openMoviePopup = (movie: MovieType) => {

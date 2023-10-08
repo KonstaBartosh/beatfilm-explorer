@@ -14,7 +14,7 @@ import NotFound from "../../pages/NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoToolTip from "../popups/InfoTooltip";
 import MoviePopup from "../popups/MoviePopup";
-import * as api from "../../utils/MainApi";
+import * as api from "../../utils/mainApi";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
@@ -69,7 +69,7 @@ function App() {
   function getUserData() {
     api
       .getUserData()
-      .then((userData) => {
+      .then((userData: UserType) => {
         setCurrentUser(userData);
       })
       .catch((err) => handleError(err));
@@ -85,7 +85,7 @@ function App() {
       .catch((err) => handleError(err));
   }
 
-  function handleRegister({ name, email, password }: UserType) {
+  function handleRegister({ name, email, password }) {
     api
       .register({ name, email, password })
       .then(() => {
@@ -117,7 +117,7 @@ function App() {
   function handleChangeProfile({ name, email }: UserType) {
     api
       .changeUserData({ name, email })
-      .then((data) => setCurrentUser(data))
+      .then((data: UserType) => setCurrentUser(data))
       .catch((err) => handleError(err));
   }
 

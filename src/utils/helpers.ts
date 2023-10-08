@@ -14,3 +14,10 @@ export function getFromLocalStorage<T>(key: string, defaultValue: T | null = nul
 export function setLocalStorage<T>(key: string, value: T | null ): void {
 	localStorage.setItem(key, JSON.stringify(value));
 }
+
+export const checkResponse = <T>(res: Response): Promise<T> => {
+	if (res.ok) {
+		return res.json();
+	}
+	return res.json().then((data) => Promise.reject(`Ошибка: ${data.message}`));
+}

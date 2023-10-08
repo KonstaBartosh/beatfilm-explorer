@@ -1,24 +1,31 @@
+import { ReactNode } from "react";
 import { DeepMap, FieldError, FieldValues, UseFormRegister } from "react-hook-form"
 
+export interface ChildrenType {
+  children: ReactNode;
+}
+
 export interface MovieType {
-	_id: string | null
-  owner: string | null
-	nameEN: string
-	nameRU: string
-	duration: number
-	image: { url: string; }
-  country: string
-  director: string
-  year: string
-  description: string
-  trailerLink: string
-  movieId: number
+  id?: string | null;
+	_id?: string | null;
+  movieId?: number;
+  owner?: string | null;
+	nameEN: string;
+	nameRU: string;
+	duration: number;
+	image: { url: string; };
+  country: string;
+  director: string;
+  year: string;
+  description: string;
+  trailerLink: string;
 }
 
 export interface UserType {
   name?: string;
   password?: string;
-  email: string;
+  email?: string;
+  token?: string;
 }
 
 export interface Inputs {

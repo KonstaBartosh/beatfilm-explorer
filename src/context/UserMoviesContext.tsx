@@ -1,14 +1,9 @@
-import React from "react";
-import { createContext, useState, ReactNode } from "react";
-import { MovieType } from "../utils/types";
+import { createContext, useState } from "react";
+import { ChildrenType, MovieType } from "../utils/types";
 
 interface UserMoviesType {
   userMovies: MovieType[];
   setUserMovies: (movies: MovieType[]) => void;
-}
-
-interface UserMoviesProviderProps {
-  children: ReactNode;
 }
 
 const defaultUserMoviesContext: UserMoviesType = {
@@ -18,9 +13,7 @@ const defaultUserMoviesContext: UserMoviesType = {
 
 export const UserMoviesContext = createContext<UserMoviesType>(defaultUserMoviesContext);
 
-export const UserMoviesProvider: React.FC<UserMoviesProviderProps> = ({
-  children,
-}) => {
+export const UserMoviesProvider = ({ children }: ChildrenType) => {
   const [userMovies, setUserMovies] = useState<MovieType[]>([]);
 
   return (

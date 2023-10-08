@@ -3,7 +3,7 @@
   import { useLocation } from "react-router-dom";
 
   import "./MoviesCard.css";
-  import * as api from "../../utils/MainApi";
+  import * as api from "../../utils/mainApi";
   import { SIGN_IN_MESSAGE, URL_MOVIE_SERVER } from "../../utils/constants";
   import { UserMoviesContext } from "../../context/UserMoviesContext";
   import { MovieContext } from "../../context/MovieContext";

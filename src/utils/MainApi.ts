@@ -1,45 +1,32 @@
-import { BASE_URL, URL_MOVIE_SERVER } from "./constants";
-import { UserType } from "./types";
-
-const jsonHeaders = {
-	'Content-Type': 'application/json',
-	'Accept': 'application/json'
-}
-
-const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return res.json().then((data) => {
-    return Promise.reject(`Ошибка: ${data.message}`);
-  });
-}
+import { BASE_URL, JSON_HEADERS, METHOD, URL_MOVIE_SERVER, AUTHORIZATION } from "./constants";
+import { checkResponse } from "./helpers";
+import { MovieType, UserType } from "./types";
 
 
 export const register = ({ name, email, password }: UserType) => {
 	return fetch(`${BASE_URL}/signup`, {
-		method: 'POST',
-		headers: jsonHeaders,
+		method: METHOD.POST,
+		headers: JSON_HEADERS,
 		body: JSON.stringify({ name, email, password })
 	})
-	.then(checkResponse)
+	.then(res => checkResponse<UserType>(res));
 };
 
 export const login = ({ email, password }: UserType) => {
 	return fetch(`${BASE_URL}/signin`, {
-		method: 'POST',
-		headers: jsonHeaders,
+		method: METHOD.POST,
+		headers: JSON_HEADERS,
 		body: JSON.stringify({ email, password })
 	})
-	.then(checkResponse)
+	.then(res => checkResponse<UserType>(res));
 };
 
 export function checkToken() {
 	return fetch(`${BASE_URL}/users/me`, {
-		method: 'GET',
+		method: METHOD.GET,
 		headers: {
-			...jsonHeaders,
-			"Authorization": `Bearer ${localStorage.getItem('token')}`
+			...JSON_HEADERS,
+			...AUTHORIZATION,
 		}
 	})
 	.then((res) => res.json())
@@ -48,44 +35,44 @@ export function checkToken() {
 
 export function getUserData() {
 	return fetch(`${BASE_URL}/users/me`, {
-		method: 'GET',
+		method: METHOD.GET,
 		headers: {
-			...jsonHeaders,
-			"Authorization": `Bearer ${localStorage.getItem('token')}`
+			...JSON_HEADERS,
+			...AUTHORIZATION
 		}
 	})
-	.then(checkResponse)
+	.then(res => checkResponse<UserType>(res));
 }
 
 export function getUserMovies() {
 	return fetch(`${BASE_URL}/movies`, {
-		method: 'GET',
+		method: METHOD.GET,
 		headers: {
-			...jsonHeaders,
-			"Authorization": `Bearer ${localStorage.getItem('token')}`
+			...JSON_HEADERS,
+			...AUTHORIZATION
 		}
 	})
-	.then(checkResponse)
+	.then(res => checkResponse<MovieType[]>(res));
 }
 
 export function changeUserData({ name, email }: UserType) {
 	return fetch(`${BASE_URL}/users/me`, {
-		method: 'PATCH',
+		method: METHOD.PATCH,
 		headers: {
-			...jsonHeaders,
-			"Authorization": `Bearer ${localStorage.getItem('token')}`
+			...JSON_HEADERS,
+			...AUTHORIZATION
 		},
 		body: JSON.stringify({ name, email })
 	})
-	.then(checkResponse)
+	.then(res => checkResponse<UserType>(res));
 }
 
-export const saveUserMovie = (movie) => {
+export const saveUserMovie = (movie: MovieType) => {
 	return fetch(`${BASE_URL}/movies`, {
-		method: 'POST',
+		method: METHOD.POST,
 		headers: {
-			...jsonHeaders,
-			"Authorization": `Bearer ${localStorage.getItem('token')}`
+			...JSON_HEADERS,
+			...AUTHORIZATION
 		},
 		body: JSON.stringify({
 			country: movie.country,
@@ -101,17 +88,16 @@ export const saveUserMovie = (movie) => {
 			movieId: movie.id,
 		})
 	})
-	.then(checkResponse)
-  .then(savedMovie => movie._id = savedMovie._id);
+	.then(res => checkResponse<UserType>(res));
 };
 
-export const removeUserMovie = (movieId) => {
+export const removeUserMovie = (movieId: MovieType) => {
 	return fetch(`${BASE_URL}/movies/${movieId}`, {
-		method: 'DELETE',
+		method: METHOD.DELETE,
 		headers: {
-			...jsonHeaders,
-			"Authorization": `Bearer ${localStorage.getItem('token')}`
+			...JSON_HEADERS,
+			...AUTHORIZATION
 		}	
 	})
-	.then(checkResponse)
+	.then(res => checkResponse<UserType>(res));
 }

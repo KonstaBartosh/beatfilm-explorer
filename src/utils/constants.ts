@@ -1,7 +1,22 @@
+export const URL_MOVIES_REQUEST: string = 'https://api.nomoreparties.co/beatfilm-movies';
 export const URL_MOVIE_SERVER: string = 'https://api.nomoreparties.co';
 export const BASE_URL: string = 'https://api.moviexplorer.nomoreparties.co';
 export const GITHUB_URL: string = 'https://github.com/KonstaBartosh';
 export const BEAT_FILM_URL:string = 'https://beatfilmfestival.ru/';
+
+export const JSON_HEADERS = {
+	'Content-Type': 'application/json',
+	'Accept': 'application/json'
+}
+
+export const METHOD = {
+  GET: 'GET',
+  POST: 'POST',
+  PATCH: 'PATCH',
+  DELETE: 'DELETE'
+}
+
+export const AUTHORIZATION = {"Authorization": `Bearer ${localStorage.getItem('token')}`};
 
 export const SUCCES_REGISTRATION_MESSAGE: string = 'Вы успешно зарегистрировались!';
 export const INVALID_EMAIL_MESSAGE: string = `Адрес электронной почты должен содержать символ ' @ ' и минимум 2 символа для домена`;
@@ -37,3 +52,4 @@ export const CARDS_AMMOUNT: NumberParams = {
   SMALL: 8,
   X_SMALL: 5,
 };
+

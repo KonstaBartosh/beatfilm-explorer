@@ -1,20 +1,12 @@
-export const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-const jsonHeaders = {
-	'Content-Type': 'application/json',
-	'Accept': 'application/json'
-}
+import { MovieType } from "./types";
+import { checkResponse} from "./helpers";
+import { JSON_HEADERS, METHOD, URL_MOVIES_REQUEST } from "./constants";
 
-const checkResponse = (res) => {
-	if (res.ok) {
-		return res.json();
-	}
-	return Promise.reject(`Упс...Ошибка: ${res.status}`);
-}
-
-export const getMovies = () => {
-	return fetch(BASE_URL, {
-		method: 'GET',
-		headers: jsonHeaders,
-	})
-	.then(checkResponse)
+export const getMovies = (): Promise<MovieType[]> => {
+	return fetch(URL_MOVIES_REQUEST, 
+		{
+			method: METHOD.GET,
+			headers: JSON_HEADERS,
+		})
+	.then((res) => checkResponse<MovieType[]>(res));
 }

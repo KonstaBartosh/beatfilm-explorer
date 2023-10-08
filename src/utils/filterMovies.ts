@@ -1,7 +1,12 @@
 import { SHORT_MOVIE_LENGTH } from "./constants";
+import { MovieType } from "./types";
 
   /** Функция фильтрации списка фильмов */
-export function filterMovies(moviesList, isShort, searchQuery) {
+export function filterMovies(
+  moviesList: MovieType[], 
+  isShort: boolean, 
+  searchQuery: string
+  ) {
   return moviesList.filter((movie) => {
     const movieName = movie.nameRU || movie.nameEN;
     return isShort
