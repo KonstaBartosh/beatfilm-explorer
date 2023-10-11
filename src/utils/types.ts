@@ -7,7 +7,7 @@ export interface ChildrenType {
 
 export interface MovieType {
   id?: string | null;
-	_id?: string | null;
+	_id?: string;
   movieId?: number;
   owner?: string | null;
 	nameEN: string;
@@ -25,7 +25,6 @@ export interface UserType {
   name?: string;
   password?: string;
   email?: string;
-  token?: string;
 }
 
 export interface Inputs {
@@ -43,6 +42,6 @@ export interface LocalStorageDataType {
   ALL_MOVIES: MovieType[];
   SHORT_MOVIES: MovieType[]; 
   SEARCH_LIST: MovieType[]; 
-  SEARCH_QUERY: string | null;
+  SEARCH_QUERY: string | '';
   IS_TOGGLED: boolean | null;
 }

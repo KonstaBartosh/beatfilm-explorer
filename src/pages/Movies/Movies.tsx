@@ -33,11 +33,11 @@ function Movies({ getUserMovies, handleError }: MoviesProps) {
 
   const [moviesList, setMoviesList] = useState<MovieType[]>(LOCAL_STORAGE.ALL_MOVIES || []);
   const [filteredMovies, setFilteredMovies] = useState<MovieType[]>(LOCAL_STORAGE.ALL_MOVIES || []);
-  const [searchQuery, setSearchQuery] = useState<string>(LOCAL_STORAGE.SEARCH_QUERY || '');
-  const [isToggled, setIsToggled] = useState<boolean>(false);
-  const [isRequestError, setRequestError] = useState<boolean>(false);
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [displayCards, setDisplayCards] = useState<number>(AMMOUNT_OF_CARDS);
+  const [searchQuery, setSearchQuery] = useState(LOCAL_STORAGE.SEARCH_QUERY || '');
+  const [isToggled, setIsToggled] = useState(false);
+  const [isRequestError, setRequestError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [displayCards, setDisplayCards] = useState(AMMOUNT_OF_CARDS);
   const cardsToShow = filteredMovies.slice(0, displayCards);
 
   //** подгружаем БД всех фильмов  */

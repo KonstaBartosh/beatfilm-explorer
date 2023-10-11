@@ -1,4 +1,4 @@
-  import React, { useState } from "react";
+  import { useState } from "react";
 
   import "./BurgerMenu.css";
   import closeIcon from "../../images/close_icon.svg";
@@ -6,7 +6,7 @@
   import NavButton from "../UI/NavButton/NavButton";
 
   function BurgerMenu() {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
       setIsOpen(!isOpen);

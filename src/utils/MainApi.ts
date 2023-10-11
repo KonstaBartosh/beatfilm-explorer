@@ -18,7 +18,7 @@ export const login = ({ email, password }: UserType) => {
 		headers: JSON_HEADERS,
 		body: JSON.stringify({ email, password })
 	})
-	.then(res => checkResponse<UserType>(res));
+	.then(res => checkResponse<any>(res));
 };
 
 export function checkToken() {

@@ -25,11 +25,11 @@ function App() {
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setUserMovies } = useContext(UserMoviesContext);
   const { pathname } = useLocation();
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
-  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState<boolean>(false);
-  const [isRegistered, setIsRegistered] = useState<boolean>(false);
-  const [succesMessage, setSuccesMessage] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [succesMessage, setSuccesMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const validFooterPaths = ["/", "/saved-movies"];
   const validHeaderPaths = validFooterPaths + "/profile";
@@ -85,7 +85,7 @@ function App() {
       .catch((err) => handleError(err));
   }
 
-  function handleRegister({ name, email, password }) {
+  function handleRegister({ name, email, password }: UserType) {
     api
       .register({ name, email, password })
       .then(() => {
@@ -99,9 +99,9 @@ function App() {
   function handleLogin({ email, password }: UserType) {
     api
       .login({ email, password })
-      .then((data) => {
+      .then((data: any) => {
         localStorage.setItem("token", data.token);
-        localStorage.setItem("isUserLogin", 'true');
+        localStorage.setItem("isUserLogin", "true");
         navigate("/");
         setLoggedIn(true);
       })
@@ -133,6 +133,9 @@ function App() {
     setIsInfoPopupOpen(false);
   };
 
+  // const AuthenticatedProfile = ProtectedRoute(Profile);
+  // const AuthSavedMovies = ProtectedRoute(SavedMovies);
+
   return (
     <div className="app">
       {shouldShowHeader && <Header />}
@@ -155,22 +158,17 @@ function App() {
         <Route
           path="/saved-movies"
           element={
-            <ProtectedRoute
-              element={SavedMovies}
-              isLoggedIn={isLoggedIn}
-              getUserMovies={getUserMovies}
-            />
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <SavedMovies getUserMovies={getUserMovies}  />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/profile"
           element={
-            <ProtectedRoute
-              element={Profile}
-              isLoggedIn={isLoggedIn}
-              onLogOut={handleLogout}
-              onSave={handleChangeProfile}
-            />
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <Profile onLogOut={handleLogout} onSave={handleChangeProfile} />
+            </ProtectedRoute>
           }
         />
         <Route path="/*" element={<NotFound />} />

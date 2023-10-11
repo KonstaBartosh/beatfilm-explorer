@@ -1,6 +1,4 @@
-import React from "react";
 import "./Header.css";
-
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import Logo from "../UI/Logo/Logo";
 import Navigation from "../Navigation/Navigation";

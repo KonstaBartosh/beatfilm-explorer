@@ -7,13 +7,14 @@ import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieType } from "../../utils/types";
+import { getFromLocalStorage } from "../../utils/helpers";
 
 
 function SavedMovies({ getUserMovies }: {getUserMovies: () => void}) {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
   const [filteredUserMovies, setFilteredUserMovies] = useState<MovieType[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [isToggled, setIsToggled] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isToggled, setIsToggled] = useState(false);
 
   //** подгружаем сохраненные фильмы из БД */
   useEffect(() => {
@@ -43,7 +44,7 @@ function SavedMovies({ getUserMovies }: {getUserMovies: () => void}) {
       localStorage.setItem('userMovies', JSON.stringify(userMovies));
     } else {
       setIsToggled(false);
-      setUserMovies(JSON.parse(localStorage.getItem("userMovies")));
+      setUserMovies(getFromLocalStorage("userMovies"));
       localStorage.removeItem("userMovies");
     }
   }

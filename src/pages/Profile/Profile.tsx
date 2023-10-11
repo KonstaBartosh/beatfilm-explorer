@@ -7,11 +7,11 @@ import TextInput from "../../components/UI/Inputs/TextInput";
 import EmailInput from "../../components/UI/Inputs/EmailInput";
 import { UserType } from "../../utils/types";
 
-interface ProfileProps {
+
+export interface ProfileProps {
   onLogOut: () => void;
   onSave: (userData: UserType) => void;
 }
-
 
 function Profile({ onLogOut, onSave }: ProfileProps) {
 	const {

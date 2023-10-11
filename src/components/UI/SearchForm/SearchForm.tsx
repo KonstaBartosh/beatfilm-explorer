@@ -23,7 +23,7 @@ function SearchForm({
 }: SearchFormProps) {
   const [validationError, setValidationError] = useState<string>("");
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = (evt: { preventDefault: () => void; }) => {
     evt.preventDefault();
     if (searchQuery === "") {
       setValidationError("Нужно ввести ключевое слово");

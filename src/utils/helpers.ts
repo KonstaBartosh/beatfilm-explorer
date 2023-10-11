@@ -6,9 +6,9 @@ export function formatTime(duration: number): string {
 	return `${hours ? `${hours}ч` : ""} ${minutes}м`;
 }
 
-export function getFromLocalStorage<T>(key: string, defaultValue: T | null = null): T | null {
+export function getFromLocalStorage(key: string)  {
 	const item = localStorage.getItem(key);
-	return item ? JSON.parse(item) as T : defaultValue;
+	return item ? JSON.parse(item) : null;
 }
 
 export function setLocalStorage<T>(key: string, value: T | null ): void {
