@@ -14,7 +14,7 @@ import NotFound from "../../pages/NotFound/NotFound";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import InfoToolTip from "../popups/InfoTooltip";
 import MoviePopup from "../popups/MoviePopup";
-import * as api from "../../utils/mainApi";
+import * as api from "../../utils/MainApi";
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
@@ -102,8 +102,8 @@ function App() {
       .then((data: any) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("isUserLogin", "true");
-        navigate("/");
         setLoggedIn(true);
+        navigate("/");
       })
       .catch((err) => handleError(err));
   }
@@ -133,9 +133,6 @@ function App() {
     setIsInfoPopupOpen(false);
   };
 
-  // const AuthenticatedProfile = ProtectedRoute(Profile);
-  // const AuthSavedMovies = ProtectedRoute(SavedMovies);
-
   return (
     <div className="app">
       {shouldShowHeader && <Header />}
@@ -158,7 +155,7 @@ function App() {
         <Route
           path="/saved-movies"
           element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
+            <ProtectedRoute>
               <SavedMovies getUserMovies={getUserMovies}  />
             </ProtectedRoute>
           }
@@ -166,7 +163,7 @@ function App() {
         <Route
           path="/profile"
           element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
+            <ProtectedRoute>
               <Profile onLogOut={handleLogout} onSave={handleChangeProfile} />
             </ProtectedRoute>
           }

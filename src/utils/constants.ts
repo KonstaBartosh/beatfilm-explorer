@@ -16,8 +16,6 @@ export const METHOD = {
   DELETE: 'DELETE'
 }
 
-export const AUTHORIZATION = {"Authorization": `Bearer ${localStorage.getItem('token')}`};
-
 export const SUCCES_REGISTRATION_MESSAGE: string = 'Вы успешно зарегистрировались!';
 export const INVALID_EMAIL_MESSAGE: string = `Адрес электронной почты должен содержать символ ' @ ' и минимум 2 символа для домена`;
 export const MOVIES_NOT_FOUND_MESSAGE: string = 'Ничего не найдено';

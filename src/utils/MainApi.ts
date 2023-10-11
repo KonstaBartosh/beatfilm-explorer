@@ -1,4 +1,4 @@
-import { BASE_URL, JSON_HEADERS, METHOD, URL_MOVIE_SERVER, AUTHORIZATION } from "./constants";
+import { BASE_URL, JSON_HEADERS, METHOD, URL_MOVIE_SERVER } from "./constants";
 import { checkResponse } from "./helpers";
 import { MovieType, UserType } from "./types";
 
@@ -18,7 +18,7 @@ export const login = ({ email, password }: UserType) => {
 		headers: JSON_HEADERS,
 		body: JSON.stringify({ email, password })
 	})
-	.then(res => checkResponse<any>(res));
+	.then(res => checkResponse<UserType>(res));
 };
 
 export function checkToken() {
@@ -26,7 +26,7 @@ export function checkToken() {
 		method: METHOD.GET,
 		headers: {
 			...JSON_HEADERS,
-			...AUTHORIZATION,
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 		}
 	})
 	.then((res) => res.json())
@@ -38,7 +38,7 @@ export function getUserData() {
 		method: METHOD.GET,
 		headers: {
 			...JSON_HEADERS,
-			...AUTHORIZATION
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 		}
 	})
 	.then(res => checkResponse<UserType>(res));
@@ -49,7 +49,7 @@ export function getUserMovies() {
 		method: METHOD.GET,
 		headers: {
 			...JSON_HEADERS,
-			...AUTHORIZATION
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 		}
 	})
 	.then(res => checkResponse<MovieType[]>(res));
@@ -60,7 +60,7 @@ export function changeUserData({ name, email }: UserType) {
 		method: METHOD.PATCH,
 		headers: {
 			...JSON_HEADERS,
-			...AUTHORIZATION
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 		},
 		body: JSON.stringify({ name, email })
 	})
@@ -72,7 +72,7 @@ export const saveUserMovie = (movie: MovieType) => {
 		method: METHOD.POST,
 		headers: {
 			...JSON_HEADERS,
-			...AUTHORIZATION
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 		},
 		body: JSON.stringify({
 			country: movie.country,
@@ -96,7 +96,7 @@ export const removeUserMovie = (movieId: MovieType) => {
 		method: METHOD.DELETE,
 		headers: {
 			...JSON_HEADERS,
-			...AUTHORIZATION
+			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 		}	
 	})
 	.then(res => checkResponse<UserType>(res));

@@ -37,8 +37,6 @@ function Profile({ onLogOut, onSave }: ProfileProps) {
     setIsSaveButtonValid(areInputsChanged);
   }, [nameInputValue, emailInputValue, currentUser]);
   
-	
-
   const handleUnlockInputs = () => {
     setIsInputsVisible(true);
   };
@@ -52,7 +50,7 @@ function Profile({ onLogOut, onSave }: ProfileProps) {
     <section className="profile">
       <div className="profile__container">
         <div className="profile__data-set">
-          <h2 className="profile__title">{`Привет, ${currentUser.name}!`}</h2>
+          <h2 className="profile__title">{currentUser.name}</h2>
           <div className="profile__data-string">
             <span className="profile__text">Имя</span>
             <span className={`profile__text ${isInputsVisible ? "hidden" : ""}`}>

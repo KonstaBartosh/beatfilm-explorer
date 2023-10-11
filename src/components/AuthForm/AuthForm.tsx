@@ -50,7 +50,7 @@ function AuthForm({
           <p className="auth-form__question">
             {question}
             <NavButton
-              text={navLinkTitle}
+              text={` ${navLinkTitle}`}
               path={navLink}
               className="auth-form__link"
             />

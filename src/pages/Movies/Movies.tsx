@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 
 import "./Movies.css";
-import * as moviesApi from "../../utils/moviesApi";
+import * as moviesApi from "../../utils/MoviesApi";
 import SearchForm from "../../components/UI/SearchForm/SearchForm";
 import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
 import { filterMovies } from "../../utils/filterMovies";

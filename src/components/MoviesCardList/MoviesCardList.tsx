@@ -24,9 +24,9 @@ function MoviesCardList({
 }: CardListProps) {
   const { pathname } = useLocation();
   const mainPage = pathname === '/';
-  const warningMessage: string = isRequestError ? MOVIES_SERVER_ERR_MESSAGE: MOVIES_NOT_FOUND_MESSAGE;
+  const warningMessage = isRequestError ? MOVIES_SERVER_ERR_MESSAGE: MOVIES_NOT_FOUND_MESSAGE;
 
-  return isLoading 
+  return isLoading
   ? ( <Preloader />) 
   : (
     <>
