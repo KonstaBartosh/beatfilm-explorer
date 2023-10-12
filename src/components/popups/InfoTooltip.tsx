@@ -1,5 +1,3 @@
-import React from "react";
-
 import "../popups/popup.css";
 import successLogo from "../../images/registration-success.svg";
 import deniedLogo from "../../images/registration-denied.svg";
@@ -12,13 +10,14 @@ interface ToolTipProps {
   deniedTitle: string;
 }
 
-function InfoTooltip({
+
+export const InfoTooltip = ({
   isOpen,
   condition,
   onClose,
   successTitle,
   deniedTitle,
-}: ToolTipProps) {
+}: ToolTipProps) => {
   return (
     <section
       className={`popup ${isOpen && "popup_opened"}`}
@@ -53,5 +52,3 @@ function InfoTooltip({
     </section>
   );
 }
-
-export default InfoTooltip;

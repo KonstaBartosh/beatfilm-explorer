@@ -1,8 +1,7 @@
-import React, { FormEvent, ReactNode } from "react";
+import { FormEvent, ReactNode } from "react";
 
 import "./AuthForm.css";
-import Logo from "../UI/Logo/Logo";
-import NavButton from "../UI/NavButton/NavButton";
+import * as ui from "../../components"
 
 interface AuthFormProps {
   title: string;
@@ -15,7 +14,7 @@ interface AuthFormProps {
   onSubmit: (evt: FormEvent) => void;
 }
 
-function AuthForm({
+export const AuthForm = ({
   title,
   buttonText,
   question,
@@ -24,14 +23,14 @@ function AuthForm({
   isValid,
   children,
   onSubmit
-}: AuthFormProps) {
+}: AuthFormProps) => {
 
   return (
     <div className="auth-form">
       <div className="auth-form__container">
         <div>
           <div className="auth-form__header">
-            <Logo />
+            <ui.Logo />
             <h2 className="auth-form__title">{title}</h2>
           </div>
           <form className="auth-form__form" id="form__auth" onSubmit={onSubmit}>
@@ -49,7 +48,7 @@ function AuthForm({
           </button>
           <p className="auth-form__question">
             {question}
-            <NavButton
+            <ui.NavButton
               text={` ${navLinkTitle}`}
               path={navLink}
               className="auth-form__link"
@@ -60,5 +59,3 @@ function AuthForm({
     </div>
   );
 }
-
-export default AuthForm;

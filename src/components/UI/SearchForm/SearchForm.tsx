@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 
 import "./SearchForm.css";
 import logo from "../../../images/search_icon.svg";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import { ToggleSwitch } from "../ToggleSwitch/ToggleSwitch";
 
 interface SearchFormProps {
   searchQuery: string;
@@ -13,14 +13,15 @@ interface SearchFormProps {
   handleSearchChange: (evt: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function SearchForm({
+
+export const SearchForm = ({
   searchQuery,
   handleSearchChange,
   onSearchClick,
   onToggle,
   defaultValue,
   isToggled,
-}: SearchFormProps) {
+}: SearchFormProps) => {
   const [validationError, setValidationError] = useState<string>("");
 
   const handleSubmit = (evt: { preventDefault: () => void; }) => {
@@ -65,4 +66,4 @@ function SearchForm({
   );
 }
 
-export default SearchForm;
+// export default SearchForm;

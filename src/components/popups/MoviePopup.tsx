@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import "../popups/popup.css";
 import { MovieContext } from "../../context/MovieContext";
 import { URL_MOVIE_SERVER } from "../../utils/constants";
 import { useLocation } from "react-router-dom";
 
-function MoviePopup() {
+export const MoviePopup = () => {
   const { selectedMovie, closeMoviePopup } = useContext(MovieContext);
   const { pathname } = useLocation();
 
@@ -52,5 +52,3 @@ function MoviePopup() {
     </section>)
   );
 }
-
-export default MoviePopup;

@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import "./SavedMovies.css";
-import SearchForm from "../../components/UI/SearchForm/SearchForm";
-import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
+import { MoviesCardList, SearchForm } from "../../components";
 import { SHORT_MOVIE_LENGTH } from "../../utils/constants";
 import { filterMovies } from "../../utils/filterMovies";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
@@ -10,7 +9,7 @@ import { MovieType } from "../../utils/types";
 import { getFromLocalStorage } from "../../utils/helpers";
 
 
-function SavedMovies({ getUserMovies }: {getUserMovies: () => void}) {
+export const SavedMovies = ({ getUserMovies }: {getUserMovies: () => void}) => {
   const {userMovies, setUserMovies} = useContext(UserMoviesContext);
   const [filteredUserMovies, setFilteredUserMovies] = useState<MovieType[]>([]);
   const [searchQuery, setSearchQuery] = useState('');

@@ -2,7 +2,7 @@ import "./styles/Input.css"
 import { Inputs } from "../../../utils/types";
 
 
-export default function TextInput({
+export const TextInput = ({
   title,
   label,
   register,
@@ -10,7 +10,8 @@ export default function TextInput({
   placeholder,
   defaultValue,
   autoComplete
-}: Inputs) {
+}: Inputs) => {
+  
   const namePattern: RegExp = /^[a-zA-Zа-яА-Я\s-]*$/;
 
   return (

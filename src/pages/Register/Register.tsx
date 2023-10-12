@@ -1,14 +1,11 @@
 import { useForm } from "react-hook-form";
 
-import TextInput from "../../components/UI/Inputs/TextInput";
-import EmailInput from "../../components/UI/Inputs/EmailInput";
-import PasswordInput from "../../components/UI/Inputs/PasswordInput";
-import AuthForm from "../../components/AuthForm/AuthForm";
+import * as com from "../../components";
 import { UserType } from "../../utils/types";
 
 type onRegisterType = (userData: UserType) => void;
 
-function Register({ onRegister }: {onRegister: onRegisterType}) {
+export const Register = ({ onRegister }: {onRegister: onRegisterType}) => {
   const {
     register,
     handleSubmit,
@@ -20,7 +17,7 @@ function Register({ onRegister }: {onRegister: onRegisterType}) {
   };
 
   return (
-    <AuthForm
+    <com.AuthForm
       title={"Добро пожаловать!"}
       buttonText={"Зарегистрироваться"}
       navLink={"/sign-in"}
@@ -29,7 +26,7 @@ function Register({ onRegister }: {onRegister: onRegisterType}) {
       onSubmit={handleSubmit(submitData)}
       isValid={isValid}
     >
-      <TextInput
+      <com.TextInput
         title={"name"}
         label={"Имя"}
         placeholder={"Имя"}
@@ -37,14 +34,14 @@ function Register({ onRegister }: {onRegister: onRegisterType}) {
         errors={errors}
         autoComplete={"name"}
       />
-      <EmailInput
+      <com.EmailInput
         title={"email"}
         label={"E-mail"}
         placeholder={"E-mail"}
         register={register}
         errors={errors}
       />
-      <PasswordInput
+      <com.PasswordInput
         title={"password"}
         label={"Пароль"}
         placeholder={"Пароль"}
@@ -52,8 +49,6 @@ function Register({ onRegister }: {onRegister: onRegisterType}) {
         errors={errors}
         autoComplete={"new-password"}
       />
-    </AuthForm>
+    </com.AuthForm>
   );
 }
-
-export default Register;

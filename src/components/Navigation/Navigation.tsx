@@ -1,7 +1,8 @@
 import "./Navigation.css";
-import NavButton from "../UI/NavButton/NavButton";
+import { NavButton } from "../UI/NavButton/NavButton";
 
-function Navigation() {
+
+export const Navigation = () => {
   return (
     <nav className="navigation">
       <div className="navigation__movies">
@@ -19,5 +20,3 @@ function Navigation() {
     </nav>
   );
 }
-
-export default Navigation;

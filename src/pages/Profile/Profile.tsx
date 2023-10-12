@@ -2,9 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import "./Profile.css";
+import * as ui from "../../components";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
-import TextInput from "../../components/UI/Inputs/TextInput";
-import EmailInput from "../../components/UI/Inputs/EmailInput";
 import { UserType } from "../../utils/types";
 
 
@@ -13,7 +12,7 @@ export interface ProfileProps {
   onSave: (userData: UserType) => void;
 }
 
-function Profile({ onLogOut, onSave }: ProfileProps) {
+export const Profile = ({ onLogOut, onSave }: ProfileProps) => {
 	const {
     register,
     handleSubmit,
@@ -57,7 +56,7 @@ function Profile({ onLogOut, onSave }: ProfileProps) {
               {currentUser.name}
             </span>
             <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
-              <TextInput
+              <ui.TextInput
                 title={"name"}
                 defaultValue={currentUser.name}
                 register={register}
@@ -72,7 +71,7 @@ function Profile({ onLogOut, onSave }: ProfileProps) {
               {currentUser.email}
             </span>
             <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
-              <EmailInput
+              <ui.EmailInput
                 title={"email"}
                 defaultValue={currentUser.email}
                 register={register}
@@ -108,5 +107,3 @@ function Profile({ onLogOut, onSave }: ProfileProps) {
     </section>
   );
 }
-
-export default  Profile;

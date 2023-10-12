@@ -3,24 +3,16 @@ import { useContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Movies from "../../pages/Movies/Movies";
-import SavedMovies from "../../pages/SavedMovies/SavedMovies";
-import Profile from "../../pages/Profile/Profile";
-import Login from "../../pages/Login/Login";
-import Register from "../../pages/Register/Register";
-import NotFound from "../../pages/NotFound/NotFound";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import InfoToolTip from "../popups/InfoTooltip";
-import MoviePopup from "../popups/MoviePopup";
+import * as components from "../../components";
+import * as pages from "../../pages";
 import * as api from "../../utils/MainApi";
+
 import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieType, UserType } from "../../utils/types";
 
-function App() {
+export const App = () => {
   const navigate = useNavigate();
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setUserMovies } = useContext(UserMoviesContext);
@@ -135,52 +127,50 @@ function App() {
 
   return (
     <div className="app">
-      {shouldShowHeader && <Header />}
+      {shouldShowHeader && <components.Header />}
       <Routes>
         <Route
           path="/"
           element={
-            <Movies getUserMovies={getUserMovies} handleError={handleError} />
+            <pages.Movies getUserMovies={getUserMovies} handleError={handleError} />
           }
         />
         {!isLoggedIn && (
           <>
             <Route
               path="/sign-up"
-              element={<Register onRegister={handleRegister} />}
+              element={<pages.Register onRegister={handleRegister} />}
             />
-            <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
+            <Route path="/sign-in" element={<pages.Login onLogin={handleLogin} />} />
           </>
         )}
         <Route
           path="/saved-movies"
           element={
-            <ProtectedRoute>
-              <SavedMovies getUserMovies={getUserMovies}  />
-            </ProtectedRoute>
+            <components.ProtectedRoute>
+              <pages.SavedMovies getUserMovies={getUserMovies}  />
+            </components.ProtectedRoute>
           }
         />
         <Route
           path="/profile"
           element={
-            <ProtectedRoute>
-              <Profile onLogOut={handleLogout} onSave={handleChangeProfile} />
-            </ProtectedRoute>
+            <components.ProtectedRoute>
+              <pages.Profile onLogOut={handleLogout} onSave={handleChangeProfile} />
+            </components.ProtectedRoute>
           }
         />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="/*" element={<pages.NotFound />} />
       </Routes>
-      {shouldShowFooter && <Footer />}
-      <InfoToolTip
+      {shouldShowFooter && <components.Footer />}
+      <components.InfoTooltip
         isOpen={isInfoPopupOpen}
         onClose={handleClosePopups}
         condition={isRegistered}
         successTitle={succesMessage}
         deniedTitle={errorMessage}
       />
-      <MoviePopup />
+      <components.MoviePopup />
     </div>
   );
 }
-
-export default App;

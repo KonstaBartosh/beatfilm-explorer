@@ -14,7 +14,7 @@ interface Props {
   handleError: (arg: string) => void;
 }
 
-function MoviesCard({ movie, handleError }: Props) {
+export const MoviesCard = ({ movie, handleError }: Props) => {
   const { userMovies, setUserMovies } = useContext(UserMoviesContext);
   const { openMoviePopup } = useContext(MovieContext);
   const { nameRU, duration, image } = movie;
@@ -110,5 +110,3 @@ function MoviesCard({ movie, handleError }: Props) {
     </div>
   );
 }
-
-export default MoviesCard;

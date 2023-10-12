@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./ToggleSwitch.css";
 
 interface ToggleSwitcherProps {
@@ -7,7 +5,8 @@ interface ToggleSwitcherProps {
 	onToggle: () => void;
 }
 
-function ToggleSwitch({ onToggle, isToggled }: ToggleSwitcherProps) {
+
+export const ToggleSwitch = ({ onToggle, isToggled }: ToggleSwitcherProps) => {
   return (
 		<label className="toggle">
 			<input type="checkbox" id="toggle" checked={isToggled} onChange={onToggle}/>
@@ -15,5 +14,3 @@ function ToggleSwitch({ onToggle, isToggled }: ToggleSwitcherProps) {
 		</label>
   );
 }
-
-export default ToggleSwitch;

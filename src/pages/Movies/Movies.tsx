@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 
 import "./Movies.css";
 import * as moviesApi from "../../utils/MoviesApi";
-import SearchForm from "../../components/UI/SearchForm/SearchForm";
-import MoviesCardList from "../../components/MoviesCardList/MoviesCardList";
+import * as com from "../../components";
+
 import { filterMovies } from "../../utils/filterMovies";
 import { LocalStorageDataType, MovieType } from "../../utils/types";
 import { getFromLocalStorage, setLocalStorage } from "../../utils/helpers";
@@ -21,7 +21,7 @@ interface MoviesProps {
   handleError: (arg: string) => void;
 }
 
-function Movies({ getUserMovies, handleError }: MoviesProps) {
+export const Movies = ({ getUserMovies, handleError }: MoviesProps) => {
   const LOCAL_STORAGE: LocalStorageDataType = {
     IS_USER_LOGGED: getFromLocalStorage("isUserLogin"),
     ALL_MOVIES: getFromLocalStorage("allMovies"),
@@ -173,7 +173,7 @@ function Movies({ getUserMovies, handleError }: MoviesProps) {
 
   return (
     <section className="movies">
-        <SearchForm
+        <com.SearchForm
           onSearchClick={handleSearchMovies}
           handleSearchChange={handleSearchChange}
           onToggle={handleToggleSwitch}
@@ -181,7 +181,7 @@ function Movies({ getUserMovies, handleError }: MoviesProps) {
           isToggled={isToggled}
           searchQuery={searchQuery}
         />
-        <MoviesCardList
+        <com.MoviesCardList
           arrayList={filteredMovies}
           isLoading={isLoading}
           isRequestError={isRequestError}
@@ -192,5 +192,3 @@ function Movies({ getUserMovies, handleError }: MoviesProps) {
     </section>
   );
 }
-
-export default Movies;

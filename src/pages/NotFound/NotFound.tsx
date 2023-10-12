@@ -1,7 +1,8 @@
 import './NotFound.css'
 import { useNavigate } from "react-router-dom";
 
-function NotFound() {
+
+export const NotFound = () => {
 	const navigate = useNavigate();
 	const onGetBack = () => navigate(-1);
 
@@ -18,5 +19,3 @@ function NotFound() {
 		</section>
 	);
 }
-
-export default NotFound;

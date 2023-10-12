@@ -1,14 +1,12 @@
 import { useForm } from "react-hook-form";
 
-import EmailInput from "../../components/UI/Inputs/EmailInput";
-import PasswordInput from "../../components/UI/Inputs/PasswordInput";
-import AuthForm from "../../components/AuthForm/AuthForm";
+import * as com from "../../components";
 import { UserType } from "../../utils/types";
 
 type OnLoginType = (userData: UserType) => void;
 
 
-function Login({ onLogin }: { onLogin: OnLoginType }) {
+export const Login = ({ onLogin }: { onLogin: OnLoginType }) => {
   const {
     register,
     handleSubmit,
@@ -20,7 +18,7 @@ function Login({ onLogin }: { onLogin: OnLoginType }) {
   };
 
   return (
-    <AuthForm
+    <com.AuthForm
       title={"Рады видеть!"}
       buttonText={"Войти"}
       navLink={"/sign-up"}
@@ -29,14 +27,14 @@ function Login({ onLogin }: { onLogin: OnLoginType }) {
       onSubmit={handleSubmit(submitData)}
       isValid={isValid}
     >
-      <EmailInput
+      <com.EmailInput
         title={"email"}
         label={"E-mail"}
         placeholder={"E-mail"}
         register={register}
         errors={errors}
       />
-      <PasswordInput
+      <com.PasswordInput
         title={"password"}
         label={"Пароль"}
         placeholder={"Пароль"}
@@ -44,8 +42,6 @@ function Login({ onLogin }: { onLogin: OnLoginType }) {
         errors={errors}
         autoComplete={"current-password"}
       />
-    </AuthForm>
+    </com.AuthForm>
   );
 }
-
-export default Login;

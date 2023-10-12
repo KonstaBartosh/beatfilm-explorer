@@ -2,7 +2,7 @@ import "./Footer.css";
 import { BEAT_FILM_URL, FOOTER_TITLE, GITHUB_URL } from "../../utils/constants";
 import { GET_YEAR } from '../../utils/helpers';
 
-function Footer() {
+export const Footer = () => {
   return (
     <footer className="footer">
       <p className="footer__title footer__title_underline">
@@ -32,5 +32,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

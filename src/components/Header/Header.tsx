@@ -1,27 +1,24 @@
 import "./Header.css";
-import BurgerMenu from "../BurgerMenu/BurgerMenu";
-import Logo from "../UI/Logo/Logo";
-import Navigation from "../Navigation/Navigation";
-import NavButton from "../UI/NavButton/NavButton";
+import * as ui from "../../components";
 
 
-function Header() {
+export const Header = () => {
   const isUserLogin = localStorage.getItem('isUserLogin')
 
   const profileMarkup = isUserLogin ? (
-    <NavButton
+    <ui.NavButton
       text="Аккаунт"
       path="/profile"
       className="header__button header__button_account"
     /> 
     ) : (
     <nav className="header__profile-nav">
-      <NavButton
+      <ui.NavButton
         text="Регистрация"
         path="/sign-up"
         className="header__button header__button_register"
       />
-      <NavButton
+      <ui.NavButton
         text="Войти"
         path="/sign-in"
         className="header__button header__button_logout"
@@ -32,13 +29,11 @@ function Header() {
   return (
     <header className="header">
       <div className="header__container">
-        <Logo />
-        {isUserLogin && <Navigation />}
+        <ui.Logo />
+        {isUserLogin && <ui.Navigation />}
         {profileMarkup}
-        {isUserLogin && <BurgerMenu />}
+        {isUserLogin && <ui.BurgerMenu />}
       </div>
     </header>
   );
 }
-
-export default Header;

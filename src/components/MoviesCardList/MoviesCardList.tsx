@@ -1,6 +1,6 @@
 import './MoviesCardList.css';
-import MoviesCard from '../MoviesCard/MoviesCard';
-import Preloader from '../UI/Preloader/Preloader';
+import { MoviesCard } from '../MoviesCard/MoviesCard';
+import { Preloader } from '../UI/Preloader/Preloader';
 import { MOVIES_NOT_FOUND_MESSAGE, MOVIES_SERVER_ERR_MESSAGE } from '../../utils/constants';
 import { MovieType } from '../../utils/types';
 import { useLocation } from 'react-router-dom';
@@ -14,14 +14,14 @@ interface CardListProps {
   handleError: (arg: string) => void;
 }
 
-function MoviesCardList({
+export const MoviesCardList = ({
   cards,
   arrayList,
   isLoading,
   isRequestError,
   onAddMore,
   handleError,
-}: CardListProps) {
+}: CardListProps) => {
   const { pathname } = useLocation();
   const mainPage = pathname === '/';
   const warningMessage = isRequestError ? MOVIES_SERVER_ERR_MESSAGE: MOVIES_NOT_FOUND_MESSAGE;
@@ -51,5 +51,3 @@ function MoviesCardList({
     </>
   );
 }
-
-export default MoviesCardList;

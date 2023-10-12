@@ -1,9 +1,10 @@
 import { useState } from "react";
+
 import "./styles/Input.css";
 import icon from '../../../images/eye_icon.svg';
 import { Inputs } from "../../../utils/types";
 
-function PasswordInput({
+export const PasswordInput = ({
   title,
   label,
   register,
@@ -11,7 +12,7 @@ function PasswordInput({
   placeholder,
   defaultValue,
   autoComplete
-}: Inputs) {
+}: Inputs) => {
   const [iShowPassword, setShowPassword] = useState<boolean>(false);
   
   const toggleShowPassword = () => {
@@ -53,5 +54,3 @@ function PasswordInput({
     </>
   );
 }
-
-export default PasswordInput;

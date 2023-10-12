@@ -7,12 +7,10 @@ interface NavButtonProps {
 	onClick?: (evt: any) => void; 
 }
 
-const NavButton = ({ text, path, className, onClick } : NavButtonProps) => {
+export const NavButton = ({ text, path, className, onClick } : NavButtonProps) => {
 	return(
 		<NavLink to={path} className={className} onClick={onClick}>
 			{text}
 		</NavLink>
 	);
 }
-
-export default NavButton;

@@ -2,14 +2,14 @@ import "./styles/Input.css"
 import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../../utils/constants";
 import { Inputs } from "../../../utils/types";
 
-export default function EmailInput({
+export const EmailInput = ({
   title,
   label,
   register,
   errors,
   placeholder,
   defaultValue,
-}: Inputs) {
+}: Inputs) => {
 
   return (
     <>
