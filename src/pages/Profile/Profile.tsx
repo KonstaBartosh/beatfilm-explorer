@@ -52,10 +52,10 @@ export const Profile = ({ onLogOut, onSave }: ProfileProps) => {
           <h2 className="profile__title">{currentUser.name}</h2>
           <div className="profile__data-string">
             <span className="profile__text">Имя</span>
-            <span className={`profile__text ${isInputsVisible ? "hidden" : ""}`}>
+            <span className={`profile__text ${isInputsVisible && "hidden"}`}>
               {currentUser.name}
             </span>
-            <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
+            <div className={`profile__input-container ${!isInputsVisible && "hidden"}`}>
               <ui.TextInput
                 title={"name"}
                 defaultValue={currentUser.name}
@@ -67,10 +67,10 @@ export const Profile = ({ onLogOut, onSave }: ProfileProps) => {
           <span className="underline" />
           <div className="profile__data-string"> 
             <span className="profile__text">E-mail</span>
-            <span className={`profile__text ${isInputsVisible ? "hidden" : ""}`}>
+            <span className={`profile__text ${isInputsVisible && "hidden"}`}>
               {currentUser.email}
             </span>
-            <div className={`profile__input-container ${isInputsVisible ? "" : "hidden"}`}>
+            <div className={`profile__input-container ${!isInputsVisible && "hidden"}`}>
               <ui.EmailInput
                 title={"email"}
                 defaultValue={currentUser.email}
