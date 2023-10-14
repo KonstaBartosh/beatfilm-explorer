@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import "./MoviesCard.css";
@@ -19,24 +19,12 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
   const { openMoviePopup } = useContext(MovieContext);
   const { nameRU, duration, image } = movie;
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   const { pathname } = useLocation();
-  const isMoviesPath: boolean = pathname === "/";
-  const picture: string =
-    pathname === "/" ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
+  const picture = pathname === "/" ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
+  const buttonClassName = `card__btn ${isLiked && "card__btn_active"}`;
 
-  //** стили для кнопки */
-  const buttonText: string | null = isMoviesPath ? null : "✗";
-  const baseButtonClassName: string = "card__btn";
-  const likeButtonClassName: string = `card__like ${
-    isLiked && "card__like_active"
-  }`;
-  const removeButtonClassName: string = "card__like_rm";
-
-  const buttonClassName: string = isMoviesPath
-    ? ` ${baseButtonClassName} ${likeButtonClassName}`
-    : `${baseButtonClassName} ${removeButtonClassName}`;
 
   // есть ли фильм в списке лайкнутых => установить начальное состояние isLiked
   useEffect(() => {
@@ -48,39 +36,35 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
   }, [userMovies, movie.nameRU]);
 
   function toggleLike() {
-    //** ищем фильм в userMovies */
-    const savedMovie = userMovies.find(
-      (userMovie) => userMovie.nameRU === movie.nameRU
-    );
-    if (!savedMovie) {
-      handleSaveMovie();
-    } else {
-      handleRemoveMovie(savedMovie);
-    }
-  }
+    const isMovieSaved = userMovies.find(
+      (userMovie) => userMovie.nameRU === movie.nameRU);
 
-  function handleSaveMovie() {
+    isMovieSaved ? removeMovie(isMovieSaved) : saveMovie();
+  }
+  
+  function saveMovie() {
     api
       .saveUserMovie(movie)
-      .then(() => {
+      .then((response) => {
+        const savedMovie = response;
         setIsLiked(true);
-        //** добавляем фильм в userMovies после сохранения */
-        setUserMovies([...userMovies, movie]);
+        setUserMovies([...userMovies, savedMovie]);
       })
       .catch(() => handleError(SIGN_IN_MESSAGE));
   }
-
-  function handleRemoveMovie(movieToRemove: any) {
+  
+  function removeMovie(movieToRemove: any) {
     api
       .removeUserMovie(movieToRemove._id)
       .then(() => {
         setIsLiked(false);
         setUserMovies(
-          userMovies.filter((userMovie) => userMovie._id !== movieToRemove._id)
+          userMovies.filter((userMovie) => userMovie.nameRU !== movieToRemove.nameRU)
         );
       })
       .catch((err) => handleError(err));
   }
+  
 
   function handleMoviePopup() {
     openMoviePopup(movie);
@@ -101,9 +85,7 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
             className={buttonClassName}
             type="submit"
             onClick={toggleLike}
-          >
-            {buttonText}
-          </button>
+          />
         </div>
         <span className="card__subtitle">{formattedDuration}</span>
       </div>
