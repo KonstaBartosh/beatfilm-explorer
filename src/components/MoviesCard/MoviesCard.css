@@ -33,33 +33,23 @@
 
 .card__btn {
 	background-color: inherit;
-	width: 16px;
-	height: 16px;
+	width: 20px;
+	height: 20px;
 	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-}
-
-.card__like {
-	border-style: solid;
-	border-radius: 50%;
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.card__like_active {
-	background-color: #EE3465;
+	border: 0;
+	background-image: url('../../images/bookmark_icon.svg');
 }
 
 .card__btn:hover {
 	opacity: 0.8;
 }
 
-.card__like_rm {
-	color: white;
-	border: 0;
-	font-size: large;
+.card__btn_active {
+	background-image: url('../../images/bookmark_icon_marked.svg');
 }
 
 .card__title {
