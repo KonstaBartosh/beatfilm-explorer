@@ -101,7 +101,7 @@
 
 @media screen and (max-width: 820px) {
 	.profile__container {
-		padding-block: 236px 269px;
+		align-self: center;
 	}
 
 	.profile__title {
@@ -109,7 +109,7 @@
 	}
 
 	.profile__buttons {
-		bottom: 269px;
+		padding-top: 210px;
 	}
 }
 
