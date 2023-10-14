@@ -80,6 +80,10 @@
 		height: 257px;
 	}
 
+	.card__title {
+		width: 260px;
+	}
+	
 	.card__image {
 		width: 339px;
 		height: 190px;

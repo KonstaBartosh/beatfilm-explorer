@@ -15,15 +15,17 @@ interface Props {
 }
 
 export const MoviesCard = ({ movie, handleError }: Props) => {
+  const { pathname } = useLocation();
   const { userMovies, setUserMovies } = useContext(UserMoviesContext);
   const { openMoviePopup } = useContext(MovieContext);
   const { nameRU, duration, image } = movie;
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);
 
-  const { pathname } = useLocation();
   const picture = pathname === "/" ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
   const buttonClassName = `card__btn ${isLiked && "card__btn_active"}`;
+  const buttonTitle = isLiked ? 'Удалить фильм' : 'Сохранить фильм';
+  const titleOnHover: string = nameRU.length > 25 ? nameRU : ''; 
 
 
   // есть ли фильм в списке лайкнутых => установить начальное состояние isLiked
@@ -80,11 +82,14 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
       />
       <div className="card__header">
         <div className="card__header-wrapper">
-          <h2 className="card__title">{nameRU}</h2>
+          <h2 className="card__title" title={titleOnHover}>
+            {nameRU}
+          </h2>
           <button
             className={buttonClassName}
             type="submit"
             onClick={toggleLike}
+            aria-label={buttonTitle}
           />
         </div>
         <span className="card__subtitle">{formattedDuration}</span>
