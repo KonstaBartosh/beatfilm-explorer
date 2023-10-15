@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "./MoviesCard.css";
 import * as api from "../../utils/MainApi";
-import { SIGN_IN_MESSAGE, URL_MOVIE_SERVER } from "../../utils/constants";
+import { URL_MOVIE_SERVER } from "../../utils/constants";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieContext } from "../../context/MovieContext";
 import { MovieType } from "../../utils/types";
@@ -14,7 +14,9 @@ interface Props {
   handleError: (arg: string) => void;
 }
 
+
 export const MoviesCard = ({ movie, handleError }: Props) => {
+  const navigate = useNavigate();
   const { pathname } = useLocation();
   const { userMovies, setUserMovies } = useContext(UserMoviesContext);
   const { openMoviePopup } = useContext(MovieContext);
@@ -22,7 +24,7 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);
 
-  const picture = pathname === "/" ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
+  const thumbnail = pathname === "/" ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
   const buttonClassName = `card__btn ${isLiked && "card__btn_active"}`;
   const buttonTitle = isLiked ? 'Удалить фильм' : 'Сохранить фильм';
   const titleOnHover: string = nameRU.length > 25 ? nameRU : ''; 
@@ -52,7 +54,7 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
         setIsLiked(true);
         setUserMovies([...userMovies, savedMovie]);
       })
-      .catch(() => handleError(SIGN_IN_MESSAGE));
+      .catch(() => navigate('/sign-in'));
   }
   
   function removeMovie(movieToRemove: any) {
@@ -75,7 +77,7 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
   return (
     <div className="card">
       <img
-        src={picture}
+        src={thumbnail}
         alt={nameRU}
         className="card__image"
         onClick={handleMoviePopup}
