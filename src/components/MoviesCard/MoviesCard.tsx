@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import "./MoviesCard.css";
 import * as api from "../../utils/MainApi";
-import { URL_MOVIE_SERVER } from "../../utils/constants";
+import { PATH, URL_MOVIE_SERVER } from "../../utils/constants";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieContext } from "../../context/MovieContext";
 import { MovieType } from "../../utils/types";
@@ -24,7 +24,7 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
   const formattedDuration = useMemo(() => formatTime(duration), [duration]);
   const [isLiked, setIsLiked] = useState(false);
 
-  const thumbnail = pathname === "/" ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
+  const thumbnail = pathname === PATH.HOME ? `${URL_MOVIE_SERVER}${image.url}` : image.url;
   const buttonClassName = `card__btn ${isLiked && "card__btn_active"}`;
   const buttonTitle = isLiked ? 'Удалить фильм' : 'Сохранить фильм';
   const titleOnHover: string = nameRU.length > 25 ? nameRU : ''; 
@@ -54,7 +54,7 @@ export const MoviesCard = ({ movie, handleError }: Props) => {
         setIsLiked(true);
         setUserMovies([...userMovies, savedMovie]);
       })
-      .catch(() => navigate('/sign-in'));
+      .catch(() => navigate(PATH.SIGN_IN));
   }
   
   function removeMovie(movieToRemove: any) {

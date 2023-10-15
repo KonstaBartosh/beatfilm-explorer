@@ -27,24 +27,28 @@ export const EMAIL_REGEX: RegExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{
 export const SHORT_MOVIE_LENGTH: number = 40;
 export const AMMOUNT_OF_CARDS: number = 16;
 
-type NumberParams = {
-  [key: string]: number;
+export const PATH = {
+  HOME: '/',
+  SIGN_IN: '/sign-in',
+  SIGN_UP: '/sign-up',
+  PROFILE: '/profile',
+  SAVED_MOVIES: '/saved-movies'
 }
 
-export const SCREEN_WIDTH: NumberParams = {
+export const SCREEN_WIDTH = {
   LARGE: 1280,
   TABLET: 989,
   TABLET_SMALL: 768,
   MOBILE: 480,
 };
 
-export const ADD_MORE_CARDS: NumberParams = {
+export const ADD_MORE_CARDS= {
   FOUR: 4,
   THREE: 3,
   TWO: 2,
 };
 
-export const CARDS_AMMOUNT: NumberParams = {
+export const CARDS_AMMOUNT = {
   LARGE: 16,
   MEDIUM: 12,
   SMALL: 8,

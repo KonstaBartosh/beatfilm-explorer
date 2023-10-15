@@ -7,24 +7,24 @@ import * as components from "../../components";
 import * as pages from "../../pages";
 import * as api from "../../utils/MainApi";
 
-import { SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
+import { PATH, SUCCES_REGISTRATION_MESSAGE } from "../../utils/constants";
 import { CurrentUserContext } from "../../context/CurrentUserContext";
 import { UserMoviesContext } from "../../context/UserMoviesContext";
 import { MovieType, UserType } from "../../utils/types";
 
 export const App = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setUserMovies } = useContext(UserMoviesContext);
-  const { pathname } = useLocation();
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isInfoPopupOpen, setIsInfoPopupOpen] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [succesMessage, setSuccesMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validFooterPaths = ["/", "/saved-movies"];
-  const validHeaderPaths = validFooterPaths + "/profile";
+  const validFooterPaths = [PATH.HOME, PATH.SAVED_MOVIES];
+  const validHeaderPaths = validFooterPaths + PATH.PROFILE;
   const shouldShowHeader = validHeaderPaths.includes(pathname);
   const shouldShowFooter = validFooterPaths.includes(pathname);
 
@@ -95,7 +95,7 @@ export const App = () => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("isUserLogin", "true");
         setLoggedIn(true);
-        navigate("/");
+        navigate(PATH.HOME);
       })
       .catch((err) => handleError(err));
   }
@@ -103,7 +103,7 @@ export const App = () => {
   function handleLogout() {
     setLoggedIn(false);
     localStorage.clear();
-    navigate("/");
+    navigate(PATH.HOME);
   }
 
   function handleChangeProfile({ name, email }: UserType) {
@@ -130,7 +130,7 @@ export const App = () => {
       {shouldShowHeader && <components.Header />}
       <Routes>
         <Route
-          path="/"
+          path={PATH.HOME}
           element={
             <pages.Movies getUserMovies={getUserMovies} handleError={handleError} />
           }
@@ -138,14 +138,14 @@ export const App = () => {
         {!isLoggedIn && (
           <>
             <Route
-              path="/sign-up"
+              path={PATH.SIGN_UP}
               element={<pages.Register onRegister={handleRegister} />}
             />
             <Route path="/sign-in" element={<pages.Login onLogin={handleLogin} />} />
           </>
         )}
         <Route
-          path="/saved-movies"
+          path={PATH.SAVED_MOVIES}
           element={
             <components.ProtectedRoute>
               <pages.SavedMovies getUserMovies={getUserMovies}  />
@@ -153,7 +153,7 @@ export const App = () => {
           }
         />
         <Route
-          path="/profile"
+          path={PATH.PROFILE}
           element={
             <components.ProtectedRoute>
               <pages.Profile onLogOut={handleLogout} onSave={handleChangeProfile} />
