@@ -1,4 +1,6 @@
-import "../popups/popup.css";
+import React from "react";
+
+import "./popup.css";
 import successLogo from "../../images/registration-success.svg";
 import deniedLogo from "../../images/registration-denied.svg";
 

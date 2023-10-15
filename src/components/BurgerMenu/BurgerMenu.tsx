@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import "./BurgerMenu.css";
 import closeIcon from "../../images/close_icon.svg";

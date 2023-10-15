@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./styles/Input.css"
 import { EMAIL_REGEX, INVALID_EMAIL_MESSAGE } from "../../../utils/constants";
 import { Inputs } from "../../../utils/types";

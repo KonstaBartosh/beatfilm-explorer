@@ -6,7 +6,7 @@ export interface ChildrenType {
 }
 
 export interface MovieType {
-  id?: string | null;
+  id?: string;
 	_id?: string;
   movieId?: number;
   owner?: string | null;

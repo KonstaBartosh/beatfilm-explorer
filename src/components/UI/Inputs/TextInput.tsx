@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./styles/Input.css"
 import { Inputs } from "../../../utils/types";
 

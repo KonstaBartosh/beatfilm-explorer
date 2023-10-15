@@ -1,6 +1,8 @@
+import React from 'react';
+import { NavLink } from "react-router-dom";
+
 import './Logo.css';
 import logo from '../../../images/beat-logo.svg';
-import { NavLink } from "react-router-dom";
 
 
 export const Logo = () => {

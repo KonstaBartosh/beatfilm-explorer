@@ -88,7 +88,7 @@ export const saveUserMovie = (movie: MovieType) => {
 			movieId: movie.id,
 		})
 	})
-	.then(res => checkResponse<UserType>(res));
+	.then(res => checkResponse<MovieType>(res));
 };
 
 export const removeUserMovie = (movieId: MovieType) => {
@@ -99,5 +99,5 @@ export const removeUserMovie = (movieId: MovieType) => {
 			"Authorization": `Bearer ${localStorage.getItem('token')}`,
 		}	
 	})
-	.then(res => checkResponse<UserType>(res));
+	.then(res => checkResponse<MovieType>(res));
 }

@@ -16,5 +16,5 @@ export { Footer } from '../components/Footer/Footer';
 export { BurgerMenu } from '../components/BurgerMenu/BurgerMenu';
 export { AuthForm } from '../components/AuthForm/AuthForm';
 
-export { InfoTooltip } from '../components/popups/InfoTooltip';
-export { MoviePopup } from '../components/popups/MoviePopup';
+export { InfoTooltip } from '../components/modals/InfoTooltip';
+export { MoviePopup } from '../components/modals/MoviePopup';

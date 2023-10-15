@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode } from "react";
+import React, { FormEvent, ReactNode } from "react";
 
 import "./AuthForm.css";
 import * as ui from "../../components"

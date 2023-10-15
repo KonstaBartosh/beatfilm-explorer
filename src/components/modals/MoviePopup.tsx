@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 
-import "../popups/popup.css";
+import "./popup.css";
 import { MovieContext } from "../../context/MovieContext";
 import { URL_MOVIE_SERVER } from "../../utils/constants";
 import { useLocation } from "react-router-dom";

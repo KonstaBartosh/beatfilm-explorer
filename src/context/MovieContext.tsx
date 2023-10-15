@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { ChildrenType, MovieType } from '../utils/types';
 
 interface MovieContextType {

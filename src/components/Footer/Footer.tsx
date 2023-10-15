@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./Footer.css";
 import { BEAT_FILM_URL, FOOTER_TITLE, GITHUB_URL } from "../../utils/constants";
 import { GET_YEAR } from '../../utils/helpers';
