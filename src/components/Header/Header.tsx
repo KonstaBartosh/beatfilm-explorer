@@ -10,6 +10,7 @@ export const Header = () => {
   const profileMarkup = isUserLogin ? (
     <ui.NavButton
       text="Аккаунт"
+      buttonLabel="Аккаунт"
       path="/profile"
       className="header__button header__button_account"
     /> 
@@ -17,11 +18,13 @@ export const Header = () => {
     <nav className="header__profile-nav">
       <ui.NavButton
         text="Регистрация"
+        buttonLabel="Регистрация"
         path="/sign-up"
         className="header__button header__button_register"
       />
       <ui.NavButton
         text="Войти"
+        buttonLabel="Войти"
         path="/sign-in"
         className="header__button header__button_logout"
       />

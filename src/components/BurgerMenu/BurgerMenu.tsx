@@ -33,6 +33,7 @@ export const BurgerMenu = () => {
           <li className="burger-menu__li">
             <NavButton
               text="Главная"
+              buttonLabel="Главная страница"
               path={PATH.HOME}
               className="burger-menu__link"
               onClick={toggleMenu}
@@ -41,6 +42,7 @@ export const BurgerMenu = () => {
           <li className="burger-menu__li">
             <NavButton
               text="Сохраненные фильмы"
+              buttonLabel="Сохраненные фильмы"
               path={PATH.SAVED_MOVIES}
               className="burger-menu__link"
               onClick={toggleMenu}
@@ -49,6 +51,7 @@ export const BurgerMenu = () => {
         </ul>
         <NavButton
           text="Аккаунт"
+          buttonLabel="Аккаунт"
           path={PATH.PROFILE}
           className="burger-menu__btn-acc"
           onClick={toggleMenu}

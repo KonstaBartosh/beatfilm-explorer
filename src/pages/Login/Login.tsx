@@ -22,6 +22,7 @@ export const Login = ({ onLogin }: { onLogin: OnLoginType }) => {
     <com.AuthForm
       title={"Рады видеть!"}
       buttonText={"Войти"}
+      buttonLabel={"Войти"}
       navLink={"/sign-up"}
       question={"Ещё не зарегистрированы?"}
       navLinkTitle={"Регистрация"}

@@ -9,6 +9,7 @@ interface AuthFormProps {
   question: string;
   navLink: string;
   navLinkTitle: string;
+  buttonLabel: string
   isValid: boolean;
   children: ReactNode;
   onSubmit: (evt: FormEvent) => void;
@@ -22,6 +23,7 @@ export const AuthForm = ({
   navLinkTitle,
   isValid,
   children,
+  buttonLabel,
   onSubmit
 }: AuthFormProps) => {
 
@@ -51,6 +53,7 @@ export const AuthForm = ({
             <ui.NavButton
               text={` ${navLinkTitle}`}
               path={navLink}
+              buttonLabel={buttonLabel}
               className="auth-form__link"
             />
           </p>

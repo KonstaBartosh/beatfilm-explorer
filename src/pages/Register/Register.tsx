@@ -21,6 +21,7 @@ export const Register = ({ onRegister }: {onRegister: onRegisterType}) => {
     <com.AuthForm
       title={"Добро пожаловать!"}
       buttonText={"Зарегистрироваться"}
+      buttonLabel={"Зарегистрироваться"}
       navLink={"/sign-in"}
       question={"Уже зарегистрированы?"}
       navLinkTitle={"Войти"}

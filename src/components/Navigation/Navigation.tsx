@@ -11,11 +11,13 @@ export const Navigation = () => {
       <div className="navigation__movies">
         <NavButton
           text="Фильмы"
+          buttonLabel="Фильмы"
           path={PATH.HOME}
           className="navigation__movies-link"
         />
         <NavButton
           text="Сохраненные фильмы"
+          buttonLabel="Сохраненные фильмы"
           path={PATH.SAVED_MOVIES}
           className="navigation__movies-link"
         />
