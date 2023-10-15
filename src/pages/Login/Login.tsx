@@ -1,3 +1,4 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 
 import * as com from "../../components";
@@ -11,7 +12,7 @@ export const Login = ({ onLogin }: { onLogin: OnLoginType }) => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: "onBlur" });
 
   const submitData = (data: UserType) => {
     onLogin(data);
