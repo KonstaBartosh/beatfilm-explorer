@@ -11,7 +11,13 @@ interface ToggleSwitcherProps {
 export const ToggleSwitch = ({ onToggle, isToggled }: ToggleSwitcherProps) => {
   return (
 		<label className="toggle">
-			<input type="checkbox" id="toggle" checked={isToggled} onChange={onToggle}/>
+			<input
+				type="checkbox" 
+				id="toggle" 
+				aria-label="Короткометражки" 
+				checked={isToggled} 
+				onChange={onToggle}
+			/>
 			<span className="toggle__slider"></span>
 		</label>
   );

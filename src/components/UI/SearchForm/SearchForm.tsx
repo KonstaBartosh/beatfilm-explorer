@@ -48,8 +48,8 @@ export const SearchForm = ({
             autoComplete="off"
           />
         </label>
-        <button className="searchform__button" type="submit">
-          <img className="searchform__icon" src={logo} alt="поиск" />
+        <button className="searchform__button" type="submit" aria-label="Поиск">
+          <img className="searchform__icon" src={logo} alt="Поиск" />
         </button>
       </form>
       {validationError && (
