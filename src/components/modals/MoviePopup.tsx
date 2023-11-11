@@ -18,7 +18,7 @@ export const MoviePopup = () => {
 
   return (
     selectedMovie && (
-    <section className="popup popup_opened" onClick={togglePopup}>
+    <section className="popup popup_opened" onClick={handleOverlayClick}>
       <div className="popup__container popup__container_movie overlay">
         <div className="popup__thumbnail-wrap">
           <img 
