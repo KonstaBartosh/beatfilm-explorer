@@ -9,9 +9,16 @@ export const MoviePopup = () => {
   const { selectedMovie, closeMoviePopup } = useContext(MovieContext);
   const { pathname } = useLocation();
 
+
+  const handleOverlayClick = (evt: React.SyntheticEvent) => {
+    if (evt.target === evt.currentTarget) {
+      closeMoviePopup();
+    }
+  }
+
   return (
     selectedMovie && (
-    <section className="popup popup_opened">
+    <section className="popup popup_opened" onClick={togglePopup}>
       <div className="popup__container popup__container_movie overlay">
         <div className="popup__thumbnail-wrap">
           <img 
