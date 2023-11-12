@@ -1,6 +1,6 @@
 # Beat Film Festival Movies Explorer на React.js
 
-[MOVIES EXPLORER](https://konstabartosh.github.io/movies-explorer-frontend/) - это приложение, в котором можно найти фильмы по запросу и добавить их себе в избранное. Beat Film Festival — международный фестиваль документального кино о новой культуре.
+[BeatFilm Explorer](https://konstabartosh.github.io/movies-explorer-frontend/) - это приложение, в котором можно найти фильмы по запросу и добавить их себе в избранное. Beat Film Festival — международный фестиваль документального кино о новой культуре.
 
 Приложение написано на JavaSript на React JS, позже перенесено на TypeScript.
 По умолчанию пользователю доступен поиск фильмов по всей базе данных и просмотр карточек фильма. После аутентификации фильмы можно добавлять в избранное и редактировать свой профиль.
