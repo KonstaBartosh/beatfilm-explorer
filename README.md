@@ -33,5 +33,3 @@
 Для запуска потребуется установленный Node.js. 
 - `npm start` для работы с проектом в режиме разработчика
 - `npm run build` для финальной сборки
-
-React, TypeScript, Redut Toolkit, React hook form (для работы с формами), yup (для валидации), Material-UI 
