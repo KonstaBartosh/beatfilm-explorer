@@ -35,7 +35,7 @@
 ### Клонирование репозитория
 
 ```shell
-git clone git@github.com:KonstaBartosh/skills-test-antipoff.git
+git clone https://github.com/KonstaBartosh/beatfilm-explorer.git
 ```
 
 ### Установка пакетов
